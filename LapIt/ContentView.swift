@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct LogIn: View {
+    @State public var isLoggedIn = false
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var secured: Bool = true
@@ -71,6 +72,12 @@ struct ContentView: View {
             .buttonStyle(.plain)
             .position(x: 205, y: 600)
         }
+    }
+}
+
+struct ContentView: View {
+    var body: some View {
+        LogIn()
     }
 }
     
