@@ -204,10 +204,97 @@ struct Register1View: View {
     }
 }
 
+struct Register2View: View {
+    @State private var firstName: String = ""
+    @State private var secondName: String = ""
+    @State private var isOrganizer: Bool = false
+    var body: some View {
+        ZStack {
+            Color.init(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor).ignoresSafeArea()
+            Text("Setting up")
+                .padding()
+                .background(Color(cgColor: UIColor(red: 0, green: 0.686, blue: 0.678, alpha: 1).cgColor))
+                .font(.largeTitle)
+                .cornerRadius(10)
+                .foregroundColor(.white)
+                .frame(width: 400)
+                .position(x: 205, y: 100)
+            
+            TextField("First Name", text: $firstName)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .frame(width: 300, height: 300)
+                .position(x: 205, y: 313)
+            
+            TextField("Second Name", text: $secondName)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .frame(width: 300, height: 300)
+                .position(x: 205, y: 375)
+            
+            Toggle(isOn: $isOrganizer, label: {
+                Text("Organizer account")
+                    .foregroundColor(.blue)
+                    .bold()
+                    .underline()
+            })
+                .position(x: 193, y: 425)
+                .padding()
+                .toggleStyle(SwitchToggleStyle(tint: .blue))
+            
+            
+            
+            if firstName.isEmpty || secondName.isEmpty {
+                Text("Fields are required!")
+                    .position(x: 205, y: 275)
+                    .foregroundColor(.red)
+            } else {
+                Button(
+                    action: {
+                        // Nothing for now
+                    },
+                    label: {
+                        Text("Register")
+                            .frame(width: 100 , height: 30, alignment: .center)
+                    })
+                .buttonStyle(.borderedProminent)
+                .position(x: 205, y: 500)
+                .foregroundColor(.white)
+                .tint(.init(cgColor: UIColor(red: 0, green: 0.686, blue: 0.678, alpha: 1).cgColor))
+            }
+            
+            // Navigator
+            ZStack {
+                Rectangle()
+                    .fill(Color(cgColor: UIColor(red: 0, green: 0.098, blue: 0.659, alpha: 1).cgColor))
+                    .frame(width: 450, height: 21)
+                    .position(x: 205, y: 700)
+                
+                Button(
+                    action: {
+                        // Nothing for now
+                    },
+                    label: {
+                        Text("<<")
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(.white)
+                            .bold()
+                    })
+                .buttonStyle(.plain)
+                .position(x: 65, y: 700)
+                
+                Image("LapItLogo")
+                    .resizable()
+                    .frame(width: 109, height: 87)
+                    .position(x: 205, y: 700)
+            }
+        }
+    }
+}
+
 struct ContentView: View {
     var body: some View {
         //LogIn()
-        Register1View()
+        //Register1View()
+        Register2View()
     }
 }
     
