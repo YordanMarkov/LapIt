@@ -49,7 +49,17 @@ struct LogIn: View {
             
             Button(
                 action: {
-                    // Nothing for now
+                    // Go to Register1View
+                    // URL: https://youtu.be/vQ0HhIerTsw
+                    let window = UIApplication
+                        .shared
+                        .connectedScenes
+                        .flatMap { ($0 as?
+                                    UIWindowScene)?.windows ?? [] }
+                        .first { $0.isKeyWindow }
+                    
+                    window?.rootViewController = UIHostingController(rootView: Register1View())
+                    window?.makeKeyAndVisible()
                 },
                 label: {
                     Text("Don't have an accout?\nRegister here.")
@@ -171,7 +181,17 @@ struct Register1View: View {
                 
                 Button(
                     action: {
-                        // Nothing for now
+                        // Go to Register2View
+                        // URL: https://youtu.be/vQ0HhIerTsw
+                        let window = UIApplication
+                            .shared
+                            .connectedScenes
+                            .flatMap { ($0 as?
+                                        UIWindowScene)?.windows ?? [] }
+                            .first { $0.isKeyWindow }
+                        
+                        window?.rootViewController = UIHostingController(rootView: Register2View())
+                        window?.makeKeyAndVisible()
                     },
                     label: {
                         Text(">>")
@@ -184,7 +204,17 @@ struct Register1View: View {
                 
                 Button(
                     action: {
-                        // Nothing for now
+                        // Go to LogIn
+                        // URL: https://youtu.be/vQ0HhIerTsw
+                        let window = UIApplication
+                            .shared
+                            .connectedScenes
+                            .flatMap { ($0 as?
+                                        UIWindowScene)?.windows ?? [] }
+                            .first { $0.isKeyWindow }
+                        
+                        window?.rootViewController = UIHostingController(rootView: LogIn())
+                        window?.makeKeyAndVisible()
                     },
                     label: {
                         Text("<<")
@@ -270,7 +300,17 @@ struct Register2View: View {
                 
                 Button(
                     action: {
-                        // Nothing for now
+                        // Go to Register1View
+                        // URL: https://youtu.be/vQ0HhIerTsw
+                        let window = UIApplication
+                            .shared
+                            .connectedScenes
+                            .flatMap { ($0 as?
+                                        UIWindowScene)?.windows ?? [] }
+                            .first { $0.isKeyWindow }
+                        
+                        window?.rootViewController = UIHostingController(rootView: Register1View())
+                        window?.makeKeyAndVisible()
                     },
                     label: {
                         Text("<<")
@@ -290,11 +330,27 @@ struct Register2View: View {
     }
 }
 
+struct HomeCompetitor: View {
+    var body: some View {
+        ZStack {
+            Color.init(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor).ignoresSafeArea()
+        }
+    }
+}
+
+struct HomeOrganizer: View {
+    var body: some View {
+        ZStack {
+            Color.init(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor).ignoresSafeArea()
+        }
+    }
+}
+
 struct ContentView: View {
     var body: some View {
-        //LogIn()
+        LogIn()
         //Register1View()
-        Register2View()
+        //Register2View()
     }
 }
     
