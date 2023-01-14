@@ -25,7 +25,7 @@ struct LapItApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                ContentView()
+                CoordinatorView(coordinator: Coordinator.shared)
             }
         }
     }

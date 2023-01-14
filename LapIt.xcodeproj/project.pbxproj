@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E759AA252972E2C100540708 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = E759AA242972E2C100540708 /* Network.swift */; };
+		E759AA272972E35000540708 /* LogInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E759AA262972E35000540708 /* LogInViewModel.swift */; };
+		E759AA2A2972E38B00540708 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E759AA292972E38B00540708 /* RegisterViewModel.swift */; };
+		E759AA2C2972E3C500540708 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E759AA2B2972E3C500540708 /* HomeViewModel.swift */; };
+		E759AA2E2972E3E700540708 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E759AA2D2972E3E700540708 /* Coordinator.swift */; };
+		E759AA302972E41500540708 /* CoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E759AA2F2972E41500540708 /* CoordinatorView.swift */; };
+		E759AA322972E5B800540708 /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E759AA312972E5B800540708 /* LogInView.swift */; };
+		E759AA342972E68600540708 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E759AA332972E68600540708 /* RegisterView.swift */; };
 		E798ED692957617C00263403 /* LapItApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E798ED682957617C00263403 /* LapItApp.swift */; };
 		E798ED6B2957617C00263403 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E798ED6A2957617C00263403 /* ContentView.swift */; };
 		E798ED6D2957617E00263403 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E798ED6C2957617E00263403 /* Assets.xcassets */; };
@@ -16,6 +24,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E759AA242972E2C100540708 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		E759AA262972E35000540708 /* LogInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewModel.swift; sourceTree = "<group>"; };
+		E759AA292972E38B00540708 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
+		E759AA2B2972E3C500540708 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		E759AA2D2972E3E700540708 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		E759AA2F2972E41500540708 /* CoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorView.swift; sourceTree = "<group>"; };
+		E759AA312972E5B800540708 /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
+		E759AA332972E68600540708 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		E798ED652957617C00263403 /* LapIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LapIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E798ED682957617C00263403 /* LapItApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LapItApp.swift; sourceTree = "<group>"; };
 		E798ED6A2957617C00263403 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -36,6 +52,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E759AA212972E27400540708 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E759AA2F2972E41500540708 /* CoordinatorView.swift */,
+				E759AA312972E5B800540708 /* LogInView.swift */,
+				E759AA332972E68600540708 /* RegisterView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E759AA222972E28200540708 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				E759AA262972E35000540708 /* LogInViewModel.swift */,
+				E759AA292972E38B00540708 /* RegisterViewModel.swift */,
+				E759AA2B2972E3C500540708 /* HomeViewModel.swift */,
+				E759AA2D2972E3E700540708 /* Coordinator.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		E759AA232972E29500540708 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				E759AA242972E2C100540708 /* Network.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		E798ED5C2957617C00263403 = {
 			isa = PBXGroup;
 			children = (
@@ -55,6 +100,9 @@
 		E798ED672957617C00263403 /* LapIt */ = {
 			isa = PBXGroup;
 			children = (
+				E759AA232972E29500540708 /* Network */,
+				E759AA222972E28200540708 /* ViewModels */,
+				E759AA212972E27400540708 /* Views */,
 				E798ED682957617C00263403 /* LapItApp.swift */,
 				E798ED6A2957617C00263403 /* ContentView.swift */,
 				E798ED6C2957617E00263403 /* Assets.xcassets */,
@@ -149,8 +197,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E759AA2A2972E38B00540708 /* RegisterViewModel.swift in Sources */,
+				E759AA342972E68600540708 /* RegisterView.swift in Sources */,
+				E759AA2C2972E3C500540708 /* HomeViewModel.swift in Sources */,
 				E798ED6B2957617C00263403 /* ContentView.swift in Sources */,
 				E798ED692957617C00263403 /* LapItApp.swift in Sources */,
+				E759AA322972E5B800540708 /* LogInView.swift in Sources */,
+				E759AA252972E2C100540708 /* Network.swift in Sources */,
+				E759AA272972E35000540708 /* LogInViewModel.swift in Sources */,
+				E759AA2E2972E3E700540708 /* Coordinator.swift in Sources */,
+				E759AA302972E41500540708 /* CoordinatorView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
