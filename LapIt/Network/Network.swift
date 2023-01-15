@@ -6,9 +6,19 @@
 //
 
 import Foundation
+import FirebaseCore
 import Firebase
+import SwiftUI
 
 class Network {
-    func LogIn() {}
-    func Register() {}
+    
+    // lazy var firebase
+    
+    func LogIn() {
+        
+    }
+    
+    func Register() {
+        
+    }
 }

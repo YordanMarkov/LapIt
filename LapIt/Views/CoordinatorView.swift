@@ -17,8 +17,8 @@ struct CoordinatorView: View {
     
     var body: some View {
         TabView(selection: $coordinator.currTab) {
-//            LogIn(viewModel: coordinator.logInViewModel)
-//                .tag(Coordinator.Tab.login)
+            LogIn(viewModel: coordinator.loginViewModel)
+                .tag(Coordinator.Tab.login)
             
             RegisterView(viewModel: coordinator.registerViewModel)
                 .tag(Coordinator.Tab.register)

@@ -14,6 +14,9 @@ class RegisterViewModel: ObservableObject {
     @Published public var repeatPassword: String = ""
     @Published public var secured1: Bool = true
     @Published public var secured2: Bool = true
+    @Published public var firstName: String = ""
+    @Published public var secondName: String = ""
+    @Published public var isOrganizer: Bool = false
     
     private let network: Network
     private unowned let coordinator: Coordinator
@@ -27,8 +30,7 @@ class RegisterViewModel: ObservableObject {
         coordinator.route(to: newTab)
     }
     
-//    func signUp() {
-//        // Posredvstom informaciqta v tozi viewModel signUp-ni nqkoj
-//        network.register()
-//    }
+    func register() {
+        network.Register()
+    }
 }

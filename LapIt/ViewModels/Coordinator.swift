@@ -16,7 +16,7 @@ class Coordinator: ObservableObject {
         case login
         case register
     }
-    @Published var currTab = Tab.register
+    @Published var currTab = Tab.login
     // auth state loading
     @Published var loading = false
     
@@ -24,6 +24,10 @@ class Coordinator: ObservableObject {
     
     lazy var registerViewModel: RegisterViewModel = {
         RegisterViewModel(network: self.network, coordinator: self)
+    }()
+    
+    lazy var loginViewModel: LogInViewModel =  {
+        LogInViewModel(network: self.network, coordinator: self)
     }()
     
 //    lazy var homeViewModel: HomeViewModel = {

@@ -54,16 +54,6 @@ struct LogIn: View {
             Button(
                 action: {
                     viewModel.route(to: .register)
-//                    // Go to Register1View
-//                    let window = UIApplication
-//                        .shared
-//                        .connectedScenes
-//                        .flatMap { ($0 as?
-//                                    UIWindowScene)?.windows ?? [] }
-//                        .first { $0.isKeyWindow }
-//
-//                    window?.rootViewController = UIHostingController(rootView: Register1View())
-//                    window?.makeKeyAndVisible()
                 },
                 label: {
                     Text("Don't have an accout?\nRegister here.")
@@ -80,7 +70,7 @@ struct LogIn: View {
             } else {
                 Button(
                     action: {
-                        // Nothing for now
+                        // Code upcoming
                     },
                     label: {
                         Text("Log in")
