@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 class RegisterViewModel: ObservableObject {
+    // Short the types
     @Published public var email: String = ""
     @Published public var password: String = ""
     @Published public var repeatPassword: String = ""
@@ -17,6 +18,7 @@ class RegisterViewModel: ObservableObject {
     @Published public var firstName: String = ""
     @Published public var secondName: String = ""
     @Published public var isOrganizer: Bool = false
+    @Published private(set) var error = ""
     
     private let network: Network
     private unowned let coordinator: Coordinator
@@ -31,6 +33,12 @@ class RegisterViewModel: ObservableObject {
     }
     
     func register() {
-        network.Register()
+        Task {
+            do {
+                try await network.Register(email: self.email, password: self.password, firstName: self.firstName, secondName: self.secondName, isOrganizer: self.isOrganizer)
+            }  catch {
+                self.error = error.localizedDescription
+            }
+        }
     }
 }

@@ -124,6 +124,8 @@ struct RegisterView: View {
                     Button(
                         action: {
                             // Code upcoming
+                            viewModel.register()
+                            viewModel.route(to: .login)
                         },
                         label: {
                             Text("Register")
