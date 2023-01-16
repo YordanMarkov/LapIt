@@ -20,8 +20,8 @@ class Network {
         Firestore.firestore()
     }()
     
-    func LogIn() {
-        
+    func SignIn(email: String, password: String) {
+        firebaseAuth.signIn(withEmail: email, password: password)
     }
     
     func Register(email: String, password: String, firstName: String, secondName: String, isOrganizer: Bool) async throws {

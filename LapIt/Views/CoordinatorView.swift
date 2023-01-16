@@ -17,14 +17,14 @@ struct CoordinatorView: View {
     
     var body: some View {
         TabView(selection: $coordinator.currTab) {
-            LogIn(viewModel: coordinator.loginViewModel)
+            LogInView(viewModel: coordinator.logInViewModel)
                 .tag(Coordinator.Tab.login)
             
             RegisterView(viewModel: coordinator.registerViewModel)
                 .tag(Coordinator.Tab.register)
             
-//            HomeView(viewModel: coordinator.homeViewModel)
-//                .tag(Coordinator.Tab.home)
+            DefaultHomeView(viewModel: coordinator.defaultHomeViewModel)
+                .tag(Coordinator.Tab.defaultHome)
         }
     }
 }

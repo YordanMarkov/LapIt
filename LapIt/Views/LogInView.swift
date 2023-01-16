@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct LogIn: View {
+struct LogInView: View {
     
     @ObservedObject private var viewModel: LogInViewModel
     
@@ -70,7 +70,8 @@ struct LogIn: View {
             } else {
                 Button(
                     action: {
-                        // Code upcoming
+                        viewModel.signIn()
+                        viewModel.route(to: .defaultHome)
                     },
                     label: {
                         Text("Log in")

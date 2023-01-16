@@ -12,7 +12,7 @@ class Coordinator: ObservableObject {
     static var shared = Coordinator()
     
     enum Tab {
-        case home
+        case defaultHome
         case login
         case register
     }
@@ -26,13 +26,13 @@ class Coordinator: ObservableObject {
         RegisterViewModel(network: self.network, coordinator: self)
     }()
     
-    lazy var loginViewModel: LogInViewModel =  {
+    lazy var logInViewModel: LogInViewModel =  {
         LogInViewModel(network: self.network, coordinator: self)
     }()
     
-//    lazy var homeViewModel: HomeViewModel = {
-//        HomeViewModel(network: self.network, coordinator: self)
-//    }()
+    lazy var defaultHomeViewModel: DefaultHomeViewModel = {
+        DefaultHomeViewModel(network: self.network, coordinator: self)
+    }()
     
     init() {
         self.network = Network()
