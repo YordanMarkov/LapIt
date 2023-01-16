@@ -13,6 +13,7 @@ class LogInViewModel: ObservableObject {
     @Published public var email: String = ""
     @Published public var password: String = ""
     @Published public var secured: Bool = true
+    @Published public var error = ""
     
     private let network: Network
     private unowned let coordinator: Coordinator
@@ -27,6 +28,13 @@ class LogInViewModel: ObservableObject {
     }
     
     func signIn() {
-        network.SignIn(email: self.email, password: self.password)
+        self.error = ""
+        Task {
+            do {
+                try await network.SignIn(email: self.email, password: self.password)
+            } catch {
+                self.error = error.localizedDescription
+            }
+        }
     }
 }

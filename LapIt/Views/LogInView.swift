@@ -10,6 +10,8 @@ import SwiftUI
 
 struct LogInView: View {
     
+    @State private var showAlert = false
+    
     @ObservedObject private var viewModel: LogInViewModel
     
     init(viewModel: LogInViewModel) {
@@ -71,12 +73,21 @@ struct LogInView: View {
                 Button(
                     action: {
                         viewModel.signIn()
-                        viewModel.route(to: .defaultHome)
+                        if viewModel.error.isEmpty {
+                            viewModel.route(to: .defaultHome)
+                        } else {
+                            showAlert.toggle()
+                        }
                     },
                     label: {
                         Text("Log in")
                             .frame(width: 100 , height: 30, alignment: .center)
-                    })
+                    }).alert(isPresented: $showAlert) {
+                        Alert (
+                            title: Text("Incorrect credentials!"),
+                            dismissButton: .default(Text("OK"))
+                        )
+                    }
                 .buttonStyle(.borderedProminent)
                 .position(x: 205, y: 600)
                 .foregroundColor(.white)
