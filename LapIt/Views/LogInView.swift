@@ -25,6 +25,7 @@ struct LoadingScreen: View {
                 .cornerRadius(10)
                 .foregroundColor(.white)
                 .frame(width: 400)
+                .position(x: 205, y: 400)
         }
     }
 }

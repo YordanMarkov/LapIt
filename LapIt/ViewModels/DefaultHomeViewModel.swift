@@ -12,6 +12,7 @@ class DefaultHomeViewModel: ObservableObject {
     private let network: Network
     private unowned let coordinator: Coordinator
     @Published public var userFullName = ""
+    @Published public var profileView = false
     
     init(network: Network, coordinator: Coordinator) {
         self.network = network
