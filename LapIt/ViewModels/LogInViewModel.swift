@@ -14,6 +14,7 @@ class LogInViewModel: ObservableObject {
     @Published public var password: String = ""
     @Published public var secured: Bool = true
     @Published public var error = ""
+    @Published public var signInSuccess = false
     
     private let network: Network
     private unowned let coordinator: Coordinator
@@ -28,12 +29,18 @@ class LogInViewModel: ObservableObject {
     }
     
     func signIn() {
-        self.error = ""
         Task {
             do {
+                DispatchQueue.main.async {
+                    self.error = ""
+                    self.signInSuccess = true
+                }
                 try await network.SignIn(email: self.email, password: self.password)
             } catch {
-                self.error = error.localizedDescription
+                DispatchQueue.main.async {
+                    self.error = error.localizedDescription
+                    self.signInSuccess = false
+                }
             }
         }
     }

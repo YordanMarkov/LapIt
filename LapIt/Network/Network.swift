@@ -24,9 +24,17 @@ class Network {
         try await firebaseAuth.signIn(withEmail: email, password: password)
     }
     
+    func signOut() {
+        do {
+            try firebaseAuth.signOut()
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
+    }
+    
     
     func Register(email: String, password: String, firstName: String, secondName: String, isOrganizer: Bool) async throws {
         try await firebaseAuth.createUser(withEmail: email, password: password)
-        firestore.collection("profiles").addDocument(data: ["firstName": firstName, "secondName": secondName, "isOrganizer": isOrganizer])
+        firestore.collection("users").addDocument(data: ["firstName": firstName, "secondName": secondName, "isOrganizer": isOrganizer])
     }
 }

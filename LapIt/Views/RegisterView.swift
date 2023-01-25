@@ -32,13 +32,16 @@ struct RegisterView: View {
             Group {
                 Toggle(isOn: $viewModel.isOrganizer, label: {
                     Text("Organizer account")
-                        .foregroundColor(.blue)
-                        .bold()
-                        .underline()
+                        .padding()
+                        .background(Color(cgColor: UIColor(red: 0, green: 0.686, blue: 0.678, alpha: 1).cgColor))
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                        .foregroundColor(.white)
+                        .frame(width: 200)
                 })
                 .position(x: 193, y: 220)
                 .padding()
-                .toggleStyle(SwitchToggleStyle(tint: .blue))
+                .toggleStyle(SwitchToggleStyle(tint: Color(cgColor: UIColor(red: 0, green: 0.686, blue: 0.678, alpha: 1).cgColor)))
                 
                 TextField("First Name", text: $viewModel.firstName)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -52,17 +55,20 @@ struct RegisterView: View {
                 
                 TextField("E-mail", text: $viewModel.email)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .autocapitalization(.none)
                     .frame(width: 300, height: 300)
                     .position(x: 205, y: 437)
                 
                 if viewModel.secured1 {
                     SecureField("Password", text: $viewModel.password)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .autocapitalization(.none)
                         .frame(width: 300, height: 300)
                         .position(x: 205, y: 499)
                 } else {
                     TextField("Password", text: $viewModel.password)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .autocapitalization(.none)
                         .frame(width: 300, height: 300)
                         .position(x: 205, y: 499)
                 }
@@ -108,7 +114,7 @@ struct RegisterView: View {
                 }
                 
                 if viewModel.firstName.isEmpty || viewModel.secondName.isEmpty || viewModel.email.isEmpty || viewModel.password.isEmpty || viewModel.repeatPassword.isEmpty {
-                    Text("Fields are required!")
+                    Text("Filling the fields is required!")
                         .position(x: 205, y: 275)
                         .foregroundColor(.red)
                 }

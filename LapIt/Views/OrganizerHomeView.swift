@@ -1,19 +1,19 @@
 //
-//  DeefaultHomeVieew.swift
+//  OrganizerHomeView.swift
 //  LapIt
 //
-//  Created by Yordan Markov on 16.01.23.
+//  Created by Yordan Markov on 25.01.23.
 //
 
 import Foundation
 import SwiftUI
 
 
-struct DefaultHomeView: View {
+struct OrganizerHomeView: View {
     
-    @ObservedObject private var viewModel: DefaultHomeViewModel
+    @ObservedObject private var viewModel: OrganizerHomeViewModel
     
-    init(viewModel: DefaultHomeViewModel) {
+    init(viewModel: OrganizerHomeViewModel) {
         self.viewModel = viewModel
     }
     
@@ -35,3 +35,4 @@ struct DefaultHomeView: View {
         }
     }
 }
+

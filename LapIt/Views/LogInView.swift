@@ -8,11 +8,34 @@
 import Foundation
 import SwiftUI
 
+struct LoadingScreen: View {
+    var body: some View {
+        ZStack {
+            Color.init(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor).ignoresSafeArea()
+            
+            Image("LapItLogo")
+                .resizable()
+                .frame(width: 218, height: 174)
+                .position(x: 205, y: 255)
+            
+            Text("Loading...")
+                .padding()
+                .background(Color(cgColor: UIColor(red: 0, green: 0.686, blue: 0.678, alpha: 1).cgColor))
+                .font(.largeTitle)
+                .cornerRadius(10)
+                .foregroundColor(.white)
+                .frame(width: 400)
+        }
+    }
+}
+
 struct LogInView: View {
     
     @State private var showAlert = false
     
     @ObservedObject private var viewModel: LogInViewModel
+    
+    @State private var showingLoadingScreen = false
     
     init(viewModel: LogInViewModel) {
         self.viewModel = viewModel
@@ -29,17 +52,20 @@ struct LogInView: View {
             
             TextField("E-mail", text: $viewModel.email)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
+                .autocapitalization(.none)
                 .frame(width: 300, height: 300)
                 .position(x: 205, y: 413)
            
             if viewModel.secured {
                 SecureField("Password", text: $viewModel.password)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .autocapitalization(.none)
                     .frame(width: 300, height: 300)
                     .position(x: 205, y: 475)
             } else {
                 TextField("Password", text: $viewModel.password)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .autocapitalization(.none)
                     .frame(width: 300, height: 300)
                     .position(x: 205, y: 475)
             }
@@ -66,17 +92,24 @@ struct LogInView: View {
             .position(x: 205, y: 540)
             
             if viewModel.email.isEmpty || viewModel.password.isEmpty {
-                Text("Fields are required!")
+                Text("Filling the fields is required!")
                     .position(x: 205, y: 370)
                     .foregroundColor(.red)
             } else {
                 Button(
                     action: {
                         viewModel.signIn()
-                        if viewModel.error.isEmpty {
-                            viewModel.route(to: .defaultHome)
-                        } else {
-                            showAlert.toggle()
+                        self.showingLoadingScreen = true
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                            if viewModel.signInSuccess {
+                                self.showingLoadingScreen = false
+                                viewModel.route(to: .defaultHome)
+                            } else {
+                                self.showingLoadingScreen = false
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                    showAlert.toggle()
+                                }
+                            }
                         }
                     },
                     label: {
@@ -84,7 +117,7 @@ struct LogInView: View {
                             .frame(width: 100 , height: 30, alignment: .center)
                     }).alert(isPresented: $showAlert) {
                         Alert (
-                            title: Text("Incorrect credentials!"),
+                            title: Text(viewModel.error),
                             dismissButton: .default(Text("OK"))
                         )
                     }
@@ -92,6 +125,10 @@ struct LogInView: View {
                 .position(x: 205, y: 600)
                 .foregroundColor(.white)
                 .tint(.init(cgColor: UIColor(red: 0, green: 0.686, blue: 0.678, alpha: 1).cgColor))
+            }
+        }.overlay {
+            if showingLoadingScreen {
+                LoadingScreen()
             }
         }
     }

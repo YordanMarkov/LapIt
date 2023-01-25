@@ -13,6 +13,7 @@ class Coordinator: ObservableObject {
     
     enum Tab {
         case defaultHome
+        case organizerHome
         case login
         case register
     }
@@ -32,6 +33,10 @@ class Coordinator: ObservableObject {
     
     lazy var defaultHomeViewModel: DefaultHomeViewModel = {
         DefaultHomeViewModel(network: self.network, coordinator: self)
+    }()
+    
+    lazy var organizerHomeViewModel: OrganizerHomeViewModel = {
+        OrganizerHomeViewModel(network: self.network, coordinator: self)
     }()
     
     init() {

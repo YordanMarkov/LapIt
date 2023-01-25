@@ -25,6 +25,9 @@ struct CoordinatorView: View {
             
             DefaultHomeView(viewModel: coordinator.defaultHomeViewModel)
                 .tag(Coordinator.Tab.defaultHome)
+            
+            OrganizerHomeView(viewModel: coordinator.organizerHomeViewModel)
+                .tag(Coordinator.Tab.organizerHome)
         }
     }
 }

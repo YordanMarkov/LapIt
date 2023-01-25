@@ -1,17 +1,16 @@
 //
-//  HomeViewModel.swift
+//  OrganizerHomeViewModel.swift
 //  LapIt
 //
-//  Created by Yordan Markov on 14.01.23.
+//  Created by Yordan Markov on 25.01.23.
 //
 
 import Foundation
 import SwiftUI
 
-class DefaultHomeViewModel: ObservableObject {
+class OrganizerHomeViewModel: ObservableObject {
     private let network: Network
     private unowned let coordinator: Coordinator
-    @Published public var userFullName = ""
     
     init(network: Network, coordinator: Coordinator) {
         self.network = network
