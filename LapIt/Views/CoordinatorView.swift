@@ -28,6 +28,18 @@ struct CoordinatorView: View {
             
             OrganizerHomeView(viewModel: coordinator.organizerHomeViewModel)
                 .tag(Coordinator.Tab.organizerHome)
+            
+            StatsView(viewModel: coordinator.statsViewModel)
+                .tag(Coordinator.Tab.stats)
+            
+            HistoryView(viewModel: coordinator.historyViewModel)
+                .tag(Coordinator.Tab.history)
+            
+            LibraryView(viewModel: coordinator.libraryViewModel)
+                .tag(Coordinator.Tab.library)
+            
+            ActiveView(viewModel: coordinator.activeViewModel)
+                .tag(Coordinator.Tab.active)
         }
     }
 }

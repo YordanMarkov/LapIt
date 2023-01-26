@@ -26,6 +26,14 @@
 		E798ED6D2957617E00263403 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E798ED6C2957617E00263403 /* Assets.xcassets */; };
 		E798ED702957617E00263403 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E798ED6F2957617E00263403 /* Preview Assets.xcassets */; };
 		E798ED772958A48D00263403 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E798ED762958A48D00263403 /* GoogleService-Info.plist */; };
+		E7F43BC929830F7A0055CBE1 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F43BC829830F7A0055CBE1 /* HistoryView.swift */; };
+		E7F43BCB29830F980055CBE1 /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F43BCA29830F980055CBE1 /* HistoryViewModel.swift */; };
+		E7F43BCD298311710055CBE1 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F43BCC298311710055CBE1 /* StatsView.swift */; };
+		E7F43BCF298311A10055CBE1 /* StatsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F43BCE298311A10055CBE1 /* StatsViewModel.swift */; };
+		E7F43BD1298315720055CBE1 /* LibraryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F43BD0298315720055CBE1 /* LibraryViewModel.swift */; };
+		E7F43BD32983158E0055CBE1 /* ActiveViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F43BD22983158E0055CBE1 /* ActiveViewModel.swift */; };
+		E7F43BD5298315A50055CBE1 /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F43BD4298315A50055CBE1 /* LibraryView.swift */; };
+		E7F43BD7298315B00055CBE1 /* ActiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F43BD6298315B00055CBE1 /* ActiveView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +54,14 @@
 		E798ED6C2957617E00263403 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E798ED6F2957617E00263403 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E798ED762958A48D00263403 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E7F43BC829830F7A0055CBE1 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		E7F43BCA29830F980055CBE1 /* HistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
+		E7F43BCC298311710055CBE1 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
+		E7F43BCE298311A10055CBE1 /* StatsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewModel.swift; sourceTree = "<group>"; };
+		E7F43BD0298315720055CBE1 /* LibraryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewModel.swift; sourceTree = "<group>"; };
+		E7F43BD22983158E0055CBE1 /* ActiveViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveViewModel.swift; sourceTree = "<group>"; };
+		E7F43BD4298315A50055CBE1 /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
+		E7F43BD6298315B00055CBE1 /* ActiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +86,10 @@
 				E759AA332972E68600540708 /* RegisterView.swift */,
 				E759AA3E2974BBF300540708 /* DefaultHomeView.swift */,
 				E759AA402981393C00540708 /* OrganizerHomeView.swift */,
+				E7F43BC829830F7A0055CBE1 /* HistoryView.swift */,
+				E7F43BCC298311710055CBE1 /* StatsView.swift */,
+				E7F43BD4298315A50055CBE1 /* LibraryView.swift */,
+				E7F43BD6298315B00055CBE1 /* ActiveView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -82,6 +102,10 @@
 				E759AA2B2972E3C500540708 /* DefaultHomeViewModel.swift */,
 				E759AA2D2972E3E700540708 /* Coordinator.swift */,
 				E759AA422981396A00540708 /* OrganizerHomeViewModel.swift */,
+				E7F43BCA29830F980055CBE1 /* HistoryViewModel.swift */,
+				E7F43BCE298311A10055CBE1 /* StatsViewModel.swift */,
+				E7F43BD0298315720055CBE1 /* LibraryViewModel.swift */,
+				E7F43BD22983158E0055CBE1 /* ActiveViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -220,18 +244,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7F43BD7298315B00055CBE1 /* ActiveView.swift in Sources */,
 				E759AA2A2972E38B00540708 /* RegisterViewModel.swift in Sources */,
+				E7F43BD32983158E0055CBE1 /* ActiveViewModel.swift in Sources */,
 				E759AA342972E68600540708 /* RegisterView.swift in Sources */,
+				E7F43BC929830F7A0055CBE1 /* HistoryView.swift in Sources */,
 				E759AA2C2972E3C500540708 /* DefaultHomeViewModel.swift in Sources */,
+				E7F43BCD298311710055CBE1 /* StatsView.swift in Sources */,
 				E798ED6B2957617C00263403 /* ContentView.swift in Sources */,
 				E798ED692957617C00263403 /* LapItApp.swift in Sources */,
+				E7F43BD5298315A50055CBE1 /* LibraryView.swift in Sources */,
 				E759AA322972E5B800540708 /* LogInView.swift in Sources */,
 				E759AA252972E2C100540708 /* Network.swift in Sources */,
 				E759AA432981396A00540708 /* OrganizerHomeViewModel.swift in Sources */,
 				E759AA412981393C00540708 /* OrganizerHomeView.swift in Sources */,
+				E7F43BCB29830F980055CBE1 /* HistoryViewModel.swift in Sources */,
+				E7F43BCF298311A10055CBE1 /* StatsViewModel.swift in Sources */,
 				E759AA272972E35000540708 /* LogInViewModel.swift in Sources */,
 				E759AA2E2972E3E700540708 /* Coordinator.swift in Sources */,
 				E759AA3F2974BBF300540708 /* DefaultHomeView.swift in Sources */,
+				E7F43BD1298315720055CBE1 /* LibraryViewModel.swift in Sources */,
 				E759AA302972E41500540708 /* CoordinatorView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

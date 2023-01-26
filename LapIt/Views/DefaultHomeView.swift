@@ -31,8 +31,6 @@ struct ProfileView: View {
                 .position(x: 205, y: 100)
             Button(
                 action: {
-//                    viewModel.signOut()
-//                    viewModel.route(to: .login)
                     showAlert = true
                 },
                 label: {
@@ -52,7 +50,7 @@ struct ProfileView: View {
             .buttonStyle(.borderedProminent)
             .foregroundColor(.white)
             .tint(.init(.red))
-            .position(x: 205, y: 500)
+            .position(x: 205, y: 700)
         }
     }
 }
@@ -68,12 +66,47 @@ struct DefaultHomeView: View {
     var body: some View {
         ZStack {
             Color.init(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor).ignoresSafeArea()
-            Text("Profile")
-            .frame(width: 100 , height: 30, alignment: .center)
-            .position(x: 205, y: 760)
+            Text("Competitions")
+                .padding()
+                .background(Color(cgColor: UIColor(red: 0, green: 0.686, blue: 0.678, alpha: 1).cgColor))
+                .font(.largeTitle)
+                .cornerRadius(10)
+                .foregroundColor(.white)
+                .frame(width: 400)
+                .position(x: 205, y: 100)
+            
+            ScrollView {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(Color.white)
+                        .frame(width: 350, height: 75)
+                    Text("Competition 1")
+                        .foregroundColor(.black)
+                }.position(x: 205, y: 200)
+                
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(Color.white)
+                        .frame(width: 350, height: 75)
+                    Text("Competition 2")
+                        .foregroundColor(.black)
+                }.position(x: 205, y: 200)
+                
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(Color.white)
+                        .frame(width: 350, height: 75)
+                    Text("Competition 3")
+                        .foregroundColor(.black)
+                }.position(x: 205, y: 200)
+            }
+            
             
             // Navigator
             ZStack {
+                Text("Profile")
+                    .frame(width: 100 , height: 30, alignment: .center)
+                    .position(x: 205, y: 760)
                 Rectangle()
                     .fill(Color(cgColor: UIColor(red: 0, green: 0.098, blue: 0.659, alpha: 1).cgColor))
                     .frame(width: 450, height: 21)
@@ -81,10 +114,10 @@ struct DefaultHomeView: View {
                 
                 Button(
                     action: {
-                        // Code upcoming
+                        viewModel.route(to: .history)
                     },
                     label: {
-                        Text("Empty")
+                        Text("History")
                             .multilineTextAlignment(.center)
                             .foregroundColor(.white)
                             .bold()
@@ -94,10 +127,10 @@ struct DefaultHomeView: View {
                 
                 Button(
                     action: {
-                        // Code upcoming
+                        viewModel.route(to: .stats)
                     },
                     label: {
-                        Text("Empty")
+                        Text("Stats")
                             .multilineTextAlignment(.center)
                             .foregroundColor(.white)
                             .bold()
