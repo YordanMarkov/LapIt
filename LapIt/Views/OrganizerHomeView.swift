@@ -115,7 +115,7 @@ struct OrganizerHomeView: View {
                 
                 Button(
                     action: {
-                        viewModel.route(to: .history)
+                        viewModel.route(to: .library)
                     },
                     label: {
                         Text("Library")
@@ -128,7 +128,7 @@ struct OrganizerHomeView: View {
                 
                 Button(
                     action: {
-                        viewModel.route(to: .stats)
+                        viewModel.route(to: .active)
                     },
                     label: {
                         Text("Active")

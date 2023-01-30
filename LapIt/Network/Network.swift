@@ -20,7 +20,7 @@ class Network {
         Firestore.firestore()
     }()
     
-    func SignIn(email: String, password: String) async throws {
+    func signIn(email: String, password: String) async throws {
         try await firebaseAuth.signIn(withEmail: email, password: password)
     }
     

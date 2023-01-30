@@ -35,7 +35,7 @@ class LogInViewModel: ObservableObject {
                     self.error = ""
                     self.signInSuccess = true
                 }
-                try await network.SignIn(email: self.email, password: self.password)
+                try await network.signIn(email: self.email, password: self.password)
             } catch {
                 DispatchQueue.main.async {
                     self.error = error.localizedDescription

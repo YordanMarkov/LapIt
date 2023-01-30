@@ -10,13 +10,11 @@ import SwiftUI
 
 struct LoadingScreen: View {
     var body: some View {
-        ZStack {
-            Color.init(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor).ignoresSafeArea()
-            
+        VStack {
             Image("LapItLogo")
                 .resizable()
                 .frame(width: 218, height: 174)
-                .position(x: 205, y: 255)
+//                .position(x: 205, y: 255)
             
             Text("Loading...")
                 .padding()
@@ -25,8 +23,9 @@ struct LoadingScreen: View {
                 .cornerRadius(10)
                 .foregroundColor(.white)
                 .frame(width: 400)
-                .position(x: 205, y: 400)
-        }
+//                .position(x: 205, y: 400)
+        }.frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color.init(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor).edgesIgnoringSafeArea(.vertical))
     }
 }
 
@@ -43,43 +42,46 @@ struct LogInView: View {
     }
 
     var body: some View {
-        ZStack {
-            Color.init(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor).ignoresSafeArea()
+        VStack(spacing: 30) {
             
             Image("LapItLogo")
                 .resizable()
                 .frame(width: 218, height: 174)
-                .position(x: 205, y: 255)
+//                .position(x: 205, y: 255)
             
-            TextField("E-mail", text: $viewModel.email)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .autocapitalization(.none)
-                .frame(width: 300, height: 300)
-                .position(x: 205, y: 413)
-           
-            if viewModel.secured {
-                SecureField("Password", text: $viewModel.password)
+            VStack (spacing: 10) {
+                TextField("E-mail", text: $viewModel.email)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .autocapitalization(.none)
-                    .frame(width: 300, height: 300)
-                    .position(x: 205, y: 475)
-            } else {
-                TextField("Password", text: $viewModel.password)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .autocapitalization(.none)
-                    .frame(width: 300, height: 300)
-                    .position(x: 205, y: 475)
+                //                .frame(width: 300, height: 300)
+                //                .position(x: 205, y: 413)
+                //
+                HStack {
+                    if viewModel.secured {
+                        SecureField("Password", text: $viewModel.password)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .autocapitalization(.none)
+                        //                    .frame(width: 300, height: 300)
+                        //                    .position(x: 205, y: 475)
+                    } else {
+                        TextField("Password", text: $viewModel.password)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .autocapitalization(.none)
+                        //                    .frame(width: 300, height: 300)
+                        //                    .position(x: 205, y: 475)
+                    }
+                    //
+                    Button( // URL: https://stackoverflow.com/questions/63095851/show-hide-password-how-can-i-add-this-feature
+                        action: {
+                            viewModel.secured.toggle()
+                        }) {
+                            Image(systemName: self.viewModel.secured ? "eye.slash" : "eye")
+                                .accentColor(.black)
+                        }
+                }
             }
-            
-            Button( // URL: https://stackoverflow.com/questions/63095851/show-hide-password-how-can-i-add-this-feature
-                action: {
-                    viewModel.secured.toggle()
-                }) {
-                    Image(systemName: self.viewModel.secured ? "eye.slash" : "eye")
-                        .accentColor(.black)
-            }
-                .position(x: 380, y: 475)
-            
+//                .position(x: 380, y: 475)
+//
             Button(
                 action: {
                     viewModel.route(to: .register)
@@ -90,11 +92,11 @@ struct LogInView: View {
                         .underline()
                 })
             .buttonStyle(.plain)
-            .position(x: 205, y: 540)
-            
+//            .position(x: 205, y: 540)
+//
             if viewModel.email.isEmpty || viewModel.password.isEmpty {
                 Text("Filling the fields is required!")
-                    .position(x: 205, y: 370)
+//                    .position(x: 205, y: 370)
                     .foregroundColor(.red)
             } else {
                 Button(
@@ -123,7 +125,7 @@ struct LogInView: View {
                         )
                     }
                 .buttonStyle(.borderedProminent)
-                .position(x: 205, y: 600)
+//                .position(x: 205, y: 600)
                 .foregroundColor(.white)
                 .tint(.init(cgColor: UIColor(red: 0, green: 0.686, blue: 0.678, alpha: 1).cgColor))
             }
@@ -132,5 +134,8 @@ struct LogInView: View {
                 LoadingScreen()
             }
         }
+        .padding()
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color.init(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor).edgesIgnoringSafeArea(.vertical))
     }
 }
