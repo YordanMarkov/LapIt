@@ -29,6 +29,64 @@ struct LoadingScreen: View {
     }
 }
 
+struct ForgottenPassword: View {
+    @ObservedObject private var viewModel: LogInViewModel
+    @State private var showAlertForChange = false
+    @State private var showingLoadingScreen = false
+    
+    init(viewModel: LogInViewModel) {
+        self.viewModel = viewModel
+    }
+    
+    var body: some View {
+        VStack(spacing: 20) {
+            Text("Type your email in order to change your password.")
+                .frame(alignment: .center)
+            TextField("Email", text: $viewModel.emailForChange)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .autocapitalization(.none)
+            if !viewModel.emailForChange.isEmpty {
+                Button(
+                    action: {
+                        viewModel.forgottenPasswordByEmail()
+                        self.showingLoadingScreen = true
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                            if viewModel.sendEmailSuccess {
+                                viewModel.forgottenPassword = false
+                                self.showingLoadingScreen = false
+                                
+                            } else {
+                                self.showingLoadingScreen = false
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                    showAlertForChange.toggle()
+                                }
+                            }
+                        }
+                    },
+                    label: {
+                        Text("Send")
+                            .frame(width: 100 , height: 30, alignment: .center)
+                    }).alert(isPresented: $showAlertForChange) {
+                        Alert (
+                            title: Text(viewModel.errorForChange),
+                            dismissButton: .default(Text("OK"))
+                        )
+                    }
+                .buttonStyle(.borderedProminent)
+                .foregroundColor(.white)
+                .tint(.init(cgColor: UIColor(red: 0, green: 0.686, blue: 0.678, alpha: 1).cgColor))
+            }
+        }.overlay {
+            if showingLoadingScreen {
+                LoadingScreen()
+            }
+        }
+        .padding()
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color.init(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor).edgesIgnoringSafeArea(.vertical))
+    }
+}
+
 struct LogInView: View {
     
     @State private var showAlert = false
@@ -50,7 +108,7 @@ struct LogInView: View {
 //                .position(x: 205, y: 255)
             
             VStack (spacing: 10) {
-                TextField("E-mail", text: $viewModel.email)
+                TextField("Email", text: $viewModel.email)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .autocapitalization(.none)
                 //                .frame(width: 300, height: 300)
@@ -81,7 +139,19 @@ struct LogInView: View {
                 }
             }
 //                .position(x: 380, y: 475)
-//
+            
+            Button(action: {
+                viewModel.forgottenPassword = true
+            },
+                   label: {
+                Text("I forgot my password.")
+            }
+            ).buttonStyle(.plain)
+            .underline()
+            .sheet(isPresented: $viewModel.forgottenPassword) {
+                ForgottenPassword(viewModel: viewModel)
+            }
+
             Button(
                 action: {
                     viewModel.route(to: .register)
@@ -102,13 +172,13 @@ struct LogInView: View {
                 Button(
                     action: {
                         viewModel.signIn()
-//                        let state = viewModel.getIsOrganizer()
+//                        viewModel.getIsOrganizer()
                         self.showingLoadingScreen = true
                         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                             if viewModel.signInSuccess {
-//                                if state == 1 {
+//                                if viewModel.stateForHome == 1 {
 //                                    viewModel.route(to: .organizerHome)
-//                                } else if state == 0 {
+//                                } else if viewModel.stateForHome == 0 {
 //                                    viewModel.route(to: .defaultHome)
 //                                }
                                 viewModel.route(to: .defaultHome)
@@ -143,5 +213,18 @@ struct LogInView: View {
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.init(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor).edgesIgnoringSafeArea(.vertical))
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        LogInView(viewModel: LogInViewModel(network: Network(), coordinator: Coordinator()))
+//        RegisterView(viewModel: RegisterViewModel(network: Network(), coordinator: Coordinator()))
+//        DefaultHomeView(viewModel: DefaultHomeViewModel(network: Network(), coordinator: Coordinator()))
+//        StatsView(viewModel: StatsViewModel(network: Network(), coordinator: Coordinator()))
+//        OrganizerHomeView(viewModel: OrganizerHomeViewModel(network: Network(), coordinator: Coordinator()))
+//        HistoryView(viewModel: HistoryViewModel(network: Network(), coordinator: Coordinator()))
+//        LibraryView(viewModel: LibraryViewModel(network: Network(), coordinator: Coordinator()))
+//        ActiveView(viewModel: ActiveViewModel(network: Network(), coordinator: Coordinator()))
     }
 }

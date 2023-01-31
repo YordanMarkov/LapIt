@@ -32,6 +32,10 @@ class Network {
         }
     }
     
+    func sendPasswordReset(email: String) async throws {
+        try await firebaseAuth.sendPasswordReset(withEmail: email)
+    }
+    
     
     func Register(email: String, password: String, firstName: String, secondName: String, isOrganizer: Bool) async throws {
         try await firebaseAuth.createUser(withEmail: email, password: password)
