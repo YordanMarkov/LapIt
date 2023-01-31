@@ -12,6 +12,12 @@ class LibraryViewModel: ObservableObject {
     private let network: Network
     private unowned let coordinator: Coordinator
     
+    @Published public var createView = false
+    
+    @Published public var name = ""
+    @Published public var description = ""
+    @Published public var distanceOrTime = 0
+    
     init(network: Network, coordinator: Coordinator) {
         self.network = network
         self.coordinator = coordinator

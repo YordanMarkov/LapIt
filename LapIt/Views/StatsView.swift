@@ -16,7 +16,7 @@ struct StatsView: View {
     }
     
     var body: some View {
-        VStack (spacing: 20) {
+        VStack (spacing: 200) {
             VStack(spacing: 50) {
                 Text("Stats")
                     .padding()
@@ -93,6 +93,8 @@ struct StatsView: View {
                             action: {
                                 viewModel.route(to: .defaultHome)
                             },
+                            
+                            
                             label: {
                                 Text(">>")
                                     .frame(alignment: .center)
@@ -107,14 +109,5 @@ struct StatsView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.init(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor).edgesIgnoringSafeArea(.vertical))
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-//        LogInView(viewModel: LogInViewModel(network: Network(), coordinator: Coordinator()))
-//        RegisterView(viewModel: RegisterViewModel(network: Network(), coordinator: Coordinator()))
-//        DefaultHomeView(viewModel: DefaultHomeViewModel(network: Network(), coordinator: Coordinator()))
-        StatsView(viewModel: StatsViewModel(network: Network(), coordinator: Coordinator()))
     }
 }

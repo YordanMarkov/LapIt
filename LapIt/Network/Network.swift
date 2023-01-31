@@ -35,7 +35,7 @@ class Network {
     
     func Register(email: String, password: String, firstName: String, secondName: String, isOrganizer: Bool) async throws {
         try await firebaseAuth.createUser(withEmail: email, password: password)
-        firestore.collection("users").addDocument(data: ["firstName": firstName, "secondName": secondName, "isOrganizer": isOrganizer])
+        firestore.collection("users").addDocument(data: ["email": email, "firstName": firstName, "secondName": secondName, "isOrganizer": isOrganizer, "km": 0, "min": 0, "wins": 0])
     }
     
 //    func getCurrentUserData() -> [String: Any]? { // Experimental, might not work.
