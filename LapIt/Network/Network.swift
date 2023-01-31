@@ -38,18 +38,17 @@ class Network {
         firestore.collection("users").addDocument(data: ["email": email, "firstName": firstName, "secondName": secondName, "isOrganizer": isOrganizer, "km": 0, "min": 0, "wins": 0])
     }
     
-//    func getCurrentUserData() -> [String: Any]? { // Experimental, might not work.
-//        if let currentUser = firebaseAuth.currentUser {
-//            var userData: [String: Any]?
-//            firestore.collection("users")
-//                .document(currentUser.uid)
-//                .getDocument { (document, error) in
-//                    if let document = document, document.exists {
-//                        userData = document.data()
-//                    }
-//                }
-//            return userData
-//        }
-//        return nil
-//    }
+    func getUserData(email: String) -> [String: Any] {
+        var userData: [String: Any]?
+        firestore.collection("users").whereField("email", isEqualTo: email).getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    userData = document.data()
+                }
+            }
+        }
+        return userData ?? [:]
+    }
 }

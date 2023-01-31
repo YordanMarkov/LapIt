@@ -44,4 +44,20 @@ class LogInViewModel: ObservableObject {
             }
         }
     }
+    
+//    func getUserData() -> [String: Any] {
+//        return network.getUserData(email: self.email)
+//    }
+    
+    func getIsOrganizer() -> Int {
+        let userData = network.getUserData(email: self.email)
+        if let isOrganizer = userData["isOrganizer"] as? Bool {
+            if isOrganizer == true {
+                return 1
+            } else if isOrganizer == false {
+                return 0
+            }
+        }
+        return -1
+    }
 }

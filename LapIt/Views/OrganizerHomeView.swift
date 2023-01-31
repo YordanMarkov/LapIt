@@ -118,7 +118,7 @@ struct OrganizerHomeView: View {
                     HStack(spacing: 50) {
                         Button(
                             action: {
-                                viewModel.route(to: .library)
+                                viewModel.route(to: .active)
                             },
                             label: {
                                 Text("Active")
@@ -141,7 +141,7 @@ struct OrganizerHomeView: View {
                         
                         Button(
                             action: {
-                                viewModel.route(to: .history)
+                                viewModel.route(to: .library)
                             },
                             label: {
                                 Text("Library ")

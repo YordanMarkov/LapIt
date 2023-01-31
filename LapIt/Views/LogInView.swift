@@ -102,11 +102,17 @@ struct LogInView: View {
                 Button(
                     action: {
                         viewModel.signIn()
+//                        let state = viewModel.getIsOrganizer()
                         self.showingLoadingScreen = true
                         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                             if viewModel.signInSuccess {
-                                self.showingLoadingScreen = false
+//                                if state == 1 {
+//                                    viewModel.route(to: .organizerHome)
+//                                } else if state == 0 {
+//                                    viewModel.route(to: .defaultHome)
+//                                }
                                 viewModel.route(to: .defaultHome)
+                                self.showingLoadingScreen = false
                             } else {
                                 self.showingLoadingScreen = false
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {

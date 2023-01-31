@@ -26,4 +26,8 @@ class DefaultHomeViewModel: ObservableObject {
     func signOut() {
         network.signOut()
     }
+    
+    func getFirstName() -> String {
+        return "Name"
+    }
 }

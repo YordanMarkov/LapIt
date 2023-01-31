@@ -154,15 +154,15 @@ struct LibraryView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-//        LogInView(viewModel: LogInViewModel(network: Network(), coordinator: Coordinator()))
-//        RegisterView(viewModel: RegisterViewModel(network: Network(), coordinator: Coordinator()))
-//        DefaultHomeView(viewModel: DefaultHomeViewModel(network: Network(), coordinator: Coordinator()))
-//        StatsView(viewModel: StatsViewModel(network: Network(), coordinator: Coordinator()))
-//        OrganizerHomeView(viewModel: OrganizerHomeViewModel(network: Network(), coordinator: Coordinator()))
-//        HistoryView(viewModel: HistoryViewModel(network: Network(), coordinator: Coordinator()))
-        LibraryView(viewModel: LibraryViewModel(network: Network(), coordinator: Coordinator()))
-//        ActiveView(viewModel: ActiveViewModel(network: Network(), coordinator: Coordinator()))
-    }
-}
+//struct ContentView_Previews: PreviewProvider {
+//    static var previews: some View {
+////        LogInView(viewModel: LogInViewModel(network: Network(), coordinator: Coordinator()))
+////        RegisterView(viewModel: RegisterViewModel(network: Network(), coordinator: Coordinator()))
+////        DefaultHomeView(viewModel: DefaultHomeViewModel(network: Network(), coordinator: Coordinator()))
+////        StatsView(viewModel: StatsViewModel(network: Network(), coordinator: Coordinator()))
+////        OrganizerHomeView(viewModel: OrganizerHomeViewModel(network: Network(), coordinator: Coordinator()))
+////        HistoryView(viewModel: HistoryViewModel(network: Network(), coordinator: Coordinator()))
+//        LibraryView(viewModel: LibraryViewModel(network: Network(), coordinator: Coordinator()))
+////        ActiveView(viewModel: ActiveViewModel(network: Network(), coordinator: Coordinator()))
+//    }
+//}

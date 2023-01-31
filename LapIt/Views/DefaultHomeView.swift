@@ -28,7 +28,7 @@ struct ProfileView: View {
                 .foregroundColor(.white)
 //                .frame(width: 400)
 //                .position(x: 205, y: 100)
-            Text("First Name: ")
+            Text("First Name: " + viewModel.getFirstName())
             
             Text("Second Name: ")
             
