@@ -19,7 +19,8 @@ class LogInViewModel: ObservableObject {
     @Published public var error = ""
     @Published public var signInSuccess = false
     @Published public var sendEmailSuccess = false
-    @Published public var stateForHome = -1
+    @Published public var isOrganizer = false
+    @Published public var isOrganizerError = ""
     
     private let network: Network
     private unowned let coordinator: Coordinator
@@ -67,14 +68,20 @@ class LogInViewModel: ObservableObject {
         }
     }
     
-    func getIsOrganizer() {
-        self.stateForHome = -1
-        let userData = network.getUserData(email: self.email)
-        if let isOrganizer = userData["isOrganizer"] as? Bool {
-            if isOrganizer == true {
-                self.stateForHome = 1
-            } else if isOrganizer == false {
-                self.stateForHome = 0
+    func getUserOrganizerStatus() {
+        Task {
+            do {
+                DispatchQueue.main.async {
+                    self.isOrganizerError = ""
+                }
+                let user = try await network.getUserOrganizerStatus(email: self.email)
+                DispatchQueue.main.async {
+                    self.isOrganizer = user
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    self.isOrganizerError = error.localizedDescription
+                }
             }
         }
     }

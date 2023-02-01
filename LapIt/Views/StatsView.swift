@@ -26,6 +26,7 @@ struct StatsView: View {
                     .foregroundColor(.white)
                 //                .frame(width: 400)
                 //                .position(x: 205, y: 100)
+                
                 HStack {
                     Text("Total kilometers")
                         .padding()
@@ -34,7 +35,7 @@ struct StatsView: View {
                         .foregroundColor(.white)
                     //                .frame(width: 400)
                     //                .position(x: 150, y: 300)
-                    Text("0")
+                    Text("\(viewModel.km)")
                         .padding()
                         .background(Color(.red))
                         .cornerRadius(10)
@@ -51,7 +52,7 @@ struct StatsView: View {
                         .foregroundColor(.white)
                     //                    .frame(width: 400)
                     //                    .position(x: 150, y: 400)
-                    Text("0")
+                    Text("\(viewModel.min)")
                         .padding()
                         .background(Color(.red))
                         .cornerRadius(10)
@@ -68,7 +69,7 @@ struct StatsView: View {
                         .foregroundColor(.white)
                     //                    .frame(width: 400)
                     //                    .position(x: 150, y: 500)
-                    Text("0")
+                    Text("\(viewModel.wins)")
                         .padding()
                         .background(Color(.red))
                         .cornerRadius(10)
@@ -109,5 +110,17 @@ struct StatsView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.init(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor).edgesIgnoringSafeArea(.vertical))
+        .onAppear {
+            viewModel.getDetails()
+        }
     }
 }
+
+
+//struct ContentView_Previews: PreviewProvider {
+//    static var previews: some View {
+////        LogInView(viewModel: LogInViewModel(network: Network(), coordinator: Coordinator()))
+////        RegisterView(viewModel: RegisterViewModel(network: Network(), coordinator: Coordinator()))
+//        StatsView(viewModel: StatsViewModel(network: Network(), coordinator: Coordinator()))
+//    }
+//}

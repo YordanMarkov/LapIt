@@ -22,7 +22,6 @@
 		E759AA412981393C00540708 /* OrganizerHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E759AA402981393C00540708 /* OrganizerHomeView.swift */; };
 		E759AA432981396A00540708 /* OrganizerHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E759AA422981396A00540708 /* OrganizerHomeViewModel.swift */; };
 		E798ED692957617C00263403 /* LapItApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E798ED682957617C00263403 /* LapItApp.swift */; };
-		E798ED6B2957617C00263403 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E798ED6A2957617C00263403 /* ContentView.swift */; };
 		E798ED6D2957617E00263403 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E798ED6C2957617E00263403 /* Assets.xcassets */; };
 		E798ED702957617E00263403 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E798ED6F2957617E00263403 /* Preview Assets.xcassets */; };
 		E798ED772958A48D00263403 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E798ED762958A48D00263403 /* GoogleService-Info.plist */; };
@@ -50,7 +49,6 @@
 		E759AA422981396A00540708 /* OrganizerHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizerHomeViewModel.swift; sourceTree = "<group>"; };
 		E798ED652957617C00263403 /* LapIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LapIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E798ED682957617C00263403 /* LapItApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LapItApp.swift; sourceTree = "<group>"; };
-		E798ED6A2957617C00263403 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E798ED6C2957617E00263403 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E798ED6F2957617E00263403 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E798ED762958A48D00263403 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -149,7 +147,6 @@
 				E759AA222972E28200540708 /* ViewModels */,
 				E759AA212972E27400540708 /* Views */,
 				E798ED682957617C00263403 /* LapItApp.swift */,
-				E798ED6A2957617C00263403 /* ContentView.swift */,
 				E798ED6C2957617E00263403 /* Assets.xcassets */,
 				E798ED6E2957617E00263403 /* Preview Content */,
 				E798ED762958A48D00263403 /* GoogleService-Info.plist */,
@@ -251,7 +248,6 @@
 				E7F43BC929830F7A0055CBE1 /* HistoryView.swift in Sources */,
 				E759AA2C2972E3C500540708 /* DefaultHomeViewModel.swift in Sources */,
 				E7F43BCD298311710055CBE1 /* StatsView.swift in Sources */,
-				E798ED6B2957617C00263403 /* ContentView.swift in Sources */,
 				E798ED692957617C00263403 /* LapItApp.swift in Sources */,
 				E7F43BD5298315A50055CBE1 /* LibraryView.swift in Sources */,
 				E759AA322972E5B800540708 /* LogInView.swift in Sources */,

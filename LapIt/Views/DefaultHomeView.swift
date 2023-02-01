@@ -28,9 +28,12 @@ struct ProfileView: View {
                 .foregroundColor(.white)
 //                .frame(width: 400)
 //                .position(x: 205, y: 100)
-            Text("First Name: " + viewModel.getFirstName())
             
-            Text("Second Name: ")
+            Text("First Name: " + viewModel.firstName)
+            
+            Text("Second Name: " + viewModel.secondName)
+            
+            Text("Email: " + viewModel.email)
             
             Button(
                 action: {
@@ -82,28 +85,26 @@ struct DefaultHomeView: View {
                 //                .position(x: 205, y: 100)
                 
                 ScrollView {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(Color.white)
-                            .frame(width: 350, height: 75)
-                        Text("Competition 1")
-                            .foregroundColor(.black)
-                    }
-                    
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(Color.white)
-                            .frame(width: 350, height: 75)
-                        Text("Competition 2")
-                            .foregroundColor(.black)
-                    }
-                    
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(Color.white)
-                            .frame(width: 350, height: 75)
-                        Text("Competition 3")
-                            .foregroundColor(.black)
+                    if viewModel.competitions.isEmpty {
+                        Text("Oops! Nothing to show.")
+                    } else {
+                        ForEach(viewModel.parseCompetitions().sorted(by: {$0.name < $1.name}), id: \.self) { competition in
+                            Button(action: {
+                                // code upcoming
+                            },
+                                   label: {
+                                VStack {
+                                    Text(competition.name)
+                                        .foregroundColor(.black)
+                                        .bold()
+                                    Text(competition.description)
+                                        .foregroundColor(.black)
+                                        .italic()
+                                }
+                                .padding()
+                                .background(RoundedRectangle(cornerRadius: 10.0).fill(Color.white))
+                            })
+                        }
                     }
                 }
             }
@@ -128,6 +129,7 @@ struct DefaultHomeView: View {
                         //                    .position(x: 65, y: 142.5)
                         Button(action: {
                             viewModel.profileView = true
+//                            viewModel.getDetails()
                         }, label: {
                             Image("LapItLogo")
                                 .resizable()
@@ -156,5 +158,8 @@ struct DefaultHomeView: View {
         }
 //        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.init(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor).edgesIgnoringSafeArea(.vertical))
+        .onAppear {
+            viewModel.getDetails()
+        }
     }
 }

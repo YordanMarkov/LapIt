@@ -172,16 +172,16 @@ struct LogInView: View {
                 Button(
                     action: {
                         viewModel.signIn()
-//                        viewModel.getIsOrganizer()
+                        viewModel.getUserOrganizerStatus()
                         self.showingLoadingScreen = true
                         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                             if viewModel.signInSuccess {
-//                                if viewModel.stateForHome == 1 {
-//                                    viewModel.route(to: .organizerHome)
-//                                } else if viewModel.stateForHome == 0 {
-//                                    viewModel.route(to: .defaultHome)
-//                                }
-                                viewModel.route(to: .defaultHome)
+                                if viewModel.isOrganizer == true {
+                                    viewModel.route(to: .organizerHome)
+                                } else if viewModel.isOrganizer == false {
+                                    viewModel.route(to: .defaultHome)
+                                }
+//                                viewModel.route(to: .defaultHome)
                                 self.showingLoadingScreen = false
                             } else {
                                 self.showingLoadingScreen = false
@@ -213,18 +213,5 @@ struct LogInView: View {
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.init(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor).edgesIgnoringSafeArea(.vertical))
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        LogInView(viewModel: LogInViewModel(network: Network(), coordinator: Coordinator()))
-//        RegisterView(viewModel: RegisterViewModel(network: Network(), coordinator: Coordinator()))
-//        DefaultHomeView(viewModel: DefaultHomeViewModel(network: Network(), coordinator: Coordinator()))
-//        StatsView(viewModel: StatsViewModel(network: Network(), coordinator: Coordinator()))
-//        OrganizerHomeView(viewModel: OrganizerHomeViewModel(network: Network(), coordinator: Coordinator()))
-//        HistoryView(viewModel: HistoryViewModel(network: Network(), coordinator: Coordinator()))
-//        LibraryView(viewModel: LibraryViewModel(network: Network(), coordinator: Coordinator()))
-//        ActiveView(viewModel: ActiveViewModel(network: Network(), coordinator: Coordinator()))
     }
 }
