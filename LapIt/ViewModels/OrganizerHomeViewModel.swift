@@ -10,7 +10,8 @@ import SwiftUI
 
 class OrganizerHomeViewModel: ObservableObject {
     
-    struct Competition: Hashable {
+    struct Competition: Hashable, Identifiable {
+        var id: String
         var name: String
         var description: String
         var distanceOrTime: Int
@@ -63,7 +64,8 @@ class OrganizerHomeViewModel: ObservableObject {
             let description = value["description"] as? String ?? ""
             let distanceOrTime = value["distanceOrTime"] as? Int ?? 0
             let isActive = value["isActive"] as? Bool ?? false
-            let competition = Competition(name: name, description: description, distanceOrTime: distanceOrTime, isActive: isActive)
+            let id = value["id"] as? String ?? ""
+            let competition = Competition(id: id, name: name, description: description, distanceOrTime: distanceOrTime, isActive: isActive)
             competitionsList.append(competition)
         }
         return competitionsList

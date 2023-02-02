@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E70112E3298BF7F300F7DEB0 /* DefaultHistoryCompetitionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70112E2298BF7F300F7DEB0 /* DefaultHistoryCompetitionView.swift */; };
+		E70112E5298C189300F7DEB0 /* OrganizerCompetitionButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70112E4298C189300F7DEB0 /* OrganizerCompetitionButtonView.swift */; };
 		E759AA252972E2C100540708 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = E759AA242972E2C100540708 /* Network.swift */; };
 		E759AA272972E35000540708 /* LogInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E759AA262972E35000540708 /* LogInViewModel.swift */; };
 		E759AA2A2972E38B00540708 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E759AA292972E38B00540708 /* RegisterViewModel.swift */; };
@@ -39,6 +40,7 @@
 
 /* Begin PBXFileReference section */
 		E70112E2298BF7F300F7DEB0 /* DefaultHistoryCompetitionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultHistoryCompetitionView.swift; sourceTree = "<group>"; };
+		E70112E4298C189300F7DEB0 /* OrganizerCompetitionButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizerCompetitionButtonView.swift; sourceTree = "<group>"; };
 		E759AA242972E2C100540708 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		E759AA262972E35000540708 /* LogInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewModel.swift; sourceTree = "<group>"; };
 		E759AA292972E38B00540708 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				E7F43BD6298315B00055CBE1 /* ActiveView.swift */,
 				E79677FB298BAC7700CB6EEA /* DefaultCompetitionButtonView.swift */,
 				E70112E2298BF7F300F7DEB0 /* DefaultHistoryCompetitionView.swift */,
+				E70112E4298C189300F7DEB0 /* OrganizerCompetitionButtonView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 				E798ED692957617C00263403 /* LapItApp.swift in Sources */,
 				E70112E3298BF7F300F7DEB0 /* DefaultHistoryCompetitionView.swift in Sources */,
 				E7F43BD5298315A50055CBE1 /* LibraryView.swift in Sources */,
+				E70112E5298C189300F7DEB0 /* OrganizerCompetitionButtonView.swift in Sources */,
 				E759AA322972E5B800540708 /* LogInView.swift in Sources */,
 				E759AA252972E2C100540708 /* Network.swift in Sources */,
 				E759AA432981396A00540708 /* OrganizerHomeViewModel.swift in Sources */,
