@@ -43,7 +43,42 @@ class Network {
     }
     
     func createCompetition(email: String, name: String, description: String, distanceOrTime: Int, isActive: Bool) {
-        firestore.collection("competitions").addDocument(data: ["email": email, "name": name, "description": description, "distanceOrTime": distanceOrTime, "isActive": isActive])
+//        firestore.collection("competitions").addDocument(data: ["id": "", "email": email, "name": name, "description": description, "distanceOrTime": distanceOrTime, "isActive": isActive])
+        let documentRef = firestore.collection("competitions").addDocument(data: ["id": "", "email": email, "name": name, "description": description, "distanceOrTime": distanceOrTime, "isActive": isActive])
+        let documentID = documentRef.documentID
+        firestore.collection("competitions").document(documentID).updateData(["id": documentID])
+    }
+    
+    func joinCompetition(competition_id: String, user_email: String) {
+        let data: [String: Any] = [
+            "competition_id": competition_id,
+            "user_email": user_email,
+            "min": 0,
+            "km": 0
+        ]
+        firestore.collection("competitions_stats").addDocument(data: data)
+    }
+    
+    func leaveCompetition(competition_id: String, user_email: String) async throws {
+        let competitionStatsCollection = firestore.collection("competitions_stats")
+        let query = competitionStatsCollection.whereField("competition_id", isEqualTo: competition_id).whereField("user_email", isEqualTo: user_email)
+        let querySnapshot = try await query.getDocuments()
+        let competitionStatsData = querySnapshot.documents
+        competitionStatsData.forEach { document in
+            document.reference.delete()
+        }
+    }
+    
+    func isAlreadyJoined(competition_id: String, user_email: String) async throws -> Bool {
+        let competitionsStatsCollection = firestore.collection("competitions_stats")
+        let query = competitionsStatsCollection.whereField("competition_id", isEqualTo: competition_id).whereField("user_email", isEqualTo: user_email)
+        let querySnapshot = try await query.getDocuments()
+        let competitionsStatsData = querySnapshot.documents
+        if competitionsStatsData.count > 0 {
+            return true
+        } else {
+            return false
+        }
     }
     
     func getActiveCompetitions() async throws -> [String: Any] {
@@ -55,6 +90,43 @@ class Network {
         competitionsData.forEach { document in
             let competition = document.data()
             competitions[document.documentID] = competition
+        }
+        return competitions
+    }
+    
+    func getInactiveCompetitions() async throws -> [String: Any] {
+        var competitions = [String: Any]()
+        let competitionsCollection = firestore.collection("competitions")
+        let query = competitionsCollection.whereField("isActive", isEqualTo: false)
+        let querySnapshot = try await query.getDocuments()
+        let competitionsData = querySnapshot.documents
+        competitionsData.forEach { document in
+            let competition = document.data()
+            competitions[document.documentID] = competition
+        }
+        return competitions
+    }
+    
+    func getActiveAndJoinedCompetitions(user_email: String) async throws -> [String: Any] {
+        var competitions = [String: Any]()
+        let activeCompetitions = try await getActiveCompetitions()
+        for (key, value) in activeCompetitions {
+            let isAlreadyJoined = try await isAlreadyJoined(competition_id: key, user_email: user_email)
+            if isAlreadyJoined {
+                competitions[key] = value
+            }
+        }
+        return competitions
+    }
+    
+    func getInactiveAndJoinedCompetitions(user_email: String) async throws -> [String: Any] {
+        var competitions = [String: Any]()
+        let activeCompetitions = try await getInactiveCompetitions()
+        for (key, value) in activeCompetitions {
+            let isAlreadyJoined = try await isAlreadyJoined(competition_id: key, user_email: user_email)
+            if isAlreadyJoined {
+                competitions[key] = value
+            }
         }
         return competitions
     }

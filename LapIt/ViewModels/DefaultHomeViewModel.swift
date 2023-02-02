@@ -11,7 +11,7 @@ import SwiftUI
 class DefaultHomeViewModel: ObservableObject {
     
     struct Competition: Hashable, Identifiable {
-        var id: Int
+        var id: String
         var name: String
         var description: String
         var distanceOrTime: Int
@@ -27,6 +27,7 @@ class DefaultHomeViewModel: ObservableObject {
     @Published public var email = ""
     @Published public var error = ""
     @Published public var competitions = [:]
+    @Published public var joined = false
     
     
     init(network: Network, coordinator: Coordinator) {
@@ -65,9 +66,26 @@ class DefaultHomeViewModel: ObservableObject {
             let description = value["description"] as? String ?? ""
             let distanceOrTime = value["distanceOrTime"] as? Int ?? 0
             let isActive = value["isActive"] as? Bool ?? false
-            let competition = Competition(id: UUID().hashValue, name: name, description: description, distanceOrTime: distanceOrTime, isActive: isActive)
+            let id = value["id"] as? String ?? ""
+            let competition = Competition(id: id, name: name, description: description, distanceOrTime: distanceOrTime, isActive: isActive)
             competitionsList.append(competition)
         }
         return competitionsList
+    }
+    
+    func isAlreadyJoined(currentCompetition: Competition) {
+        Task {
+            do {
+                self.joined = try await network.isAlreadyJoined(competition_id: currentCompetition.id, user_email: self.email)
+            } catch {
+                DispatchQueue.main.async {
+                    self.error = error.localizedDescription
+                }
+            }
+        }
+    }
+    
+    func joinCompetition(currentCompetition: Competition) {
+        network.joinCompetition(competition_id: currentCompetition.id, user_email: self.email)
     }
 }

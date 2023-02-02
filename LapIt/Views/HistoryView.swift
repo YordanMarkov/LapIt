@@ -10,6 +10,7 @@ import SwiftUI
 
 struct HistoryView: View {
     @ObservedObject private var viewModel: HistoryViewModel
+    @State private var selectedCompetition: HistoryViewModel.Competition? = nil
     
     init(viewModel: HistoryViewModel) {
         self.viewModel = viewModel
@@ -29,59 +30,59 @@ struct HistoryView: View {
                 VStack {
                     Text("Joined")
                     ScrollView {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(Color.white)
-                                .frame(width: 350, height: 75)
-                            Text("Competition 1")
-                                .foregroundColor(.black)
+                        if viewModel.competitions.isEmpty {
+                            Text("Oops! Nothing to show.")
+                        } else {
+                            ForEach(viewModel.parseCompetitions().sorted(by: {$0.name < $1.name}), id: \.self) { competition in
+                                Button(action: {
+                                    self.selectedCompetition = competition
+                                },
+                                       label: {
+                                    VStack {
+                                        Text(competition.name)
+                                            .foregroundColor(.black)
+                                            .bold()
+                                        Text(competition.description)
+                                            .foregroundColor(.black)
+                                            .italic()
+                                    }
+                                    .padding()
+                                    .background(RoundedRectangle(cornerRadius: 10.0).fill(Color.white))
+                                })
+                            }
                         }
-                        
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(Color.white)
-                                .frame(width: 350, height: 75)
-                            Text("Competition 2")
-                                .foregroundColor(.black)
-                        }
-                        
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(Color.white)
-                                .frame(width: 350, height: 75)
-                            Text("Competition 3")
-                                .foregroundColor(.black)
-                        }
-                    }
+                    }.sheet(item: self.$selectedCompetition, content: { selectedCompetition in
+                        DefaultHistoryCompetitionView(viewModel: viewModel, currentCompetition: selectedCompetition)
+                    })
                 }
                 
                 VStack {
                     Text("Previous")
                     ScrollView {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(Color.white)
-                                .frame(width: 350, height: 75)
-                            Text("Competition 1")
-                                .foregroundColor(.black)
+                        if viewModel.inactive_competitions.isEmpty {
+                            Text("Oops! Nothing to show.")
+                        } else {
+                            ForEach(viewModel.parseInactiveCompetitions().sorted(by: {$0.name < $1.name}), id: \.self) { competition in
+                                Button(action: {
+                                    self.selectedCompetition = competition
+                                },
+                                       label: {
+                                    VStack {
+                                        Text(competition.name)
+                                            .foregroundColor(.black)
+                                            .bold()
+                                        Text(competition.description)
+                                            .foregroundColor(.black)
+                                            .italic()
+                                    }
+                                    .padding()
+                                    .background(RoundedRectangle(cornerRadius: 10.0).fill(Color.white))
+                                })
+                            }
                         }
-                        
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(Color.white)
-                                .frame(width: 350, height: 75)
-                            Text("Competition 2")
-                                .foregroundColor(.black)
-                        }
-                        
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(Color.white)
-                                .frame(width: 350, height: 75)
-                            Text("Competition 3")
-                                .foregroundColor(.black)
-                        }
-                    }
+                    }.sheet(item: self.$selectedCompetition, content: { selectedCompetition in
+                        DefaultHistoryCompetitionView(viewModel: viewModel, currentCompetition: selectedCompetition)
+                    })
                 }
             }
             
@@ -114,6 +115,10 @@ struct HistoryView: View {
                     }
                 }
             }
-        }.background(Color.init(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor).edgesIgnoringSafeArea(.vertical))
+        }
+        .background(Color.init(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor).edgesIgnoringSafeArea(.vertical))
+        .onAppear {
+            viewModel.getDetails()
+        }
     }
 }

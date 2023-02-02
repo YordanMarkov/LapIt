@@ -1,5 +1,5 @@
 //
-//  DefaultCompetitionButtonView.swift
+//  DefaultHistoryCompetitionView.swift
 //  LapIt
 //
 //  Created by Yordan Markov on 2.02.23.
@@ -8,13 +8,13 @@
 import Foundation
 import SwiftUI
 
-struct DefaultCompetitionButtonView: View {
+struct DefaultHistoryCompetitionView: View {
     
-    @ObservedObject private var viewModel: DefaultHomeViewModel
-    @State private var currentCompetition: DefaultHomeViewModel.Competition
+    @ObservedObject private var viewModel: HistoryViewModel
+    @State private var currentCompetition: HistoryViewModel.Competition
     @State private var showAlert = false
     
-    init(viewModel: DefaultHomeViewModel, currentCompetition: DefaultHomeViewModel.Competition) {
+    init(viewModel: HistoryViewModel, currentCompetition: HistoryViewModel.Competition) {
         self.viewModel = viewModel
         self.currentCompetition = currentCompetition
     }
@@ -39,31 +39,37 @@ struct DefaultCompetitionButtonView: View {
                     .bold()
             }
             
-            if !viewModel.joined {
+            if !viewModel.left && currentCompetition.isActive != false {
                 Button(
                     action: {
                         self.showAlert = true
                     },
                     label: {
-                        Text("Join")
+                        Text("Leave")
                             .frame(width: 100 , height: 30, alignment: .center)
                     }
                 )
                 .alert(isPresented: $showAlert) {
                     Alert (
-                        title: Text("Are you sure you want to join? You can leave this competition from the History tab."),
+                        title: Text("Are you sure you want to leave? You can rejoin this competition from the Home tab."),
                         primaryButton: .default(Text("Yes")) {
-                            viewModel.joinCompetition(currentCompetition: currentCompetition)
-                            viewModel.joined = true
+                            viewModel.leaveCompetition(currentCompetition: currentCompetition)
+                            viewModel.left = true
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                                viewModel.getDetails()
+                            }
                         },
                         secondaryButton: .cancel()
                     )
                 }
                 .buttonStyle(.borderedProminent)
                 .foregroundColor(.white)
-                .tint(.init(cgColor: UIColor(red: 0, green: 0.686, blue: 0.678, alpha: 1).cgColor))
-            } else {
-                Text("Already joined!")
+                .tint(.red)
+            } else if currentCompetition.isActive != false {
+                Text("You just left!")
+                    .foregroundColor(.red)
+            } else if currentCompetition.isActive == false {
+                Text("Old competition. You cannot join nor leave.")
                     .foregroundColor(.red)
             }
         }
@@ -75,15 +81,3 @@ struct DefaultCompetitionButtonView: View {
         .background(Color.init(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor).edgesIgnoringSafeArea(.vertical))
     }
 }
-
-//struct ContentView_Previews: PreviewProvider {
-//    @ObservedObject private var viewModel: DefaultHomeViewModel
-//    init(viewModel: DefaultHomeViewModel) {
-//        self.viewModel = viewModel
-//    }
-//    static var previews: some View {
-////        LogInView(viewModel: LogInViewModel(network: Network(), coordinator: Coordinator()))
-////        RegisterView(viewModel: RegisterViewModel(network: Network(), coordinator: Coordinator()))
-//        DefaultCompetitionButtonView(viewModel: DefaultHomeViewModel(network: Network(), coordinator: Coordinator(), currentCompetition: viewModel.Competition(name: "Test", description: "Description", distanceOrTime: 1, isActive: true)))
-//    }
-//}
