@@ -10,7 +10,8 @@ import SwiftUI
 
 class DefaultHomeViewModel: ObservableObject {
     
-    struct Competition: Hashable {
+    struct Competition: Hashable, Identifiable {
+        var id: Int
         var name: String
         var description: String
         var distanceOrTime: Int
@@ -64,7 +65,7 @@ class DefaultHomeViewModel: ObservableObject {
             let description = value["description"] as? String ?? ""
             let distanceOrTime = value["distanceOrTime"] as? Int ?? 0
             let isActive = value["isActive"] as? Bool ?? false
-            let competition = Competition(name: name, description: description, distanceOrTime: distanceOrTime, isActive: isActive)
+            let competition = Competition(id: UUID().hashValue, name: name, description: description, distanceOrTime: distanceOrTime, isActive: isActive)
             competitionsList.append(competition)
         }
         return competitionsList

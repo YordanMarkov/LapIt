@@ -63,6 +63,7 @@ struct CreateView: View {
 }
 
 struct LibraryView: View {
+    @State private var showComp = false
     @ObservedObject private var viewModel: LibraryViewModel
     
     init(viewModel: LibraryViewModel) {

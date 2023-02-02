@@ -67,6 +67,7 @@ struct ProfileView: View {
 struct DefaultHomeView: View {
     
     @ObservedObject private var viewModel: DefaultHomeViewModel
+    @State private var selectedCompetition: DefaultHomeViewModel.Competition? = nil
     
     init(viewModel: DefaultHomeViewModel) {
         self.viewModel = viewModel
@@ -90,7 +91,7 @@ struct DefaultHomeView: View {
                     } else {
                         ForEach(viewModel.parseCompetitions().sorted(by: {$0.name < $1.name}), id: \.self) { competition in
                             Button(action: {
-                                // code upcoming
+                                self.selectedCompetition = competition
                             },
                                    label: {
                                 VStack {
@@ -106,7 +107,9 @@ struct DefaultHomeView: View {
                             })
                         }
                     }
-                }
+                }.sheet(item: self.$selectedCompetition, content: { selectedCompetition in
+                    DefaultCompetitionButtonView(viewModel: viewModel, currentCompetition: selectedCompetition)
+                })
             }
                 
             VStack {

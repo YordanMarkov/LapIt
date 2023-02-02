@@ -21,6 +21,7 @@
 		E759AA3F2974BBF300540708 /* DefaultHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E759AA3E2974BBF300540708 /* DefaultHomeView.swift */; };
 		E759AA412981393C00540708 /* OrganizerHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E759AA402981393C00540708 /* OrganizerHomeView.swift */; };
 		E759AA432981396A00540708 /* OrganizerHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E759AA422981396A00540708 /* OrganizerHomeViewModel.swift */; };
+		E79677FC298BAC7700CB6EEA /* DefaultCompetitionButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79677FB298BAC7700CB6EEA /* DefaultCompetitionButtonView.swift */; };
 		E798ED692957617C00263403 /* LapItApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E798ED682957617C00263403 /* LapItApp.swift */; };
 		E798ED6D2957617E00263403 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E798ED6C2957617E00263403 /* Assets.xcassets */; };
 		E798ED702957617E00263403 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E798ED6F2957617E00263403 /* Preview Assets.xcassets */; };
@@ -47,6 +48,7 @@
 		E759AA3E2974BBF300540708 /* DefaultHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultHomeView.swift; sourceTree = "<group>"; };
 		E759AA402981393C00540708 /* OrganizerHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizerHomeView.swift; sourceTree = "<group>"; };
 		E759AA422981396A00540708 /* OrganizerHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizerHomeViewModel.swift; sourceTree = "<group>"; };
+		E79677FB298BAC7700CB6EEA /* DefaultCompetitionButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCompetitionButtonView.swift; sourceTree = "<group>"; };
 		E798ED652957617C00263403 /* LapIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LapIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E798ED682957617C00263403 /* LapItApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LapItApp.swift; sourceTree = "<group>"; };
 		E798ED6C2957617E00263403 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 				E7F43BCC298311710055CBE1 /* StatsView.swift */,
 				E7F43BD4298315A50055CBE1 /* LibraryView.swift */,
 				E7F43BD6298315B00055CBE1 /* ActiveView.swift */,
+				E79677FB298BAC7700CB6EEA /* DefaultCompetitionButtonView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -246,6 +249,7 @@
 				E7F43BD32983158E0055CBE1 /* ActiveViewModel.swift in Sources */,
 				E759AA342972E68600540708 /* RegisterView.swift in Sources */,
 				E7F43BC929830F7A0055CBE1 /* HistoryView.swift in Sources */,
+				E79677FC298BAC7700CB6EEA /* DefaultCompetitionButtonView.swift in Sources */,
 				E759AA2C2972E3C500540708 /* DefaultHomeViewModel.swift in Sources */,
 				E7F43BCD298311710055CBE1 /* StatsView.swift in Sources */,
 				E798ED692957617C00263403 /* LapItApp.swift in Sources */,
