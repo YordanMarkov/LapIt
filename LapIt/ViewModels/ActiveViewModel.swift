@@ -10,12 +10,14 @@ import SwiftUI
 
 class ActiveViewModel: ObservableObject {
     
-    struct Competition: Hashable {
+    struct Competition: Hashable, Identifiable {
+        var id: String
         var name: String
         var description: String
         var distanceOrTime: Int
         var isActive: Bool
     }
+    
     @Published public var activeCompetitions = [:]
     @Published public var deactivatedCompetitions = [:]
     @Published public var email = ""
@@ -55,9 +57,34 @@ class ActiveViewModel: ObservableObject {
             let description = value["description"] as? String ?? ""
             let distanceOrTime = value["distanceOrTime"] as? Int ?? 0
             let isActive = value["isActive"] as? Bool ?? false
-            let competition = Competition(name: name, description: description, distanceOrTime: distanceOrTime, isActive: isActive)
+            let id = value["id"] as? String ?? ""
+            let competition = Competition(id: id, name: name, description: description, distanceOrTime: distanceOrTime, isActive: isActive)
             competitionsList.append(competition)
         }
         return competitionsList
+    }
+    
+    func deactivateCompetition(currentCompetition: Competition) {
+        Task {
+            do {
+                try await network.deactivateCompetitionById(competition_id: currentCompetition.id)
+            } catch {
+                DispatchQueue.main.async {
+                    self.error = error.localizedDescription
+                }
+            }
+        }
+    }
+    
+    func activateCompetition(currentCompetition: Competition) {
+        Task {
+            do {
+                try await network.activateCompetitionById(competition_id: currentCompetition.id)
+            } catch {
+                DispatchQueue.main.async {
+                    self.error = error.localizedDescription
+                }
+            }
+        }
     }
 }

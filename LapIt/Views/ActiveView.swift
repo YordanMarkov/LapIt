@@ -10,6 +10,8 @@ import SwiftUI
 
 struct ActiveView: View {
     @ObservedObject private var viewModel: ActiveViewModel
+    @State private var selectedToDeactivateCompetition: ActiveViewModel.Competition? = nil
+    @State private var selectedToActivateCompetition: ActiveViewModel.Competition? = nil
     
     init(viewModel: ActiveViewModel) {
         self.viewModel = viewModel
@@ -34,7 +36,7 @@ struct ActiveView: View {
                         } else {
                             ForEach(viewModel.parseCompetitions(array: viewModel.activeCompetitions).sorted(by: {$0.name < $1.name}), id: \.self) { competition in
                                 Button(action: {
-                                    // code upcoming
+                                    self.selectedToDeactivateCompetition = competition
                                 },
                                        label: {
                                     VStack {
@@ -50,7 +52,9 @@ struct ActiveView: View {
                                 })
                             }
                         }
-                    }
+                    }.sheet(item: self.$selectedToDeactivateCompetition, content: { selectedToDeactivateCompetition in
+                        OrganizerActiveButtonView(viewModel: viewModel, currentCompetition: selectedToDeactivateCompetition)
+                    })
                 }
                 
                 VStack {
@@ -61,7 +65,7 @@ struct ActiveView: View {
                         } else {
                             ForEach(viewModel.parseCompetitions(array: viewModel.deactivatedCompetitions).sorted(by: {$0.name < $1.name}), id: \.self) { competition in
                                 Button(action: {
-                                    // code upcoming
+                                    self.selectedToActivateCompetition = competition
                                 },
                                        label: {
                                     VStack {
@@ -77,7 +81,9 @@ struct ActiveView: View {
                                 })
                             }
                         }
-                    }
+                    }.sheet(item: self.$selectedToActivateCompetition, content: { selectedToActivateCompetition in
+                        OrganizerDeactivedButtonView(viewModel: viewModel, currentCompetition: selectedToActivateCompetition)
+                    })
                 }
             }
             

@@ -131,6 +131,31 @@ class Network {
         return competitions
     }
     
+    func deactivateCompetitionById(competition_id: String) async throws {
+        let competitionCollection = firestore.collection("competitions")
+        let query = competitionCollection.document(competition_id)
+        try await query.updateData(["isActive": false])
+    }
+    
+    func activateCompetitionById(competition_id: String) async throws {
+        let competitionCollection = firestore.collection("competitions")
+        let query = competitionCollection.document(competition_id)
+        try await query.updateData(["isActive": true])
+    }
+    
+    func deleteCompetition(competition_id: String) async throws {
+        let competitionCollection = firestore.collection("competitions")
+        let query = competitionCollection.document(competition_id)
+        try await query.delete()
+        let competitionStatsCollection = firestore.collection("competitions_stats")
+        let query2 = competitionStatsCollection.whereField("competition_id", isEqualTo: competition_id)
+        let querySnapshot = try await query2.getDocuments()
+        let competitionStatsData = querySnapshot.documents
+        competitionStatsData.forEach { document in
+            document.reference.delete()
+        }
+    }
+    
     func getActiveCompetitionsByEmail(email: String) async throws -> [String: Any] {
         var competitions = [String: Any]()
         let competitionsCollection = firestore.collection("competitions")

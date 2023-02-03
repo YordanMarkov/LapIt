@@ -39,6 +39,9 @@ struct OrganizerCompetitionButtonView: View {
                     .bold()
             }
         }
+        .onAppear{
+            viewModel.getDetails()
+        }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.init(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor).edgesIgnoringSafeArea(.vertical))

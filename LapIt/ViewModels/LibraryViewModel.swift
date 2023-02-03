@@ -10,7 +10,8 @@ import SwiftUI
 
 class LibraryViewModel: ObservableObject {
     
-    struct Competition: Hashable {
+    struct Competition: Hashable, Identifiable {
+        var id: String
         var name: String
         var description: String
         var distanceOrTime: Int
@@ -21,6 +22,7 @@ class LibraryViewModel: ObservableObject {
     private unowned let coordinator: Coordinator
     
     @Published public var createView = false
+    @Published public var reuse = true
     @Published public var error = ""
     @Published public var email = ""
     @Published public var name = ""
@@ -58,7 +60,8 @@ class LibraryViewModel: ObservableObject {
             let description = value["description"] as? String ?? ""
             let distanceOrTime = value["distanceOrTime"] as? Int ?? 0
             let isActive = value["isActive"] as? Bool ?? false
-            let competition = Competition(name: name, description: description, distanceOrTime: distanceOrTime, isActive: isActive)
+            let id = value["id"] as? String ?? ""
+            let competition = Competition(id: id, name: name, description: description, distanceOrTime: distanceOrTime, isActive: isActive)
             competitionsList.append(competition)
         }
         return competitionsList
@@ -66,5 +69,17 @@ class LibraryViewModel: ObservableObject {
     
     func create() {
         network.createCompetition(email: self.email, name: self.name, description: self.description, distanceOrTime: self.distanceOrTime, isActive: true)
+    }
+    
+    func delete(competition: Competition?) {
+        Task {
+            do {
+                try await network.deleteCompetition(competition_id: competition?.id ?? "")
+            } catch {
+                DispatchQueue.main.async {
+                    self.error = error.localizedDescription
+                }
+            }
+        }
     }
 }
