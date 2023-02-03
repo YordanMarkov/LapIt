@@ -11,6 +11,7 @@ import SwiftUI
 struct ProfileViewO: View {
     
     @State private var showAlert = false
+    @State private var showDeleteAlert = false
     
     @ObservedObject private var viewModel: OrganizerHomeViewModel
     
@@ -57,6 +58,28 @@ struct ProfileViewO: View {
                 .foregroundColor(.white)
                 .tint(.init(.red))
             //            .position(x: 205, y: 700)
+            
+            Button(
+                action: {
+                    showDeleteAlert = true
+                },
+                label: {
+                    Text("Delete account")
+                        .frame(width: 155 , height: 30, alignment: .center)
+                }).alert(isPresented: $showDeleteAlert) {
+                    Alert (
+                        title: Text("You are about to delete your account. This will delete all of your stats and history. This action is irreversible. Continue?"),
+                        primaryButton: .default(Text("Yes")) {
+                            viewModel.profileView = false
+                            viewModel.deleteAccount()
+                            viewModel.route(to: .login)
+                        },
+                        secondaryButton: .cancel()
+                    )
+                }
+            .buttonStyle(.borderedProminent)
+            .foregroundColor(.white)
+            .tint(.init(.yellow))
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)

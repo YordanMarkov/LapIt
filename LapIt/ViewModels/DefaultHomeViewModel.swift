@@ -88,4 +88,16 @@ class DefaultHomeViewModel: ObservableObject {
     func joinCompetition(currentCompetition: Competition) {
         network.joinCompetition(competition_id: currentCompetition.id, user_email: self.email)
     }
+    
+    func deleteAccount() {
+        Task {
+            do {
+                try await network.deleteAccount(email: self.email)
+            } catch {
+                DispatchQueue.main.async {
+                    self.error = error.localizedDescription
+                }
+            }
+        }
+    }
 }

@@ -42,6 +42,32 @@ class Network {
         firestore.collection("users").addDocument(data: ["email": email, "firstName": firstName, "secondName": secondName, "isOrganizer": isOrganizer, "km": 0, "min": 0, "wins": 0])
     }
     
+    func deleteAccount(email: String) async throws {
+        try await firebaseAuth.currentUser?.delete()
+        
+        let usersCollection = firestore.collection("users")
+        let query = usersCollection.whereField("email", isEqualTo: email)
+        let querySnapshot = try await query.getDocuments()
+        let userData = querySnapshot.documents.first
+        try await userData?.reference.delete()
+        
+        let competitionsCollection = firestore.collection("competitions")
+        let query2 = competitionsCollection.whereField("email", isEqualTo: email)
+        let querySnapshot2 = try await query2.getDocuments()
+        let competitionsData = querySnapshot2.documents
+        competitionsData.forEach { document in
+            document.reference.delete()
+        }
+        
+        let competitionsStatsCollection = firestore.collection("competitions_stats")
+        let query3 = competitionsStatsCollection.whereField("user_email", isEqualTo: email)
+        let querySnapshot3 = try await query3.getDocuments()
+        let competitionsStatsData = querySnapshot3.documents
+        competitionsStatsData.forEach { document in
+            document.reference.delete()
+        }
+    }
+    
     func createCompetition(email: String, name: String, description: String, distanceOrTime: Int, isActive: Bool) {
 //        firestore.collection("competitions").addDocument(data: ["id": "", "email": email, "name": name, "description": description, "distanceOrTime": distanceOrTime, "isActive": isActive])
         let documentRef = firestore.collection("competitions").addDocument(data: ["id": "", "email": email, "name": name, "description": description, "distanceOrTime": distanceOrTime, "isActive": isActive])

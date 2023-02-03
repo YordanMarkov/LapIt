@@ -70,4 +70,16 @@ class OrganizerHomeViewModel: ObservableObject {
         }
         return competitionsList
     }
+    
+    func deleteAccount() {
+        Task {
+            do {
+                try await network.deleteAccount(email: self.email)
+            } catch {
+                DispatchQueue.main.async {
+                    self.error = error.localizedDescription
+                }
+            }
+        }
+    }
 }
