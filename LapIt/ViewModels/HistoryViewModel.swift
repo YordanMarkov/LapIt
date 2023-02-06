@@ -20,6 +20,14 @@ class HistoryViewModel: ObservableObject {
         var isActive: Bool
     }
     
+    struct User: Hashable {
+        var user_email: String
+        var firstName: String
+        var secondName: String
+        var km: Int
+        var min: Int
+    }
+    
     @Published public var firstName = ""
     @Published public var secondName = ""
     @Published public var email = ""
@@ -27,6 +35,7 @@ class HistoryViewModel: ObservableObject {
     @Published public var competitions = [:]
     @Published public var inactive_competitions = [:]
     @Published public var left = false
+    @Published public var users: [User] = []
     
     init(network: Network, coordinator: Coordinator) {
         self.network = network
@@ -45,6 +54,43 @@ class HistoryViewModel: ObservableObject {
                 self.secondName = try await network.getUserSecondName(email: self.email)
                 self.competitions = try await network.getActiveAndJoinedCompetitions(user_email: self.email)
                 self.inactive_competitions = try await network.getInactiveAndJoinedCompetitions(user_email: self.email)
+            } catch {
+                DispatchQueue.main.async {
+                    self.error = error.localizedDescription
+                }
+            }
+        }
+    }
+    
+    func getUsers(currentCompetition: Competition) {
+        Task {
+            do {
+                try await parseUsers(array: network.getUsersById(competition_id: currentCompetition.id))
+//                decideWinners(currentCompetition: currentCompetition)
+            } catch {
+                DispatchQueue.main.async {
+                    self.error = error.localizedDescription
+                }
+            }
+        }
+    }
+    
+    func parseUsers(array: [AnyHashable : Any]) {
+        Task {
+            do {
+                var users: [User] = []
+                for (_, value) in array {
+                    guard let value = value as? [String: Any] else { continue }
+                    
+                        let user_email = value["user_email"] as? String ?? ""
+                        let firstName = try await network.getUserFirstName(email: user_email)
+                        let secondName = try await network.getUserSecondName(email: user_email)
+                        let km = value["km"] as? Int ?? 0
+                        let min = value["min"] as? Int ?? 0
+                        let user = User(user_email: user_email, firstName: firstName, secondName: secondName, km: km, min: min)
+                        users.append(user)
+                }
+                self.users = users
             } catch {
                 DispatchQueue.main.async {
                     self.error = error.localizedDescription

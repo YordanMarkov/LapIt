@@ -62,7 +62,7 @@ class ActiveViewModel: ObservableObject {
         Task {
             do {
                 try await parseUsers(array: network.getUsersById(competition_id: currentCompetition.id))
-                decideWinners(currentCompetition: currentCompetition)
+//                decideWinners(currentCompetition: currentCompetition)
             } catch {
                 DispatchQueue.main.async {
                     self.error = error.localizedDescription

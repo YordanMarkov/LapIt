@@ -72,9 +72,26 @@ struct DefaultHistoryCompetitionView: View {
                 Text("Old competition. You cannot join nor leave.")
                     .foregroundColor(.red)
             }
+            
+            Text("All users")
+                .fontWeight(.bold)
+            ScrollView {
+                ForEach(viewModel.users, id: \.self) { user in
+                    VStack {
+                        Text("\(user.firstName) \(user.secondName)")
+                            .fontWeight(.bold)
+                        if currentCompetition.distanceOrTime == 0 {
+                            Text("Distance: \(user.km)")
+                        } else {
+                            Text("Time: \(user.min)")
+                        }
+                    }
+                }
+            }
         }
         .onAppear {
             viewModel.isAlreadyJoined(currentCompetition: currentCompetition)
+            viewModel.getUsers(currentCompetition: currentCompetition) 
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)

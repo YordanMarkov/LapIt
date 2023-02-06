@@ -146,14 +146,18 @@ struct OrganizerActiveButtonView: View {
                         if currentCompetition.distanceOrTime == 0 {
                             KmView(userKm: user.km, action: { newKm in
                                 viewModel.updateKm(currentCompetition: currentCompetition, km: newKm, user_email: user.user_email)
-                                viewModel.getDetails()
-                                viewModel.getUsers(currentCompetition: currentCompetition)
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+//                                    viewModel.getDetails()
+                                    viewModel.getUsers(currentCompetition: currentCompetition)
+                                }
                             })
                         } else {
                             MinView(userMin: user.min, action: { newMin in
                                 viewModel.updateMin(currentCompetition: currentCompetition, min: newMin, user_email: user.user_email)
-                                viewModel.getDetails()
-                                viewModel.getUsers(currentCompetition: currentCompetition)
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+//                                    viewModel.getDetails()
+                                    viewModel.getUsers(currentCompetition: currentCompetition)
+                                }
                             })
                         }
                     }

@@ -287,21 +287,31 @@ class Network {
     }
     
     func getUserKm(email: String) async throws -> Int {
-        let userCollection = firestore.collection("users")
-        let query = userCollection.whereField("email", isEqualTo: email)
+        let competitionsStatsCollection = firestore.collection("competitions_stats")
+        let query = competitionsStatsCollection.whereField("user_email", isEqualTo: email)
         let querySnapshot = try await query.getDocuments()
-        let userData = querySnapshot.documents.first
-        let km = userData?["km"] as? Int ?? 0
-        return km
+        var totalKm = 0
+        for document in querySnapshot.documents {
+            let data = document.data()
+            if let km = data["km"] as? Int {
+                totalKm += km
+            }
+        }
+        return totalKm
     }
     
     func getUserMin(email: String) async throws -> Int {
-        let userCollection = firestore.collection("users")
-        let query = userCollection.whereField("email", isEqualTo: email)
+        let competitionsStatsCollection = firestore.collection("competitions_stats")
+        let query = competitionsStatsCollection.whereField("user_email", isEqualTo: email)
         let querySnapshot = try await query.getDocuments()
-        let userData = querySnapshot.documents.first
-        let min = userData?["min"] as? Int ?? 0
-        return min
+        var totalMin = 0
+        for document in querySnapshot.documents {
+            let data = document.data()
+            if let min = data["min"] as? Int {
+                totalMin += min
+            }
+        }
+        return totalMin
     }
     
     func getUserWins(email: String) async throws -> Int {
