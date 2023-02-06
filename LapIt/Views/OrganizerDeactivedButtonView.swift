@@ -4,7 +4,6 @@
 //
 //  Created by Yordan Markov on 3.02.23.
 //
-
 import Foundation
 import SwiftUI
 
@@ -70,9 +69,41 @@ struct OrganizerDeactivedButtonView: View {
                 Text("Already activated!")
                     .foregroundColor(.red)
             }
+            
+            Text("Winners")
+                .fontWeight(.bold)
+                .foregroundColor(.red)
+            ForEach(viewModel.winners, id: \.self) { user in
+                VStack {
+                    Text("\(user.firstName) \(user.secondName)")
+                        .fontWeight(.bold)
+                    if currentCompetition.distanceOrTime == 0 {
+                        Text("Distance: \(user.km)")
+                    } else {
+                        Text("Time: \(user.min)")
+                    }
+                }
+            }
+            
+            Text("All users")
+                .fontWeight(.bold)
+            ScrollView {
+                ForEach(viewModel.users, id: \.self) { user in
+                    VStack {
+                        Text("\(user.firstName) \(user.secondName)")
+                            .fontWeight(.bold)
+                        if currentCompetition.distanceOrTime == 0 {
+                            Text("Distance: \(user.km)")
+                        } else {
+                            Text("Time: \(user.min)")
+                        }
+                    }
+                }
+            }
         }
         .onAppear{
             viewModel.getDetails()
+            viewModel.getUsers(currentCompetition: currentCompetition)
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)

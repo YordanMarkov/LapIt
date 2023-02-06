@@ -69,7 +69,6 @@ class Network {
     }
     
     func createCompetition(email: String, name: String, description: String, distanceOrTime: Int, isActive: Bool) {
-//        firestore.collection("competitions").addDocument(data: ["id": "", "email": email, "name": name, "description": description, "distanceOrTime": distanceOrTime, "isActive": isActive])
         let documentRef = firestore.collection("competitions").addDocument(data: ["id": "", "email": email, "name": name, "description": description, "distanceOrTime": distanceOrTime, "isActive": isActive])
         let documentID = documentRef.documentID
         firestore.collection("competitions").document(documentID).updateData(["id": documentID])
@@ -179,6 +178,37 @@ class Network {
         let competitionStatsData = querySnapshot.documents
         competitionStatsData.forEach { document in
             document.reference.delete()
+        }
+    }
+    
+    func getUsersById(competition_id: String) async throws -> [String: Any] {
+        var users = [String: Any]()
+        let competitionsStatsCollection = firestore.collection("competitions_stats")
+        let query = competitionsStatsCollection.whereField("competition_id", isEqualTo: competition_id)
+        let querySnapshot = try await query.getDocuments()
+        let usersData = querySnapshot.documents
+        usersData.forEach { document in
+            let user = document.data()
+            users[document.documentID] = user
+        }
+        return users
+    }
+    
+    func updateKm(competition_id: String, km: Int, user_email: String) async throws {
+        let competitionsStatsCollection = firestore.collection("competitions_stats")
+        let query = competitionsStatsCollection.whereField("competition_id", isEqualTo: competition_id).whereField("user_email", isEqualTo: user_email)
+        let querySnapshot = try await query.getDocuments()
+        for document in querySnapshot.documents {
+            try await document.reference.updateData(["km": km])
+        }
+    }
+    
+    func updateMin(competition_id: String, min: Int, user_email: String) async throws {
+        let competitionsStatsCollection = firestore.collection("competitions_stats")
+        let query = competitionsStatsCollection.whereField("competition_id", isEqualTo: competition_id).whereField("user_email", isEqualTo: user_email)
+        let querySnapshot = try await query.getDocuments()
+        for document in querySnapshot.documents {
+            try await document.reference.updateData(["min": min])
         }
     }
     

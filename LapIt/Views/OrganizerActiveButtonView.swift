@@ -4,9 +4,74 @@
 //
 //  Created by Yordan Markov on 3.02.23.
 //
-
 import Foundation
 import SwiftUI
+
+struct KmView: View {
+    let userKm: Int
+    let action: (Int) -> Void
+    @State var km: Int = 0
+    
+    init(userKm: Int, action: @escaping (Int) -> Void) {
+        self.userKm = userKm
+        self.action = action
+    }
+    
+    var body: some View {
+        HStack {
+            Text("Distance: \(userKm)")
+            TextField("Change", value: $km, format: .number)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+            
+                .keyboardType(.numberPad)
+            if(km != userKm && km > 0) {
+                Button {
+                        action(km)
+                    }
+                label: {
+                    Text("Update")
+                        .frame(width: 60 , height: 15)
+                }
+                .buttonStyle(.borderedProminent)
+                .foregroundColor(.white)
+                .tint(.yellow)
+            }
+        }
+    }
+}
+
+struct MinView: View {
+    let userMin: Int
+    let action: (Int) -> Void
+    @State var min: Int = 0
+    
+    init(userMin: Int, action: @escaping (Int) -> Void) {
+        self.userMin = userMin
+        self.action = action
+    }
+    
+    var body: some View {
+        HStack {
+            Text("Time: \(userMin)")
+            TextField("Change", value: $min, format: .number)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+            if(min != userMin && min >= 0) {
+                Button(
+                    action: {
+                        action(min)
+                    },
+                    label: {
+                        Text("Update")
+                            .frame(width: 100 , height: 30)
+                    }
+                )
+                .buttonStyle(.borderedProminent)
+                .foregroundColor(.white)
+                .tint(.yellow)
+            }
+        }
+    }
+}
 
 struct OrganizerActiveButtonView: View {
     
@@ -70,9 +135,34 @@ struct OrganizerActiveButtonView: View {
                 Text("Already deactivated!")
                     .foregroundColor(.red)
             }
+            
+            Text("All users")
+                .fontWeight(.bold)
+            ScrollView {
+                ForEach(viewModel.users, id: \.self) { user in
+                    VStack {
+                        Text("\(user.firstName) \(user.secondName)")
+                            .fontWeight(.bold)
+                        if currentCompetition.distanceOrTime == 0 {
+                            KmView(userKm: user.km, action: { newKm in
+                                viewModel.updateKm(currentCompetition: currentCompetition, km: newKm, user_email: user.user_email)
+                                viewModel.getDetails()
+                                viewModel.getUsers(currentCompetition: currentCompetition)
+                            })
+                        } else {
+                            MinView(userMin: user.min, action: { newMin in
+                                viewModel.updateMin(currentCompetition: currentCompetition, min: newMin, user_email: user.user_email)
+                                viewModel.getDetails()
+                                viewModel.getUsers(currentCompetition: currentCompetition)
+                            })
+                        }
+                    }
+                }
+            }
         }
         .onAppear{
             viewModel.getDetails()
+            viewModel.getUsers(currentCompetition: currentCompetition)
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)

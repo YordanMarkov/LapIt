@@ -4,7 +4,6 @@
 //
 //  Created by Yordan Markov on 26.01.23.
 //
-
 import Foundation
 import SwiftUI
 
@@ -18,10 +17,20 @@ class ActiveViewModel: ObservableObject {
         var isActive: Bool
     }
     
+    struct User: Hashable {
+        var user_email: String
+        var firstName: String
+        var secondName: String
+        var km: Int
+        var min: Int
+    }
+    
     @Published public var activeCompetitions = [:]
     @Published public var deactivatedCompetitions = [:]
+    @Published public var users: [User] = []
     @Published public var email = ""
     @Published public var error = ""
+    @Published public var winners: [User] = []
     
     private let network: Network
     private unowned let coordinator: Coordinator
@@ -46,6 +55,65 @@ class ActiveViewModel: ObservableObject {
                     self.error = error.localizedDescription
                 }
             }
+        }
+    }
+    
+    func getUsers(currentCompetition: Competition) {
+        Task {
+            do {
+                try await parseUsers(array: network.getUsersById(competition_id: currentCompetition.id))
+                decideWinners(currentCompetition: currentCompetition)
+            } catch {
+                DispatchQueue.main.async {
+                    self.error = error.localizedDescription
+                }
+            }
+        }
+    }
+    
+    func parseUsers(array: [AnyHashable : Any]) {
+        Task {
+            do {
+                var users: [User] = []
+                for (_, value) in array {
+                    guard let value = value as? [String: Any] else { continue }
+                    
+                        let user_email = value["user_email"] as? String ?? ""
+                        let firstName = try await network.getUserFirstName(email: user_email)
+                        let secondName = try await network.getUserSecondName(email: user_email)
+                        let km = value["km"] as? Int ?? 0
+                        let min = value["min"] as? Int ?? 0
+                        let user = User(user_email: user_email, firstName: firstName, secondName: secondName, km: km, min: min)
+                        users.append(user)
+                }
+                self.users = users
+            } catch {
+                DispatchQueue.main.async {
+                    self.error = error.localizedDescription
+                }
+            }
+        }
+    }
+    
+    func decideWinners(currentCompetition: Competition) {
+        if currentCompetition.distanceOrTime == 0 {
+            let sortedUsers = users.sorted { $0.min < $1.min }
+            var wins: [User] = []
+            for user in sortedUsers {
+                if user.min != 0 && wins.count < 3 {
+                    wins.append(user)
+                }
+            }
+            self.winners = wins
+        } else {
+            let sortedUsers = users.sorted { $0.km > $1.km }
+            var wins: [User] = []
+            for user in sortedUsers {
+                if user.km != 0 && wins.count < 3 {
+                    wins.append(user)
+                }
+            }
+            self.winners = wins
         }
     }
     
@@ -80,6 +148,30 @@ class ActiveViewModel: ObservableObject {
         Task {
             do {
                 try await network.activateCompetitionById(competition_id: currentCompetition.id)
+            } catch {
+                DispatchQueue.main.async {
+                    self.error = error.localizedDescription
+                }
+            }
+        }
+    }
+    
+    func updateMin(currentCompetition: Competition, min: Int, user_email: String) {
+        Task {
+            do {
+                try await network.updateMin(competition_id: currentCompetition.id, min: min, user_email: user_email)
+            } catch {
+                DispatchQueue.main.async {
+                    self.error = error.localizedDescription
+                }
+            }
+        }
+    }
+    
+    func updateKm(currentCompetition: Competition, km: Int, user_email: String) {
+        Task {
+            do {
+                try await network.updateKm(competition_id: currentCompetition.id, km: km, user_email: user_email)
             } catch {
                 DispatchQueue.main.async {
                     self.error = error.localizedDescription
