@@ -105,30 +105,23 @@ struct LogInView: View {
             Image("LapItLogo")
                 .resizable()
                 .frame(width: 218, height: 174)
-//                .position(x: 205, y: 255)
             
             VStack (spacing: 10) {
                 TextField("Email", text: $viewModel.email)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .autocapitalization(.none)
-                //                .frame(width: 300, height: 300)
-                //                .position(x: 205, y: 413)
-                //
+                
                 HStack {
                     if viewModel.secured {
                         SecureField("Password", text: $viewModel.password)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .autocapitalization(.none)
-                        //                    .frame(width: 300, height: 300)
-                        //                    .position(x: 205, y: 475)
                     } else {
                         TextField("Password", text: $viewModel.password)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .autocapitalization(.none)
-                        //                    .frame(width: 300, height: 300)
-                        //                    .position(x: 205, y: 475)
                     }
-                    //
+                    
                     Button( // URL: https://stackoverflow.com/questions/63095851/show-hide-password-how-can-i-add-this-feature
                         action: {
                             viewModel.secured.toggle()
@@ -138,7 +131,6 @@ struct LogInView: View {
                         }
                 }
             }
-//                .position(x: 380, y: 475)
             
             Button(action: {
                 viewModel.forgottenPassword = true
@@ -162,11 +154,9 @@ struct LogInView: View {
                         .underline()
                 })
             .buttonStyle(.plain)
-//            .position(x: 205, y: 540)
-//
+
             if viewModel.email.isEmpty || viewModel.password.isEmpty {
                 Text("Filling the fields is required!")
-//                    .position(x: 205, y: 370)
                     .foregroundColor(.red)
             } else {
                 Button(
@@ -181,7 +171,6 @@ struct LogInView: View {
                                 } else if viewModel.isOrganizer == false {
                                     viewModel.route(to: .defaultHome)
                                 }
-//                                viewModel.route(to: .defaultHome)
                                 self.showingLoadingScreen = false
                             } else {
                                 self.showingLoadingScreen = false
@@ -201,7 +190,6 @@ struct LogInView: View {
                         )
                     }
                 .buttonStyle(.borderedProminent)
-//                .position(x: 205, y: 600)
                 .foregroundColor(.white)
                 .tint(.init(cgColor: UIColor(red: 0, green: 0.686, blue: 0.678, alpha: 1).cgColor))
             }

@@ -60,23 +60,6 @@ struct StatsView: View {
                     //                    .frame(width: 400)
                     //                    .position(x: 305, y: 400)
                 }.padding()
-                
-                HStack {
-                    Text("Total wins")
-                        .padding()
-                        .background(Color(.blue))
-                        .cornerRadius(10)
-                        .foregroundColor(.white)
-                    //                    .frame(width: 400)
-                    //                    .position(x: 150, y: 500)
-                    Text("\(viewModel.wins)")
-                        .padding()
-                        .background(Color(.red))
-                        .cornerRadius(10)
-                        .foregroundColor(.white)
-                    //                    .frame(width: 400)
-                    //                    .position(x: 305, y: 500)
-                }
             }
             VStack {
                 ZStack {

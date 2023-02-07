@@ -70,38 +70,33 @@ struct OrganizerDeactivedButtonView: View {
                     .foregroundColor(.red)
             }
             
-            Text("Winners")
+            Text("Scoreboard")
                 .fontWeight(.bold)
-                .foregroundColor(.red)
-            ForEach(viewModel.winners, id: \.self) { user in
-                VStack {
-                    Text("\(user.firstName) \(user.secondName)")
-                        .fontWeight(.bold)
+            if viewModel.users.isEmpty {
+                Text("Oops! No users joined this competition.")
+            } else {
+                ScrollView {
                     if currentCompetition.distanceOrTime == 0 {
-                        Text("Distance: \(user.km)")
+                        ForEach(viewModel.users.sorted(by: {$0.km > $1.km}), id: \.self) { user in
+                            VStack {
+                                Text("\(user.firstName) \(user.secondName)")
+                                    .fontWeight(.bold)
+                                Text("Distance: \(user.km)")
+                            }
+                        }
                     } else {
-                        Text("Time: \(user.min)")
-                    }
-                }
-            }
-            
-            Text("All users")
-                .fontWeight(.bold)
-            ScrollView {
-                ForEach(viewModel.users, id: \.self) { user in
-                    VStack {
-                        Text("\(user.firstName) \(user.secondName)")
-                            .fontWeight(.bold)
-                        if currentCompetition.distanceOrTime == 0 {
-                            Text("Distance: \(user.km)")
-                        } else {
-                            Text("Time: \(user.min)")
+                        ForEach(viewModel.users.sorted(by: {$0.min < $1.min}), id: \.self) { user in
+                            VStack {
+                                Text("\(user.firstName) \(user.secondName)")
+                                    .fontWeight(.bold)
+                                Text("Time: \(user.min)")
+                            }
                         }
                     }
                 }
             }
         }
-        .onAppear{
+        .onAppear {
             viewModel.getDetails()
             viewModel.getUsers(currentCompetition: currentCompetition)
         }

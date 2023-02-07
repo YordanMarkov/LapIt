@@ -95,27 +95,27 @@ class ActiveViewModel: ObservableObject {
         }
     }
     
-    func decideWinners(currentCompetition: Competition) {
-        if currentCompetition.distanceOrTime == 0 {
-            let sortedUsers = users.sorted { $0.min < $1.min }
-            var wins: [User] = []
-            for user in sortedUsers {
-                if user.min != 0 && wins.count < 3 {
-                    wins.append(user)
-                }
-            }
-            self.winners = wins
-        } else {
-            let sortedUsers = users.sorted { $0.km > $1.km }
-            var wins: [User] = []
-            for user in sortedUsers {
-                if user.km != 0 && wins.count < 3 {
-                    wins.append(user)
-                }
-            }
-            self.winners = wins
-        }
-    }
+//    func decideWinners(currentCompetition: Competition) {
+//        if currentCompetition.distanceOrTime == 0 {
+//            let sortedUsers = users.sorted { $0.min < $1.min }
+//            var wins: [User] = []
+//            for user in sortedUsers {
+//                if user.min != 0 && wins.count < 3 {
+//                    wins.append(user)
+//                }
+//            }
+//            self.winners = wins
+//        } else {
+//            let sortedUsers = users.sorted { $0.km > $1.km }
+//            var wins: [User] = []
+//            for user in sortedUsers {
+//                if user.km != 0 && wins.count < 3 {
+//                    wins.append(user)
+//                }
+//            }
+//            self.winners = wins
+//        }
+//    }
     
     func parseCompetitions(array: [AnyHashable : Any]) -> [Competition] {
         var competitionsList: [Competition] = []

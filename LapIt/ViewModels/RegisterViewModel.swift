@@ -35,7 +35,7 @@ class RegisterViewModel: ObservableObject {
     func register() {
         Task {
             do {
-                try await network.Register(email: self.email, password: self.password, firstName: self.firstName, secondName: self.secondName, isOrganizer: self.isOrganizer)
+                try await network.register(email: self.email, password: self.password, firstName: self.firstName, secondName: self.secondName, isOrganizer: self.isOrganizer)
             }  catch {
                 self.error = error.localizedDescription
             }

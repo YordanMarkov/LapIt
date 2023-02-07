@@ -37,9 +37,9 @@ class Network {
     }
     
     
-    func Register(email: String, password: String, firstName: String, secondName: String, isOrganizer: Bool) async throws {
+    func register(email: String, password: String, firstName: String, secondName: String, isOrganizer: Bool) async throws {
         try await firebaseAuth.createUser(withEmail: email, password: password)
-        firestore.collection("users").addDocument(data: ["email": email, "firstName": firstName, "secondName": secondName, "isOrganizer": isOrganizer, "km": 0, "min": 0, "wins": 0])
+        firestore.collection("users").addDocument(data: ["email": email, "firstName": firstName, "secondName": secondName, "isOrganizer": isOrganizer])
     }
     
     func deleteAccount(email: String) async throws {
@@ -312,14 +312,5 @@ class Network {
             }
         }
         return totalMin
-    }
-    
-    func getUserWins(email: String) async throws -> Int {
-        let userCollection = firestore.collection("users")
-        let query = userCollection.whereField("email", isEqualTo: email)
-        let querySnapshot = try await query.getDocuments()
-        let userData = querySnapshot.documents.first
-        let wins = userData?["wins"] as? Int ?? 0
-        return wins
     }
 }

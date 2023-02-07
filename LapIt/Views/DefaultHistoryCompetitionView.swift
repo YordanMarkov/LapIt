@@ -73,16 +73,23 @@ struct DefaultHistoryCompetitionView: View {
                     .foregroundColor(.red)
             }
             
-            Text("All users")
+            Text("Scoreboard")
                 .fontWeight(.bold)
+            
             ScrollView {
-                ForEach(viewModel.users, id: \.self) { user in
-                    VStack {
-                        Text("\(user.firstName) \(user.secondName)")
-                            .fontWeight(.bold)
-                        if currentCompetition.distanceOrTime == 0 {
+                if currentCompetition.distanceOrTime == 0 {
+                    ForEach(viewModel.users.sorted(by: {$0.km > $1.km}), id: \.self) { user in
+                        VStack {
+                            Text("\(user.firstName) \(user.secondName)")
+                                .fontWeight(.bold)
                             Text("Distance: \(user.km)")
-                        } else {
+                        }
+                    }
+                } else {
+                    ForEach(viewModel.users.sorted(by: {$0.min < $1.min}), id: \.self) { user in
+                        VStack {
+                            Text("\(user.firstName) \(user.secondName)")
+                                .fontWeight(.bold)
                             Text("Time: \(user.min)")
                         }
                     }
@@ -91,7 +98,7 @@ struct DefaultHistoryCompetitionView: View {
         }
         .onAppear {
             viewModel.isAlreadyJoined(currentCompetition: currentCompetition)
-            viewModel.getUsers(currentCompetition: currentCompetition) 
+            viewModel.getUsers(currentCompetition: currentCompetition)
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
