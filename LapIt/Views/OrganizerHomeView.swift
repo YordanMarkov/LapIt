@@ -27,8 +27,6 @@ struct ProfileViewO: View {
                 .font(.largeTitle)
                 .cornerRadius(10)
                 .foregroundColor(.white)
-            //                .frame(width: 400)
-            //                .position(x: 205, y: 100)
             
             Text("First Name: " + viewModel.firstName)
             
@@ -57,7 +55,6 @@ struct ProfileViewO: View {
                 .buttonStyle(.borderedProminent)
                 .foregroundColor(.white)
                 .tint(.init(.red))
-            //            .position(x: 205, y: 700)
             
             Button(
                 action: {
@@ -84,7 +81,6 @@ struct ProfileViewO: View {
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.init(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor).ignoresSafeArea())
-            //.edgesIgnoringSafeArea(.vertical))
     }
 }
     
@@ -107,8 +103,6 @@ struct OrganizerHomeView: View {
                     .font(.largeTitle)
                     .cornerRadius(10)
                     .foregroundColor(.white)
-                //                .frame(width: 400)
-                //                .position(x: 205, y: 100)
                 
                 ScrollView {
                     if viewModel.competitions.isEmpty {
@@ -142,7 +136,6 @@ struct OrganizerHomeView: View {
                     Rectangle()
                         .fill(Color(cgColor: UIColor(red: 0, green: 0.098, blue: 0.659, alpha: 1).cgColor))
                         .frame(width: 450, height: 21, alignment: .center)
-                    //                    .position(x: 200, y: 143)
                     HStack(spacing: 50) {
                         Button(
                             action: {
@@ -154,15 +147,12 @@ struct OrganizerHomeView: View {
                                     .bold()
                             })
                         .buttonStyle(.plain)
-                        //                    .position(x: 65, y: 142.5)
                         Button(action: {
                             viewModel.profileView = true
-//                            viewModel.getDetails()
                         }, label: {
                             Image("LapItLogo")
                                 .resizable()
                                 .frame(width: 109, height: 87, alignment: .center)
-                            //                        .position(x: 200, y: 143)
                         }
                         ).sheet(isPresented: $viewModel.profileView) {
                             ProfileViewO(viewModel: viewModel)
@@ -184,20 +174,9 @@ struct OrganizerHomeView: View {
                 Text("Profile   ")
             }
         }
-        //        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.init(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor).ignoresSafeArea())
-            //.edgesIgnoringSafeArea(.vertical))
         .onAppear {
             viewModel.getDetails()
         }
     }
 }
-
-//struct ContentView_Previews: PreviewProvider {
-//    static var previews: some View {
-////        LogInView(viewModel: LogInViewModel(network: Network(), coordinator: Coordinator()))
-////        RegisterView(viewModel: RegisterViewModel(network: Network(), coordinator: Coordinator()))
-////        StatsView(viewModel: StatsViewModel(network: Network(), coordinator: Coordinator()))
-//        OrganizerHomeView(viewModel: OrganizerHomeViewModel(network: Network(), coordinator: Coordinator()))
-//    }
-//}

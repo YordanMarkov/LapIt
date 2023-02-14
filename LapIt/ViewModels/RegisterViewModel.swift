@@ -9,7 +9,6 @@ import Foundation
 import SwiftUI
 
 class RegisterViewModel: ObservableObject {
-    // Short the types
     @Published public var email: String = ""
     @Published public var password: String = ""
     @Published public var repeatPassword: String = ""

@@ -25,8 +25,6 @@ struct HistoryView: View {
                     .font(.largeTitle)
                     .cornerRadius(10)
                     .foregroundColor(.white)
-                //                .frame(width: 400)
-                //                .position(x: 205, y: 100)
                 VStack {
                     Text("Joined")
                     ScrollView {
@@ -91,7 +89,6 @@ struct HistoryView: View {
                     Rectangle()
                         .fill(Color(cgColor: UIColor(red: 0, green: 0.098, blue: 0.659, alpha: 1).cgColor))
                         .frame(width: 450, height: 21)
-                    //                    .position(x: 205, y: 700)
                     HStack(spacing: 50) {
                         Button(
                             action: {
@@ -106,17 +103,15 @@ struct HistoryView: View {
                                     .bold()
                             })
                         .buttonStyle(.plain)
-                        //                .position(x: 330, y: 700)
                         Image("LapItLogo")
                             .resizable()
                             .frame(width: 109, height: 87, alignment: .center)
-                        //                    .position(x: 205, y: 700)
                         Text("     ")
                     }
                 }
             }
         }
-        .background(Color.init(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor).edgesIgnoringSafeArea(.vertical))
+        .background(Color.init(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor).ignoresSafeArea())
         .onAppear {
             viewModel.getDetails()
         }

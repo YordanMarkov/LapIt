@@ -14,7 +14,6 @@ struct LoadingScreen: View {
             Image("LapItLogo")
                 .resizable()
                 .frame(width: 218, height: 174)
-//                .position(x: 205, y: 255)
             
             Text("Loading...")
                 .padding()
@@ -23,10 +22,9 @@ struct LoadingScreen: View {
                 .cornerRadius(10)
                 .foregroundColor(.white)
                 .frame(width: 400)
-//                .position(x: 205, y: 400)
-        }.frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.init(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor).ignoresSafeArea())
-            //.edgesIgnoringSafeArea(.vertical))
     }
 }
 
@@ -85,7 +83,6 @@ struct ForgottenPassword: View {
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.init(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor).ignoresSafeArea())
-            //.edgesIgnoringSafeArea(.vertical))
     }
 }
 
@@ -205,14 +202,5 @@ struct LogInView: View {
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.init(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor).ignoresSafeArea())
-//            .edgesIgnoringSafeArea(.vertical))
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        LogInView(viewModel: LogInViewModel(network: Network(), coordinator: Coordinator()))
-//        RegisterView(viewModel: RegisterViewModel(network: Network(), coordinator: Coordinator()))
-//        StatsView(viewModel: StatsViewModel(network: Network(), coordinator: Coordinator()))
     }
 }

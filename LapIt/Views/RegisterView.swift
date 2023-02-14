@@ -19,7 +19,6 @@ struct RegisterView: View {
     
     var body: some View {
         VStack {
-//            Color.init(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor).ignoresSafeArea()
             VStack(spacing: 20) {
                 Text("Setting up")
                     .padding()
@@ -27,8 +26,6 @@ struct RegisterView: View {
                     .font(.largeTitle)
                     .cornerRadius(10)
                     .foregroundColor(.white)
-                //                .frame(width: 400)
-                //                .position(x: 205, y: 100)
                 
                 Group {
                     Toggle(isOn: $viewModel.isOrganizer, label: {
@@ -38,41 +35,28 @@ struct RegisterView: View {
                             .foregroundColor(.white)
                             .cornerRadius(10)
                             .foregroundColor(.white)
-                        //                        .frame(width: 200)
                     })
-                    //                .position(x: 193, y: 220)
                     .padding()
                     .toggleStyle(SwitchToggleStyle(tint: Color(cgColor: UIColor(red: 0, green: 0.686, blue: 0.678, alpha: 1).cgColor)))
                     
                     TextField("First Name", text: $viewModel.firstName)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
-                    //                    .frame(width: 300, height: 300)
-                    //                    .position(x: 205, y: 313)
                     
                     TextField("Second Name", text: $viewModel.secondName)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
-                    //                    .frame(width: 300, height: 300)
-                    //                    .position(x: 205, y: 375)
                     
                     TextField("E-mail", text: $viewModel.email)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .autocapitalization(.none)
-                    //                    .frame(width: 300, height: 300)
-                    //                    .position(x: 205, y: 437)
                     HStack {
                         if viewModel.secured1 {
                             SecureField("Password", text: $viewModel.password)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
                                 .autocapitalization(.none)
-                            //                            .frame(width: 300, height: 300)
-                            //                            .position(x: 205, y: 499)
                         } else {
                             TextField("Password", text: $viewModel.password)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
                                 .autocapitalization(.none)
-                              
-                            //                            .frame(width: 300, height: 300)
-                            //                            .position(x: 205, y: 499)
                         }
                         
                         
@@ -83,20 +67,15 @@ struct RegisterView: View {
                                 Image(systemName: self.viewModel.secured1 ? "eye.slash" : "eye")
                                     .accentColor(.black)
                             }
-                        //                        .position(x: 380, y: 499)
                     }
                     
                     HStack {
                         if viewModel.secured2 {
                             SecureField("Repeat Password", text: $viewModel.repeatPassword)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
-                            //                            .frame(width: 300, height: 300)
-                            //                            .position(x: 205, y: 561)
                         } else {
                             TextField("Repeat Password", text: $viewModel.repeatPassword)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
-                            //                            .frame(width: 300, height: 300)
-                            //                            .position(x: 205, y: 561)
                         }
                         
                         Button( // URL: https://stackoverflow.com/questions/63095851/show-hide-password-how-can-i-add-this-feature
@@ -106,22 +85,18 @@ struct RegisterView: View {
                                 Image(systemName: self.viewModel.secured2 ? "eye.slash" : "eye")
                                     .accentColor(.black)
                             }
-                        //                        .position(x: 380, y: 561)
                     }
                     
                     if viewModel.repeatPassword != viewModel.password {
                         Text("The passwords must match!")
-                        //                        .position(x: 205, y: 466)
                             .foregroundColor(.red)
                     } else if viewModel.password.count < 8 && !viewModel.password.isEmpty {
                         Text("The password must be at least 8 characters!")
-                        //                        .position(x: 205, y: 466)
                             .foregroundColor(.red)
                     }
                     
                     if viewModel.firstName.isEmpty || viewModel.secondName.isEmpty || viewModel.email.isEmpty || viewModel.password.isEmpty {
                         Text("Filling the fields is required!")
-                        //                        .position(x: 205, y: 275)
                             .foregroundColor(.red)
                     }
                 }
@@ -173,13 +148,5 @@ struct RegisterView: View {
             
         }
         .background(Color.init(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor).ignoresSafeArea())
-            //.edgesIgnoringSafeArea(.vertical))
     }
 }
-
-//struct ContentView_Previews: PreviewProvider {
-//    static var previews: some View {
-////        LogInView(viewModel: LogInViewModel(network: Network(), coordinator: Coordinator()))
-//        RegisterView(viewModel: RegisterViewModel(network: Network(), coordinator: Coordinator()))
-//    }
-//}

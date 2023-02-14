@@ -44,10 +44,16 @@ class OrganizerHomeViewModel: ObservableObject {
     func getDetails() {
         Task {
             do {
-                self.email = try await network.getCurrentUserEmail()
-                self.firstName = try await network.getUserFirstName(email: self.email)
-                self.secondName = try await network.getUserSecondName(email: self.email)
-                self.competitions = try await network.getActiveCompetitions()
+                let email = try await network.getCurrentUserEmail()
+                let firstName = try await network.getUserFirstName(email: email)
+                let secondName = try await network.getUserSecondName(email: email)
+                let competitions = try await network.getActiveCompetitions()
+                DispatchQueue.main.async {
+                    self.email = email
+                    self.firstName = firstName
+                    self.secondName = secondName
+                    self.competitions = competitions
+                }
             } catch {
                 DispatchQueue.main.async {
                     self.error = error.localizedDescription

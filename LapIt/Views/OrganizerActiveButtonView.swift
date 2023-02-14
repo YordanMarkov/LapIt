@@ -135,30 +135,31 @@ struct OrganizerActiveButtonView: View {
                 Text("Already deactivated!")
                     .foregroundColor(.red)
             }
-            
-            Text("All users")
-                .fontWeight(.bold)
-            ScrollView {
-                ForEach(viewModel.users, id: \.self) { user in
-                    VStack {
-                        Text("\(user.firstName) \(user.secondName)")
-                            .fontWeight(.bold)
-                        if currentCompetition.distanceOrTime == 0 {
-                            KmView(userKm: user.km, action: { newKm in
-                                viewModel.updateKm(currentCompetition: currentCompetition, km: newKm, user_email: user.user_email)
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-//                                    viewModel.getDetails()
-                                    viewModel.getUsers(currentCompetition: currentCompetition)
-                                }
-                            })
-                        } else {
-                            MinView(userMin: user.min, action: { newMin in
-                                viewModel.updateMin(currentCompetition: currentCompetition, min: newMin, user_email: user.user_email)
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-//                                    viewModel.getDetails()
-                                    viewModel.getUsers(currentCompetition: currentCompetition)
-                                }
-                            })
+            if viewModel.users.isEmpty {
+                Text("Oops! No users joined this competition.")
+            } else {
+                Text("All users")
+                    .fontWeight(.bold)
+                ScrollView {
+                    ForEach(viewModel.users, id: \.self) { user in
+                        VStack {
+                            Text("\(user.firstName) \(user.secondName)")
+                                .fontWeight(.bold)
+                            if currentCompetition.distanceOrTime == 0 {
+                                KmView(userKm: user.km, action: { newKm in
+                                    viewModel.updateKm(currentCompetition: currentCompetition, km: newKm, user_email: user.user_email)
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                                        viewModel.getUsers(currentCompetition: currentCompetition)
+                                    }
+                                })
+                            } else {
+                                MinView(userMin: user.min, action: { newMin in
+                                    viewModel.updateMin(currentCompetition: currentCompetition, min: newMin, user_email: user.user_email)
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                                        viewModel.getUsers(currentCompetition: currentCompetition)
+                                    }
+                                })
+                            }
                         }
                     }
                 }
@@ -170,6 +171,6 @@ struct OrganizerActiveButtonView: View {
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.init(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor).edgesIgnoringSafeArea(.vertical))
+        .background(Color.init(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor).ignoresSafeArea())
     }
 }
