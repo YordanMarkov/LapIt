@@ -70,9 +70,11 @@ struct RegisterView: View {
                             TextField("Password", text: $viewModel.password)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
                                 .autocapitalization(.none)
+                              
                             //                            .frame(width: 300, height: 300)
                             //                            .position(x: 205, y: 499)
                         }
+                        
                         
                         Button( // URL: https://stackoverflow.com/questions/63095851/show-hide-password-how-can-i-add-this-feature
                             action: {
@@ -111,26 +113,27 @@ struct RegisterView: View {
                         Text("The passwords must match!")
                         //                        .position(x: 205, y: 466)
                             .foregroundColor(.red)
-                    } else if viewModel.password.count < 8 && !viewModel.password.isEmpty && !viewModel.repeatPassword.isEmpty {
+                    } else if viewModel.password.count < 8 && !viewModel.password.isEmpty {
                         Text("The password must be at least 8 characters!")
                         //                        .position(x: 205, y: 466)
                             .foregroundColor(.red)
                     }
                     
-                    if viewModel.firstName.isEmpty || viewModel.secondName.isEmpty || viewModel.email.isEmpty || viewModel.password.isEmpty || viewModel.repeatPassword.isEmpty {
+                    if viewModel.firstName.isEmpty || viewModel.secondName.isEmpty || viewModel.email.isEmpty || viewModel.password.isEmpty {
                         Text("Filling the fields is required!")
                         //                        .position(x: 205, y: 275)
                             .foregroundColor(.red)
                     }
                 }
-            }.padding()
+            }
+            .padding()
             
             // Navigator
             ZStack {
                 Rectangle()
                     .fill(Color(cgColor: UIColor(red: 0, green: 0.098, blue: 0.659, alpha: 1).cgColor))
-                    .frame(width: 450, height: 21)
-                    .position(x: 200, y: 143)
+                    .frame(width: 450, height: 21)//
+                    .position(x: 200, y: 143)//
                 if !viewModel.firstName.isEmpty && !viewModel.secondName.isEmpty && !viewModel.email.isEmpty && !viewModel.password.isEmpty && !viewModel.repeatPassword.isEmpty && viewModel.repeatPassword == viewModel.password && viewModel.password.count >= 8 {
                     Button(
                         action: {
@@ -145,7 +148,7 @@ struct RegisterView: View {
                                 .bold()
                         })
                     .buttonStyle(.plain)
-                    .position(x: 325, y: 142.5)
+                    .position(x: 325, y: 142.5)//
                 }
                 
                 Button(
@@ -160,7 +163,7 @@ struct RegisterView: View {
                             .bold()
                     })
                 .buttonStyle(.plain)
-                .position(x: 65, y: 142.5)
+                .position(x: 65, y: 142.5)//
                 
                 Image("LapItLogo")
                     .resizable()
@@ -169,7 +172,8 @@ struct RegisterView: View {
             }
             
         }
-        .background(Color.init(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor).edgesIgnoringSafeArea(.vertical))
+        .background(Color.init(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor).ignoresSafeArea())
+            //.edgesIgnoringSafeArea(.vertical))
     }
 }
 

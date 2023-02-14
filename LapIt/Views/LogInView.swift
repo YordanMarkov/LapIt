@@ -25,7 +25,8 @@ struct LoadingScreen: View {
                 .frame(width: 400)
 //                .position(x: 205, y: 400)
         }.frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.init(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor).edgesIgnoringSafeArea(.vertical))
+        .background(Color.init(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor).ignoresSafeArea())
+            //.edgesIgnoringSafeArea(.vertical))
     }
 }
 
@@ -83,7 +84,8 @@ struct ForgottenPassword: View {
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.init(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor).edgesIgnoringSafeArea(.vertical))
+        .background(Color.init(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor).ignoresSafeArea())
+            //.edgesIgnoringSafeArea(.vertical))
     }
 }
 
@@ -138,7 +140,8 @@ struct LogInView: View {
                    label: {
                 Text("I forgot my password.")
             }
-            ).buttonStyle(.plain)
+            )
+            .buttonStyle(.plain)
             .underline()
             .sheet(isPresented: $viewModel.forgottenPassword) {
                 ForgottenPassword(viewModel: viewModel)
@@ -183,7 +186,8 @@ struct LogInView: View {
                     label: {
                         Text("Log in")
                             .frame(width: 100 , height: 30, alignment: .center)
-                    }).alert(isPresented: $showAlert) {
+                    })
+                .alert(isPresented: $showAlert) {
                         Alert (
                             title: Text(viewModel.error),
                             dismissButton: .default(Text("OK"))
@@ -200,6 +204,15 @@ struct LogInView: View {
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.init(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor).edgesIgnoringSafeArea(.vertical))
+        .background(Color.init(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor).ignoresSafeArea())
+//            .edgesIgnoringSafeArea(.vertical))
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        LogInView(viewModel: LogInViewModel(network: Network(), coordinator: Coordinator()))
+//        RegisterView(viewModel: RegisterViewModel(network: Network(), coordinator: Coordinator()))
+//        StatsView(viewModel: StatsViewModel(network: Network(), coordinator: Coordinator()))
     }
 }

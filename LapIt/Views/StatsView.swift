@@ -72,6 +72,7 @@ struct StatsView: View {
                         Image("LapItLogo")
                             .resizable()
                             .frame(width: 109, height: 87, alignment: .center)
+        
                         //                    .position(x: 205, y: 700)
                         Button(
                             action: {
@@ -92,7 +93,8 @@ struct StatsView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.init(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor).edgesIgnoringSafeArea(.vertical))
+        .background(Color(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor)
+            .edgesIgnoringSafeArea(.vertical))
         .onAppear {
             viewModel.getDetails()
         }
