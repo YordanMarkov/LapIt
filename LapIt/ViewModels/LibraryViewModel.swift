@@ -22,7 +22,7 @@ class LibraryViewModel: ObservableObject {
     private unowned let coordinator: Coordinator
     
     @Published public var createView = false
-    @Published public var reuse = true
+    @Published public var reuse = false
     @Published public var error = ""
     @Published public var email = ""
     @Published public var name = ""
@@ -42,8 +42,12 @@ class LibraryViewModel: ObservableObject {
     func getDetails() {
         Task {
             do {
-                self.email = try await network.getCurrentUserEmail()
-                self.competitions = try await network.getCompetitionsByEmail(email: self.email)
+                let email = try await network.getCurrentUserEmail()
+                let competitions = try await network.getCompetitionsByEmail(email: self.email)
+                DispatchQueue.main.async {
+                    self.email = email
+                    self.competitions = competitions
+                }
             } catch {
                 DispatchQueue.main.async {
                     self.error = error.localizedDescription

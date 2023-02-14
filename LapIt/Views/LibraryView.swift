@@ -179,8 +179,6 @@ struct LibraryView: View {
                             action: {
                                 viewModel.createView = true
                             },
-                            
-                            
                             label: {
                                 Text("Create")
                                     .frame(alignment: .center)

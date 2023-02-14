@@ -29,9 +29,14 @@ class StatsViewModel: ObservableObject {
     func getDetails() {
         Task {
             do {
-                self.email = try await network.getCurrentUserEmail()
-                self.km = try await network.getUserKm(email: self.email)
-                self.min = try await network.getUserMin(email: self.email)
+                let email = try await network.getCurrentUserEmail()
+                let km = try await network.getUserKm(email: self.email)
+                let min = try await network.getUserMin(email: self.email)
+                DispatchQueue.main.async {
+                    self.email = email
+                    self.km = km
+                    self.min = min
+                }
             } catch {
                 DispatchQueue.main.async {
                     self.error = error.localizedDescription

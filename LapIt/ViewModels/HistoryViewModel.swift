@@ -49,11 +49,18 @@ class HistoryViewModel: ObservableObject {
     func getDetails() {
         Task {
             do {
-                self.email = try await network.getCurrentUserEmail()
-                self.firstName = try await network.getUserFirstName(email: self.email)
-                self.secondName = try await network.getUserSecondName(email: self.email)
-                self.competitions = try await network.getActiveAndJoinedCompetitions(user_email: self.email)
-                self.inactive_competitions = try await network.getInactiveAndJoinedCompetitions(user_email: self.email)
+                let email = try await network.getCurrentUserEmail()
+                let firstName = try await network.getUserFirstName(email: self.email)
+                let secondName = try await network.getUserSecondName(email: self.email)
+                let competitions = try await network.getActiveAndJoinedCompetitions(user_email: self.email)
+                let inactive_competitions = try await network.getInactiveAndJoinedCompetitions(user_email: self.email)
+                DispatchQueue.main.async {
+                    self.email = email
+                    self.firstName = firstName
+                    self.secondName = secondName
+                    self.competitions = competitions
+                    self.inactive_competitions = inactive_competitions
+                }
             } catch {
                 DispatchQueue.main.async {
                     self.error = error.localizedDescription
@@ -66,7 +73,6 @@ class HistoryViewModel: ObservableObject {
         Task {
             do {
                 try await parseUsers(array: network.getUsersById(competition_id: currentCompetition.id))
-//                decideWinners(currentCompetition: currentCompetition)
             } catch {
                 DispatchQueue.main.async {
                     self.error = error.localizedDescription
@@ -90,7 +96,10 @@ class HistoryViewModel: ObservableObject {
                         let user = User(user_email: user_email, firstName: firstName, secondName: secondName, km: km, min: min)
                         users.append(user)
                 }
-                self.users = users
+                let finalized = users
+                DispatchQueue.main.async {
+                    self.users = finalized
+                }
             } catch {
                 DispatchQueue.main.async {
                     self.error = error.localizedDescription
@@ -144,7 +153,10 @@ class HistoryViewModel: ObservableObject {
     func isAlreadyJoined(currentCompetition: Competition) {
         Task {
             do {
-                self.left = try await !network.isAlreadyJoined(competition_id: currentCompetition.id, user_email: self.email)
+                let left = try await !network.isAlreadyJoined(competition_id: currentCompetition.id, user_email: self.email)
+                DispatchQueue.main.async {
+                    self.left = left
+                }
             } catch {
                 DispatchQueue.main.async {
                     self.error = error.localizedDescription

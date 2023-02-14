@@ -47,9 +47,14 @@ class ActiveViewModel: ObservableObject {
     func getDetails() {
         Task {
             do {
-                self.email = try await network.getCurrentUserEmail()
-                self.activeCompetitions = try await network.getActiveCompetitionsByEmail(email: self.email)
-                self.deactivatedCompetitions = try await network.getDeactivatedCompetitionsByEmail(email: self.email)
+                let email = try await network.getCurrentUserEmail()
+                let activeCompetitions = try await network.getActiveCompetitionsByEmail(email: self.email)
+                let deactivatedCompetitions = try await network.getDeactivatedCompetitionsByEmail(email: self.email)
+                DispatchQueue.main.async {
+                    self.email = email
+                    self.activeCompetitions = activeCompetitions
+                    self.deactivatedCompetitions = deactivatedCompetitions
+                }
             } catch {
                 DispatchQueue.main.async {
                     self.error = error.localizedDescription
@@ -76,16 +81,18 @@ class ActiveViewModel: ObservableObject {
                 var users: [User] = []
                 for (_, value) in array {
                     guard let value = value as? [String: Any] else { continue }
-                    
-                        let user_email = value["user_email"] as? String ?? ""
-                        let firstName = try await network.getUserFirstName(email: user_email)
-                        let secondName = try await network.getUserSecondName(email: user_email)
-                        let km = value["km"] as? Int ?? 0
-                        let min = value["min"] as? Int ?? 0
-                        let user = User(user_email: user_email, firstName: firstName, secondName: secondName, km: km, min: min)
-                        users.append(user)
+                    let user_email = value["user_email"] as? String ?? ""
+                    let firstName = try await network.getUserFirstName(email: user_email)
+                    let secondName = try await network.getUserSecondName(email: user_email)
+                    let km = value["km"] as? Int ?? 0
+                    let min = value["min"] as? Int ?? 0
+                    let user = User(user_email: user_email, firstName: firstName, secondName: secondName, km: km, min: min)
+                    users.append(user)
                 }
-                self.users = users
+                let finalized = users
+                DispatchQueue.main.async {
+                    self.users = finalized
+                }
             } catch {
                 DispatchQueue.main.async {
                     self.error = error.localizedDescription
