@@ -9,7 +9,6 @@ import Foundation
 import SwiftUI
 
 class LogInViewModel: ObservableObject {
-    @Published public var isLoggedIn = false
     @Published public var forgottenPassword = false
     @Published public var errorForChange = ""
     @Published public var emailForChange = ""

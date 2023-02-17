@@ -23,7 +23,6 @@ class Coordinator: ObservableObject {
     }
     
     @Published var currTab = Tab.login // has to be .login
-    @Published var loading = false
     
     private  let network: Network
     

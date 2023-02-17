@@ -40,7 +40,15 @@ class DefaultHomeViewModel: ObservableObject {
     }
     
     func signOut() {
-        network.signOut()
+        Task {
+            do {
+                try await network.signOut()
+            } catch {
+                DispatchQueue.main.async {
+                    self.error = error.localizedDescription
+                }
+            }
+        }
     }
     
     func getDetails() {

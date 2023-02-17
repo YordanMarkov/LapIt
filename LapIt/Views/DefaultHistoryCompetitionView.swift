@@ -51,7 +51,7 @@ struct DefaultHistoryCompetitionView: View {
                 )
                 .alert(isPresented: $showAlert) {
                     Alert (
-                        title: Text("Are you sure you want to leave? You can rejoin this competition from the Home tab."),
+                        title: Text("Are you sure you want to leave? Warning: This will delete your stats for this competition. You can rejoin this competition from the Home tab."),
                         primaryButton: .default(Text("Yes")) {
                             viewModel.leaveCompetition(currentCompetition: currentCompetition)
                             viewModel.left = true

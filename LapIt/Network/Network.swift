@@ -24,12 +24,8 @@ class Network {
         try await firebaseAuth.signIn(withEmail: email, password: password)
     }
     
-    func signOut() {
-        do {
-            try firebaseAuth.signOut()
-        } catch let signOutError as NSError {
-            print ("Error signing out: %@", signOutError)
-        }
+    func signOut() async throws {
+        try firebaseAuth.signOut()
     }
     
     func sendPasswordReset(email: String) async throws {
