@@ -4,7 +4,6 @@
 //
 //  Created by Yordan Markov on 14.01.23.
 //
-
 import Foundation
 import SwiftUI
 
@@ -18,15 +17,15 @@ struct RegisterView: View {
     
     
     var body: some View {
-        VStack {
+        VStack() {
+            Text("Setting up")
+                .padding()
+                .background(Color(cgColor: UIColor(red: 0, green: 0.686, blue: 0.678, alpha: 1).cgColor))
+                .font(.largeTitle)
+                .cornerRadius(10)
+                .foregroundColor(.white)
+            
             VStack(spacing: 20) {
-                Text("Setting up")
-                    .padding()
-                    .background(Color(cgColor: UIColor(red: 0, green: 0.686, blue: 0.678, alpha: 1).cgColor))
-                    .font(.largeTitle)
-                    .cornerRadius(10)
-                    .foregroundColor(.white)
-                
                 Group {
                     Toggle(isOn: $viewModel.isOrganizer, label: {
                         Text("Organizer account")
@@ -48,6 +47,7 @@ struct RegisterView: View {
                     TextField("E-mail", text: $viewModel.email)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .autocapitalization(.none)
+                    
                     HStack {
                         if viewModel.secured1 {
                             SecureField("Password", text: $viewModel.password)
@@ -59,14 +59,14 @@ struct RegisterView: View {
                                 .autocapitalization(.none)
                         }
                         
-                        
-                        Button( // URL: https://stackoverflow.com/questions/63095851/show-hide-password-how-can-i-add-this-feature
+                        Button(
                             action: {
                                 viewModel.secured1.toggle()
-                            }) {
+                            },
+                            label: {
                                 Image(systemName: self.viewModel.secured1 ? "eye.slash" : "eye")
                                     .accentColor(.black)
-                            }
+                            })
                     }
                     
                     HStack {
@@ -78,13 +78,14 @@ struct RegisterView: View {
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
                         }
                         
-                        Button( // URL: https://stackoverflow.com/questions/63095851/show-hide-password-how-can-i-add-this-feature
+                        Button(
                             action: {
                                 viewModel.secured2.toggle()
-                            }) {
+                            },
+                            label: {
                                 Image(systemName: self.viewModel.secured2 ? "eye.slash" : "eye")
                                     .accentColor(.black)
-                            }
+                            })
                     }
                     
                     if viewModel.repeatPassword != viewModel.password {
@@ -103,49 +104,48 @@ struct RegisterView: View {
             }
             .padding()
             
-            // Navigator
+            Spacer()
+            
             ZStack {
                 Rectangle()
                     .fill(Color(cgColor: UIColor(red: 0, green: 0.098, blue: 0.659, alpha: 1).cgColor))
-                    .frame(width: 450, height: 21)//
-                    .position(x: 200, y: 143)//
-                if !viewModel.firstName.isEmpty && !viewModel.secondName.isEmpty && !viewModel.email.isEmpty && !viewModel.password.isEmpty && !viewModel.repeatPassword.isEmpty && viewModel.repeatPassword == viewModel.password && viewModel.password.count >= 8 {
+                    .frame(width: 450, height: 21)
+                HStack(spacing: 20) {
+                    
                     Button(
                         action: {
-                            // Code upcoming
-                            viewModel.register()
                             viewModel.route(to: .login)
                         },
                         label: {
-                            Text("Register")
+                            Text("<<")
                                 .multilineTextAlignment(.center)
                                 .foregroundColor(.white)
                                 .bold()
                         })
                     .buttonStyle(.plain)
-                    .position(x: 325, y: 142.5)//
+                    
+                    Image("LapItLogo")
+                        .resizable()
+                        .frame(width: 109, height: 87)
+                    
+                    if !viewModel.firstName.isEmpty && !viewModel.secondName.isEmpty && !viewModel.email.isEmpty && !viewModel.password.isEmpty && !viewModel.repeatPassword.isEmpty && viewModel.repeatPassword == viewModel.password && viewModel.password.count >= 8 {
+                        Button(
+                            action: {
+                                viewModel.register()
+                                viewModel.route(to: .login)
+                            },
+                            label: {
+                                Text("Register")
+                                    .multilineTextAlignment(.center)
+                                    .foregroundColor(.white)
+                                    .bold()
+                            })
+                        .buttonStyle(.plain)
+                    } else {
+                        Text("     ")
+                    }
                 }
-                
-                Button(
-                    action: {
-                        // Go to LogIn
-                        viewModel.route(to: .login)
-                    },
-                    label: {
-                        Text("<<")
-                            .multilineTextAlignment(.center)
-                            .foregroundColor(.white)
-                            .bold()
-                    })
-                .buttonStyle(.plain)
-                .position(x: 65, y: 142.5)//
-                
-                Image("LapItLogo")
-                    .resizable()
-                    .frame(width: 109, height: 87)
-                    .position(x: 200, y: 143)
             }
-            
         }
         .background(Color.init(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor).ignoresSafeArea())
     }

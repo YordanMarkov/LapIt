@@ -47,8 +47,7 @@ struct DefaultCompetitionButtonView: View {
                     label: {
                         Text("Join")
                             .frame(width: 100 , height: 30, alignment: .center)
-                    }
-                )
+                    })
                 .alert(isPresented: $showAlert) {
                     Alert (
                         title: Text("Are you sure you want to join? You can leave this competition from the History tab."),

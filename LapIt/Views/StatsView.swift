@@ -31,6 +31,7 @@ struct StatsView: View {
                         .background(Color(.blue))
                         .cornerRadius(10)
                         .foregroundColor(.white)
+                    
                     Text("\(viewModel.km)")
                         .padding()
                         .background(Color(.red))
@@ -44,6 +45,7 @@ struct StatsView: View {
                         .background(Color(.blue))
                         .cornerRadius(10)
                         .foregroundColor(.white)
+                    
                     Text("\(viewModel.min)")
                         .padding()
                         .background(Color(.red))
@@ -56,8 +58,10 @@ struct StatsView: View {
                     Rectangle()
                         .fill(Color(cgColor: UIColor(red: 0, green: 0.098, blue: 0.659, alpha: 1).cgColor))
                         .frame(width: 450, height: 21)
+                    
                     HStack(spacing: 50) {
                         Text("     ")
+                        
                         Image("LapItLogo")
                             .resizable()
                             .frame(width: 109, height: 87, alignment: .center)
@@ -66,8 +70,6 @@ struct StatsView: View {
                             action: {
                                 viewModel.route(to: .defaultHome)
                             },
-                            
-                            
                             label: {
                                 Text(">>")
                                     .frame(alignment: .center)

@@ -25,13 +25,14 @@ struct KmView: View {
             
                 .keyboardType(.numberPad)
             if(km != userKm && km > 0) {
-                Button {
+                Button(
+                    action: {
                         action(km)
-                    }
-                label: {
-                    Text("Update")
-                        .frame(width: 60 , height: 15)
-                }
+                    },
+                    label: {
+                        Text("Update")
+                            .frame(width: 60 , height: 15)
+                    })
                 .buttonStyle(.borderedProminent)
                 .foregroundColor(.white)
                 .tint(.yellow)
@@ -53,8 +54,10 @@ struct MinView: View {
     var body: some View {
         HStack {
             Text("Time: \(userMin)")
+            
             TextField("Change", value: $min, format: .number)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
+            
             if(min != userMin && min >= 0) {
                 Button(
                     action: {
@@ -140,6 +143,7 @@ struct OrganizerActiveButtonView: View {
             } else {
                 Text("All users")
                     .fontWeight(.bold)
+                
                 ScrollView {
                     ForEach(viewModel.users, id: \.self) { user in
                         VStack {
