@@ -97,22 +97,23 @@ struct LibraryView: View {
                         } else {
                             ForEach(viewModel.parseCompetitions().sorted(by: {$0.name < $1.name}), id: \.self) { competition in
                                 HStack {
-                                    Button(action: {
-                                        self.selectedCompetition = competition
-                                        self.showAlert = true
-                                    },
-                                           label: {
-                                        VStack {
-                                            Text(competition.name)
-                                                .foregroundColor(.black)
-                                                .bold()
-                                            Text(competition.description)
-                                                .foregroundColor(.black)
-                                                .italic()
-                                        }
-                                        .padding()
-                                        .background(RoundedRectangle(cornerRadius: 10.0).fill(Color.white))
-                                    })
+                                    Button(
+                                        action: {
+                                            self.selectedCompetition = competition
+                                            self.showAlert = true
+                                        },
+                                        label: {
+                                            VStack {
+                                                Text(competition.name)
+                                                    .foregroundColor(.black)
+                                                    .bold()
+                                                Text(competition.description)
+                                                    .foregroundColor(.black)
+                                                    .italic()
+                                            }
+                                            .padding()
+                                            .background(RoundedRectangle(cornerRadius: 10.0).fill(Color.white))
+                                        })
                                     .alert(isPresented: $showAlert) {
                                         Alert (
                                             title: Text("Do you want to reuse this model?"),
@@ -159,12 +160,12 @@ struct LibraryView: View {
                     Rectangle()
                         .fill(Color(cgColor: UIColor(red: 0, green: 0.098, blue: 0.659, alpha: 1).cgColor))
                         .frame(width: 450, height: 21)
+                    
                     HStack(spacing: 50) {
                         Button(
                             action: {
                                 viewModel.route(to: .organizerHome)
                             },
-                            
                             label: {
                                 Text(" <<    ")
                                     .frame(alignment: .center)
@@ -172,9 +173,11 @@ struct LibraryView: View {
                                     .bold()
                             })
                         .buttonStyle(.plain)
+                        
                         Image("LapItLogo")
                             .resizable()
                             .frame(width: 109, height: 87, alignment: .center)
+                        
                         Button(
                             action: {
                                 viewModel.createView = true
@@ -192,10 +195,11 @@ struct LibraryView: View {
                     }
                 }
             }
-        }.background(Color.init(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor).ignoresSafeArea())
-            .onAppear {
-                viewModel.getDetails()
-            }
+        }
+        .background(Color.init(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor).ignoresSafeArea())
+        .onAppear {
+            viewModel.getDetails()
+        }
     }
 }
 

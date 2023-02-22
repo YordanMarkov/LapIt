@@ -41,20 +41,21 @@ struct ProfileViewO: View {
                 label: {
                     Text("Sign out")
                         .frame(width: 100 , height: 30, alignment: .center)
-                }).alert(isPresented: $showAlert) {
-                    Alert (
-                        title: Text("You are about to sign out. Continue?"),
-                        primaryButton: .default(Text("Yes")) {
-                            viewModel.profileView = false
-                            viewModel.signOut()
-                            viewModel.route(to: .login)
-                        },
-                        secondaryButton: .cancel()
-                    )
-                }
-                .buttonStyle(.borderedProminent)
-                .foregroundColor(.white)
-                .tint(.init(.red))
+                })
+            .alert(isPresented: $showAlert) {
+                Alert (
+                    title: Text("You are about to sign out. Continue?"),
+                    primaryButton: .default(Text("Yes")) {
+                        viewModel.profileView = false
+                        viewModel.signOut()
+                        viewModel.route(to: .login)
+                    },
+                    secondaryButton: .cancel()
+                )
+            }
+            .buttonStyle(.borderedProminent)
+            .foregroundColor(.white)
+            .tint(.init(.red))
             
             Button(
                 action: {
@@ -63,17 +64,18 @@ struct ProfileViewO: View {
                 label: {
                     Text("Delete account")
                         .frame(width: 155 , height: 30, alignment: .center)
-                }).alert(isPresented: $showDeleteAlert) {
-                    Alert (
-                        title: Text("You are about to delete your account. This will delete all of your stats and history. This action is irreversible. Continue?"),
-                        primaryButton: .default(Text("Yes")) {
-                            viewModel.profileView = false
-                            viewModel.deleteAccount()
-                            viewModel.route(to: .login)
-                        },
-                        secondaryButton: .cancel()
-                    )
-                }
+                })
+            .alert(isPresented: $showDeleteAlert) {
+                Alert (
+                    title: Text("You are about to delete your account. This will delete all of your stats and history. This action is irreversible. Continue?"),
+                    primaryButton: .default(Text("Yes")) {
+                        viewModel.profileView = false
+                        viewModel.deleteAccount()
+                        viewModel.route(to: .login)
+                    },
+                    secondaryButton: .cancel()
+                )
+            }
             .buttonStyle(.borderedProminent)
             .foregroundColor(.white)
             .tint(.init(.yellow))
@@ -109,24 +111,26 @@ struct OrganizerHomeView: View {
                         Text("Oops! Nothing to show.")
                     } else {
                         ForEach(viewModel.parseCompetitions().sorted(by: {$0.name < $1.name}), id: \.self) { competition in
-                            Button(action: {
-                                self.selectedCompetition = competition
-                            },
-                                   label: {
-                                VStack {
-                                    Text(competition.name)
-                                        .foregroundColor(.black)
-                                        .bold()
-                                    Text(competition.description)
-                                        .foregroundColor(.black)
-                                        .italic()
-                                }
-                                .padding()
-                                .background(RoundedRectangle(cornerRadius: 10.0).fill(Color.white))
-                            })
+                            Button(
+                                action: {
+                                    self.selectedCompetition = competition
+                                },
+                                label: {
+                                    VStack {
+                                        Text(competition.name)
+                                            .foregroundColor(.black)
+                                            .bold()
+                                        Text(competition.description)
+                                            .foregroundColor(.black)
+                                            .italic()
+                                    }
+                                    .padding()
+                                    .background(RoundedRectangle(cornerRadius: 10.0).fill(Color.white))
+                                })
                         }
                     }
-                }.sheet(item: self.$selectedCompetition, content: { selectedCompetition in
+                }
+                .sheet(item: self.$selectedCompetition, content: { selectedCompetition in
                     OrganizerCompetitionButtonView(viewModel: viewModel, currentCompetition: selectedCompetition)
                 })
             }
@@ -147,6 +151,7 @@ struct OrganizerHomeView: View {
                                     .bold()
                             })
                         .buttonStyle(.plain)
+                        
                         Button(action: {
                             viewModel.profileView = true
                         }, label: {
@@ -154,7 +159,8 @@ struct OrganizerHomeView: View {
                                 .resizable()
                                 .frame(width: 109, height: 87, alignment: .center)
                         }
-                        ).sheet(isPresented: $viewModel.profileView) {
+                        )
+                        .sheet(isPresented: $viewModel.profileView) {
                             ProfileViewO(viewModel: viewModel)
                         }
                         

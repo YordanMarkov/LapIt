@@ -90,7 +90,10 @@ class DefaultHomeViewModel: ObservableObject {
     func isAlreadyJoined(currentCompetition: Competition) {
         Task {
             do {
-                self.joined = try await network.isAlreadyJoined(competition_id: currentCompetition.id, user_email: self.email)
+                let joined = try await network.isAlreadyJoined(competition_id: currentCompetition.id, user_email: self.email)
+                DispatchQueue.main.async {
+                    self.joined = joined
+                }
             } catch {
                 DispatchQueue.main.async {
                     self.error = error.localizedDescription

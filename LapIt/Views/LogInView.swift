@@ -41,9 +41,11 @@ struct ForgottenPassword: View {
         VStack(spacing: 20) {
             Text("Type your email in order to change your password.")
                 .frame(alignment: .center)
+            
             TextField("Email", text: $viewModel.emailForChange)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .autocapitalization(.none)
+            
             if !viewModel.emailForChange.isEmpty {
                 Button(
                     action: {
@@ -75,7 +77,8 @@ struct ForgottenPassword: View {
                 .foregroundColor(.white)
                 .tint(.init(cgColor: UIColor(red: 0, green: 0.686, blue: 0.678, alpha: 1).cgColor))
             }
-        }.overlay {
+        }
+        .overlay {
             if showingLoadingScreen {
                 LoadingScreen()
             }
@@ -121,7 +124,7 @@ struct LogInView: View {
                             .autocapitalization(.none)
                     }
                     
-                    Button( // URL: https://stackoverflow.com/questions/63095851/show-hide-password-how-can-i-add-this-feature
+                    Button(
                         action: {
                             viewModel.secured.toggle()
                         }) {
@@ -174,9 +177,7 @@ struct LogInView: View {
                                 self.showingLoadingScreen = false
                             } else {
                                 self.showingLoadingScreen = false
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                    showAlert.toggle()
-                                }
+                                showAlert.toggle()
                             }
                         }
                     },
@@ -194,7 +195,8 @@ struct LogInView: View {
                 .foregroundColor(.white)
                 .tint(.init(cgColor: UIColor(red: 0, green: 0.686, blue: 0.678, alpha: 1).cgColor))
             }
-        }.overlay {
+        }
+        .overlay {
             if showingLoadingScreen {
                 LoadingScreen()
             }

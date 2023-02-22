@@ -25,60 +25,67 @@ struct HistoryView: View {
                     .font(.largeTitle)
                     .cornerRadius(10)
                     .foregroundColor(.white)
+                
                 VStack {
                     Text("Joined")
+                    
                     ScrollView {
                         if viewModel.competitions.isEmpty {
                             Text("Oops! Nothing to show.")
                         } else {
                             ForEach(viewModel.parseCompetitions().sorted(by: {$0.name < $1.name}), id: \.self) { competition in
-                                Button(action: {
-                                    self.selectedCompetition = competition
-                                },
-                                       label: {
-                                    VStack {
-                                        Text(competition.name)
-                                            .foregroundColor(.black)
-                                            .bold()
-                                        Text(competition.description)
-                                            .foregroundColor(.black)
-                                            .italic()
-                                    }
-                                    .padding()
-                                    .background(RoundedRectangle(cornerRadius: 10.0).fill(Color.white))
-                                })
+                                Button(
+                                    action: {
+                                        self.selectedCompetition = competition
+                                    },
+                                    label: {
+                                        VStack {
+                                            Text(competition.name)
+                                                .foregroundColor(.black)
+                                                .bold()
+                                            Text(competition.description)
+                                                .foregroundColor(.black)
+                                                .italic()
+                                        }
+                                        .padding()
+                                        .background(RoundedRectangle(cornerRadius: 10.0).fill(Color.white))
+                                    })
                             }
                         }
-                    }.sheet(item: self.$selectedCompetition, content: { selectedCompetition in
+                    }
+                    .sheet(item: self.$selectedCompetition, content: { selectedCompetition in
                         DefaultHistoryCompetitionView(viewModel: viewModel, currentCompetition: selectedCompetition)
                     })
                 }
                 
                 VStack {
                     Text("Previous")
+                    
                     ScrollView {
                         if viewModel.inactive_competitions.isEmpty {
                             Text("Oops! Nothing to show.")
                         } else {
                             ForEach(viewModel.parseInactiveCompetitions().sorted(by: {$0.name < $1.name}), id: \.self) { competition in
-                                Button(action: {
-                                    self.selectedCompetition = competition
-                                },
-                                       label: {
-                                    VStack {
-                                        Text(competition.name)
-                                            .foregroundColor(.black)
-                                            .bold()
-                                        Text(competition.description)
-                                            .foregroundColor(.black)
-                                            .italic()
-                                    }
-                                    .padding()
-                                    .background(RoundedRectangle(cornerRadius: 10.0).fill(Color.white))
-                                })
+                                Button(
+                                    action: {
+                                        self.selectedCompetition = competition
+                                    },
+                                    label: {
+                                        VStack {
+                                            Text(competition.name)
+                                                .foregroundColor(.black)
+                                                .bold()
+                                            Text(competition.description)
+                                                .foregroundColor(.black)
+                                                .italic()
+                                        }
+                                        .padding()
+                                        .background(RoundedRectangle(cornerRadius: 10.0).fill(Color.white))
+                                    })
                             }
                         }
-                    }.sheet(item: self.$selectedCompetition, content: { selectedCompetition in
+                    }
+                    .sheet(item: self.$selectedCompetition, content: { selectedCompetition in
                         DefaultHistoryCompetitionView(viewModel: viewModel, currentCompetition: selectedCompetition)
                     })
                 }
@@ -89,13 +96,12 @@ struct HistoryView: View {
                     Rectangle()
                         .fill(Color(cgColor: UIColor(red: 0, green: 0.098, blue: 0.659, alpha: 1).cgColor))
                         .frame(width: 450, height: 21)
+                    
                     HStack(spacing: 50) {
                         Button(
                             action: {
                                 viewModel.route(to: .defaultHome)
                             },
-                            
-                            
                             label: {
                                 Text("<<")
                                     .frame(alignment: .center)
@@ -103,9 +109,11 @@ struct HistoryView: View {
                                     .bold()
                             })
                         .buttonStyle(.plain)
+                        
                         Image("LapItLogo")
                             .resizable()
                             .frame(width: 109, height: 87, alignment: .center)
+                        
                         Text("     ")
                     }
                 }

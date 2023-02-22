@@ -125,7 +125,8 @@ struct DefaultHomeView: View {
                             })
                         }
                     }
-                }.sheet(item: self.$selectedCompetition, content: { selectedCompetition in
+                }
+                .sheet(item: self.$selectedCompetition, content: { selectedCompetition in
                     DefaultCompetitionButtonView(viewModel: viewModel, currentCompetition: selectedCompetition)
                 })
             }
@@ -146,14 +147,15 @@ struct DefaultHomeView: View {
                                     .bold()
                             })
                         .buttonStyle(.plain)
+                        
                         Button(action: {
                             viewModel.profileView = true
                         }, label: {
                             Image("LapItLogo")
                                 .resizable()
                                 .frame(width: 109, height: 87, alignment: .center)
-                        }
-                        ).sheet(isPresented: $viewModel.profileView) {
+                        })
+                        .sheet(isPresented: $viewModel.profileView) {
                             ProfileView(viewModel: viewModel)
                         }
                         
