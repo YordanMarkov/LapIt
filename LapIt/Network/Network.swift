@@ -32,10 +32,17 @@ class Network {
         try await firebaseAuth.sendPasswordReset(withEmail: email)
     }
     
-    
     func register(email: String, password: String, firstName: String, secondName: String, isOrganizer: Bool) async throws {
         try await firebaseAuth.createUser(withEmail: email, password: password)
         firestore.collection("users").addDocument(data: ["email": email, "firstName": firstName, "secondName": secondName, "isOrganizer": isOrganizer])
+    }
+    
+    func updateNames(firstName: String, secondName: String, email: String) async throws {
+        let usersCollection = firestore.collection("users")
+        let query = usersCollection.whereField("email", isEqualTo: email)
+        let querySnapshot = try await query.getDocuments()
+        let userData = querySnapshot.documents.first
+        try await userData?.reference.updateData(["firstName": firstName, "secondName": secondName])
     }
     
     func deleteAccount(email: String) async throws {

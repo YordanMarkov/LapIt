@@ -117,4 +117,16 @@ class DefaultHomeViewModel: ObservableObject {
             }
         }
     }
+    
+    func save(firstName: String, secondName: String) {
+        Task {
+            do {
+                try await network.updateNames(firstName: firstName, secondName: secondName, email: self.email)
+            } catch {
+                DispatchQueue.main.async {
+                    self.error = error.localizedDescription
+                }
+            }
+        }
+    }
 }

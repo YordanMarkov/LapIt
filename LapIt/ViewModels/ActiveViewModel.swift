@@ -163,4 +163,16 @@ class ActiveViewModel: ObservableObject {
             }
         }
     }
+    
+    func leaveCompetition(competition_id: String, user_email: String) {
+        Task {
+            do {
+                try await network.leaveCompetition(competition_id: competition_id, user_email: user_email)
+            } catch {
+                DispatchQueue.main.async {
+                    self.error = error.localizedDescription
+                }
+            }
+        }
+    }
 }

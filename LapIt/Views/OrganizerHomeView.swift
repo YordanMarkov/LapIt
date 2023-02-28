@@ -13,10 +13,15 @@ struct ProfileViewO: View {
     @State private var showAlert = false
     @State private var showDeleteAlert = false
     
+    @State private var firstName: String
+    @State private var secondName: String
+    
     @ObservedObject private var viewModel: OrganizerHomeViewModel
     
     init(viewModel: OrganizerHomeViewModel) {
         self.viewModel = viewModel
+        self.firstName = viewModel.firstName
+        self.secondName = viewModel.secondName
     }
     
     var body: some View {
@@ -28,11 +33,36 @@ struct ProfileViewO: View {
                 .cornerRadius(10)
                 .foregroundColor(.white)
             
-            Text("First Name: " + viewModel.firstName)
+            VStack {
+                Text("First Name: ")
+                TextField("", text: $firstName)
+                    .multilineTextAlignment(.center)
+            }
             
-            Text("Second Name: " + viewModel.secondName)
+            VStack {
+                Text("Second Name: ")
+                TextField("", text: $secondName)
+                    .multilineTextAlignment(.center)
+            }
             
             Text("Email: " + viewModel.email)
+            
+            if(firstName != viewModel.firstName || secondName != viewModel.secondName) {
+                Button(
+                    action: {
+                        viewModel.save(firstName: firstName, secondName: secondName)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            viewModel.getDetails()
+                        }
+                    },
+                    label: {
+                        Text("Save")
+                            .frame(width: 100 , height: 30, alignment: .center)
+                    })
+                .buttonStyle(.borderedProminent)
+                .foregroundColor(.white)
+                .tint(.init(.green))
+            }
             
             Button(
                 action: {
@@ -67,7 +97,7 @@ struct ProfileViewO: View {
                 })
             .alert(isPresented: $showDeleteAlert) {
                 Alert (
-                    title: Text("You are about to delete your account. This will delete all of your stats and history. This action is irreversible. Continue?"),
+                    title: Text("You are about to delete your account. This will delete all of your competitions and scoreboards. This action is irreversible. Continue?"),
                     primaryButton: .default(Text("Yes")) {
                         viewModel.profileView = false
                         viewModel.deleteAccount()

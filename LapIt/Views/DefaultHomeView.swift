@@ -13,10 +13,15 @@ struct ProfileView: View {
     @State private var showAlert = false
     @State private var showDeleteAlert = false
     
+    @State private var firstName: String
+    @State private var secondName: String
+    
     @ObservedObject private var viewModel: DefaultHomeViewModel
     
     init(viewModel: DefaultHomeViewModel) {
         self.viewModel = viewModel
+        self.firstName = viewModel.firstName
+        self.secondName = viewModel.secondName
     }
     
     var body: some View {
@@ -28,11 +33,36 @@ struct ProfileView: View {
                 .cornerRadius(10)
                 .foregroundColor(.white)
             
-            Text("First Name: " + viewModel.firstName)
+            VStack {
+                Text("First Name: ")
+                TextField("", text: $firstName)
+                    .multilineTextAlignment(.center)
+            }
             
-            Text("Second Name: " + viewModel.secondName)
+            VStack {
+                Text("Second Name: ")
+                TextField("", text: $secondName)
+                    .multilineTextAlignment(.center)
+            }
             
             Text("Email: " + viewModel.email)
+            
+            if(firstName != viewModel.firstName || secondName != viewModel.secondName) {
+                Button(
+                    action: {
+                        viewModel.save(firstName: firstName, secondName: secondName)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            viewModel.getDetails()
+                        }
+                    },
+                    label: {
+                        Text("Save")
+                            .frame(width: 100 , height: 30, alignment: .center)
+                    })
+                .buttonStyle(.borderedProminent)
+                .foregroundColor(.white)
+                .tint(.init(.green))
+            }
             
             Button(
                 action: {
@@ -154,7 +184,8 @@ struct DefaultHomeView: View {
                             Image("LapItLogo")
                                 .resizable()
                                 .frame(width: 109, height: 87, alignment: .center)
-                        })
+                        }
+)
                         .sheet(isPresented: $viewModel.profileView) {
                             ProfileView(viewModel: viewModel)
                         }
