@@ -20,10 +20,10 @@ struct KmView: View {
     var body: some View {
         HStack {
             Text("Distance: \(userKm, specifier: "%.2f") km")
+            
             TextField("Change", value: $km, format: .number)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
             
-                .keyboardType(.numberPad)
             if(km != userKm && km >= 0) {
                 Button(
                     action: {
