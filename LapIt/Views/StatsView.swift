@@ -32,7 +32,7 @@ struct StatsView: View {
                         .cornerRadius(10)
                         .foregroundColor(.white)
                     
-                    Text("\(viewModel.km)")
+                    Text("\(viewModel.km, specifier: "%.2f")")
                         .padding()
                         .background(Color(.red))
                         .cornerRadius(10)
@@ -46,7 +46,7 @@ struct StatsView: View {
                         .cornerRadius(10)
                         .foregroundColor(.white)
                     
-                    Text("\(viewModel.min)")
+                    Text("\(viewModel.min, specifier: "%.2f")")
                         .padding()
                         .background(Color(.red))
                         .cornerRadius(10)

@@ -146,9 +146,6 @@ struct DefaultHomeView: View {
                                     Text(competition.name)
                                         .foregroundColor(.black)
                                         .bold()
-                                    Text(competition.description)
-                                        .foregroundColor(.black)
-                                        .italic()
                                 }
                                 .padding()
                                 .background(RoundedRectangle(cornerRadius: 10.0).fill(Color.white))

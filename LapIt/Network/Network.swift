@@ -197,7 +197,7 @@ class Network {
         return users
     }
     
-    func updateKm(competition_id: String, km: Int, user_email: String) async throws {
+    func updateKm(competition_id: String, km: Float, user_email: String) async throws {
         let competitionsStatsCollection = firestore.collection("competitions_stats")
         let query = competitionsStatsCollection.whereField("competition_id", isEqualTo: competition_id).whereField("user_email", isEqualTo: user_email)
         let querySnapshot = try await query.getDocuments()
@@ -206,7 +206,7 @@ class Network {
         }
     }
     
-    func updateMin(competition_id: String, min: Int, user_email: String) async throws {
+    func updateMin(competition_id: String, min: Float, user_email: String) async throws {
         let competitionsStatsCollection = firestore.collection("competitions_stats")
         let query = competitionsStatsCollection.whereField("competition_id", isEqualTo: competition_id).whereField("user_email", isEqualTo: user_email)
         let querySnapshot = try await query.getDocuments()
@@ -289,28 +289,28 @@ class Network {
         return secondName
     }
     
-    func getUserKm(email: String) async throws -> Int {
+    func getUserKm(email: String) async throws -> Float {
         let competitionsStatsCollection = firestore.collection("competitions_stats")
         let query = competitionsStatsCollection.whereField("user_email", isEqualTo: email)
         let querySnapshot = try await query.getDocuments()
-        var totalKm = 0
+        var totalKm: Float = 0
         for document in querySnapshot.documents {
             let data = document.data()
-            if let km = data["km"] as? Int {
+            if let km = data["km"] as? Float {
                 totalKm += km
             }
         }
         return totalKm
     }
     
-    func getUserMin(email: String) async throws -> Int {
+    func getUserMin(email: String) async throws -> Float {
         let competitionsStatsCollection = firestore.collection("competitions_stats")
         let query = competitionsStatsCollection.whereField("user_email", isEqualTo: email)
         let querySnapshot = try await query.getDocuments()
-        var totalMin = 0
+        var totalMin: Float = 0
         for document in querySnapshot.documents {
             let data = document.data()
-            if let min = data["min"] as? Int {
+            if let min = data["min"] as? Float {
                 totalMin += min
             }
         }

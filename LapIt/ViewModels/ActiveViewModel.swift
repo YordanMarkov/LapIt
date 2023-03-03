@@ -21,8 +21,8 @@ class ActiveViewModel: ObservableObject {
         var user_email: String
         var firstName: String
         var secondName: String
-        var km: Int
-        var min: Int
+        var km: Float
+        var min: Float
     }
     
     @Published public var activeCompetitions = [:]
@@ -84,8 +84,8 @@ class ActiveViewModel: ObservableObject {
                     let user_email = value["user_email"] as? String ?? ""
                     let firstName = try await network.getUserFirstName(email: user_email)
                     let secondName = try await network.getUserSecondName(email: user_email)
-                    let km = value["km"] as? Int ?? 0
-                    let min = value["min"] as? Int ?? 0
+                    let km = value["km"] as? Float ?? 0
+                    let min = value["min"] as? Float ?? 0
                     let user = User(user_email: user_email, firstName: firstName, secondName: secondName, km: km, min: min)
                     users.append(user)
                 }
@@ -140,7 +140,7 @@ class ActiveViewModel: ObservableObject {
         }
     }
     
-    func updateMin(currentCompetition: Competition, min: Int, user_email: String) {
+    func updateMin(currentCompetition: Competition, min: Float, user_email: String) {
         Task {
             do {
                 try await network.updateMin(competition_id: currentCompetition.id, min: min, user_email: user_email)
@@ -152,7 +152,7 @@ class ActiveViewModel: ObservableObject {
         }
     }
     
-    func updateKm(currentCompetition: Competition, km: Int, user_email: String) {
+    func updateKm(currentCompetition: Competition, km: Float, user_email: String) {
         Task {
             do {
                 try await network.updateKm(competition_id: currentCompetition.id, km: km, user_email: user_email)

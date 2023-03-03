@@ -81,7 +81,7 @@ struct OrganizerDeactivedButtonView: View {
                             VStack {
                                 Text("\(user.firstName) \(user.secondName)")
                                     .fontWeight(.bold)
-                                Text("Distance: \(user.km)")
+                                Text("Distance: \(user.km, specifier: "%.2f") km")
                             }
                         }
                     } else {
@@ -89,7 +89,7 @@ struct OrganizerDeactivedButtonView: View {
                             VStack {
                                 Text("\(user.firstName) \(user.secondName)")
                                     .fontWeight(.bold)
-                                Text("Time: \(user.min)")
+                                Text("Time: \(user.min, specifier: "%.2f") min")
                             }
                         }
                     }

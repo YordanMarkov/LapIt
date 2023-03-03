@@ -9,8 +9,8 @@ import Foundation
 import SwiftUI
 
 class StatsViewModel: ObservableObject {
-    @Published public var km = 0
-    @Published public var min = 0
+    @Published public var km: Float = 0
+    @Published public var min: Float = 0
     @Published public var email = ""
     @Published public var error = ""
     

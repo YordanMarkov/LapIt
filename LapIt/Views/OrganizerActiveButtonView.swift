@@ -8,23 +8,23 @@ import Foundation
 import SwiftUI
 
 struct KmView: View {
-    let userKm: Int
-    let action: (Int) -> Void
-    @State var km: Int = 0
+    let userKm: Float
+    let action: (Float) -> Void
+    @State var km: Float = 0
     
-    init(userKm: Int, action: @escaping (Int) -> Void) {
+    init(userKm: Float, action: @escaping (Float) -> Void) {
         self.userKm = userKm
         self.action = action
     }
     
     var body: some View {
         HStack {
-            Text("Distance: \(userKm)")
+            Text("Distance: \(userKm, specifier: "%.2f") km")
             TextField("Change", value: $km, format: .number)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
             
                 .keyboardType(.numberPad)
-            if(km != userKm && km > 0) {
+            if(km != userKm && km >= 0) {
                 Button(
                     action: {
                         action(km)
@@ -42,18 +42,18 @@ struct KmView: View {
 }
 
 struct MinView: View {
-    let userMin: Int
-    let action: (Int) -> Void
-    @State var min: Int = 0
+    let userMin: Float
+    let action: (Float) -> Void
+    @State var min: Float = 0
     
-    init(userMin: Int, action: @escaping (Int) -> Void) {
+    init(userMin: Float, action: @escaping (Float) -> Void) {
         self.userMin = userMin
         self.action = action
     }
     
     var body: some View {
         HStack {
-            Text("Time: \(userMin)")
+            Text("Time: \(userMin, specifier: "%.2f") min")
             
             TextField("Change", value: $min, format: .number)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
