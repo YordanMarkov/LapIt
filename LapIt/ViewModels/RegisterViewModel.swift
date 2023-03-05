@@ -17,7 +17,8 @@ class RegisterViewModel: ObservableObject {
     @Published public var firstName: String = ""
     @Published public var secondName: String = ""
     @Published public var isOrganizer: Bool = false
-    @Published private(set) var error = ""
+    @Published public var error = ""
+    @Published public var registerSuccess = false
     
     private let network: Network
     private unowned let coordinator: Coordinator
@@ -34,9 +35,16 @@ class RegisterViewModel: ObservableObject {
     func register() {
         Task {
             do {
+                DispatchQueue.main.async {
+                    self.error = ""
+                    self.registerSuccess = true
+                }
                 try await network.register(email: self.email, password: self.password, firstName: self.firstName, secondName: self.secondName, isOrganizer: self.isOrganizer)
             }  catch {
-                self.error = error.localizedDescription
+                DispatchQueue.main.async {
+                    self.error = error.localizedDescription
+                    self.registerSuccess = false
+                }
             }
         }
     }

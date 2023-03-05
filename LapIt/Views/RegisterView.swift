@@ -10,6 +10,8 @@ import SwiftUI
 struct RegisterView: View {
     
     @ObservedObject private var viewModel: RegisterViewModel
+    @State private var showAlert = false
+    @State private var showingLoadingScreen = false
     
     init(viewModel: RegisterViewModel) {
         self.viewModel = viewModel
@@ -17,7 +19,7 @@ struct RegisterView: View {
     
     
     var body: some View {
-        VStack() {
+        VStack {
             Text("Setting up")
                 .padding()
                 .background(Color(cgColor: UIColor(red: 0, green: 0.686, blue: 0.678, alpha: 1).cgColor))
@@ -132,7 +134,16 @@ struct RegisterView: View {
                         Button(
                             action: {
                                 viewModel.register()
-                                viewModel.route(to: .login)
+                                self.showingLoadingScreen = true
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                    if viewModel.registerSuccess {
+                                        viewModel.route(to: .login)
+                                        self.showingLoadingScreen = false
+                                    } else {
+                                        self.showingLoadingScreen = false
+                                        showAlert.toggle()
+                                    }
+                                }
                             },
                             label: {
                                 Text("Register")
@@ -141,10 +152,21 @@ struct RegisterView: View {
                                     .bold()
                             })
                         .buttonStyle(.plain)
+                        .alert(isPresented: $showAlert) {
+                            Alert (
+                                title: Text(viewModel.error),
+                                dismissButton: .default(Text("OK"))
+                            )
+                        }
                     } else {
                         Text("     ")
                     }
                 }
+            }
+        }
+        .overlay {
+            if showingLoadingScreen {
+                LoadingScreen()
             }
         }
         .background(Color.init(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor).ignoresSafeArea())
