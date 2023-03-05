@@ -25,4 +25,4 @@
 * 2. Firebase
 
 # Документация
-* [Натиснете тук](https://github.com/YordanMarkov/LapIt/blob/main/Documentation_LapIt.pdf)
+* [Натиснете тук](https://github.com/YordanMarkov/LapIt/blob/main/Work%20files/Documentation_LapIt.pdf)
