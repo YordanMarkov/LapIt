@@ -24,5 +24,14 @@
 1. Swift & SwiftUI
 2. Firebase
 
+# Инсталация
+За да се изтегли iOS мобилното приложение „LapIt”, трябва да се следват следните стъпки:
+1. Да се клонира проектът от публичното хранилище: https://github.com/YordanMarkov/LapIt
+2. Да се отвори папката „LapIt” в Xcode.
+3. Да се свърже телефон, iPhone, който поддържа минимум iOS 16 операционна система.
+4. От телефона да се пусне Developer mode от настройките.
+5. Да се build-не приложението и да се стартира след като се избере устройството за симулатор на проекта.
+6. От телефона да се удостовери приложението от настройките за поверителност.
+
 # Документация
-* [Натиснете тук](https://github.com/YordanMarkov/LapIt/blob/main/Documentation/Documentation_LapIt.pdf)
+* [Натиснете тук](https://github.com/YordanMarkov/LapIt/blob/main/Documentation/Yordan_Markov_12V_2023.pdf)
