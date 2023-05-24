@@ -25,8 +25,8 @@ class ActiveViewModel: ObservableObject {
         var min: Float
     }
     
-    @Published public var activeCompetitions = [:]
-    @Published public var deactivatedCompetitions = [:]
+    @Published public var activeCompetitions: [String: Any] = [:]
+    @Published public var deactivatedCompetitions: [String: Any] = [:]
     @Published public var users: [User] = []
     @Published public var email = ""
     @Published public var error = ""

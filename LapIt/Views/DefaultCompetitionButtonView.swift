@@ -20,24 +20,8 @@ struct DefaultCompetitionButtonView: View {
     }
     
     var body: some View {
-        VStack(spacing: 20) {
-            Text(currentCompetition.name)
-                .padding()
-                .background(Color(cgColor: UIColor(red: 0, green: 0.686, blue: 0.678, alpha: 1).cgColor))
-                .font(.largeTitle)
-                .cornerRadius(10)
-                .foregroundColor(.white)
-            
-            Text(currentCompetition.description)
-                .italic()
-            
-            if currentCompetition.distanceOrTime == 0 {
-                Text("The players are ranked by distance.")
-                    .bold()
-            } else {
-                Text("The players are ranked by time.")
-                    .bold()
-            }
+        VStack {
+            CompetitionButtonView(viewModel: DefaultHomeViewModel(network: Network(), coordinator: Coordinator()), currentCompetition: currentCompetition)
             
             if !viewModel.joined {
                 Button(

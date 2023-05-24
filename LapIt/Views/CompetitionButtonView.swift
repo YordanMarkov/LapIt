@@ -1,20 +1,19 @@
 //
-//  OrganizerCompetitionButtonView.swift
+//  CompetitionButtonView.swift
 //  LapIt
 //
-//  Created by Yordan Markov on 2.02.23.
+//  Created by Yordan Markov on 24.05.23.
 //
 
 import Foundation
 import SwiftUI
 
-struct OrganizerCompetitionButtonView: View {
-    
-    @ObservedObject private var viewModel: OrganizerHomeViewModel
-    @State private var currentCompetition: OrganizerHomeViewModel.Competition
+struct CompetitionButtonView: View {
+    @ObservedObject private var viewModel: BaseHomeViewModel
+    @State private var currentCompetition: BaseHomeViewModel.Competition
     @State private var showAlert = false
     
-    init(viewModel: OrganizerHomeViewModel, currentCompetition: OrganizerHomeViewModel.Competition) {
+    init(viewModel: BaseHomeViewModel, currentCompetition: BaseHomeViewModel.Competition) {
         self.viewModel = viewModel
         self.currentCompetition = currentCompetition
     }
@@ -28,8 +27,10 @@ struct OrganizerCompetitionButtonView: View {
                 .cornerRadius(10)
                 .foregroundColor(.white)
             
-            Text(currentCompetition.description)
-                .italic()
+            ScrollView {
+                Text(currentCompetition.description)
+                    .italic()
+            }
             
             if currentCompetition.distanceOrTime == 0 {
                 Text("The players are ranked by distance.")
@@ -47,3 +48,4 @@ struct OrganizerCompetitionButtonView: View {
         .background(Color.init(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor).ignoresSafeArea())
     }
 }
+

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		E70112E3298BF7F300F7DEB0 /* DefaultHistoryCompetitionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70112E2298BF7F300F7DEB0 /* DefaultHistoryCompetitionView.swift */; };
-		E70112E5298C189300F7DEB0 /* OrganizerCompetitionButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70112E4298C189300F7DEB0 /* OrganizerCompetitionButtonView.swift */; };
 		E70112E7298D054100F7DEB0 /* OrganizerActiveButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70112E6298D054100F7DEB0 /* OrganizerActiveButtonView.swift */; };
 		E70112EB29910D0900F7DEB0 /* OrganizerDeactivedButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70112EA29910D0900F7DEB0 /* OrganizerDeactivedButtonView.swift */; };
 		E759AA252972E2C100540708 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = E759AA242972E2C100540708 /* Network.swift */; };
@@ -30,6 +29,13 @@
 		E798ED6D2957617E00263403 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E798ED6C2957617E00263403 /* Assets.xcassets */; };
 		E798ED702957617E00263403 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E798ED6F2957617E00263403 /* Preview Assets.xcassets */; };
 		E798ED772958A48D00263403 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E798ED762958A48D00263403 /* GoogleService-Info.plist */; };
+		E7CF30832A1E11BB00E3098D /* BaseHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CF30822A1E11BB00E3098D /* BaseHomeViewModel.swift */; };
+		E7CF30852A1E147F00E3098D /* CompetitionButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CF30842A1E147F00E3098D /* CompetitionButtonView.swift */; };
+		E7CF30872A1E21E900E3098D /* CreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CF30862A1E21E900E3098D /* CreateView.swift */; };
+		E7CF308D2A1E24CE00E3098D /* MeasurementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CF308C2A1E24CE00E3098D /* MeasurementView.swift */; };
+		E7CF308F2A1E2FA000E3098D /* ForgottenPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CF308E2A1E2FA000E3098D /* ForgottenPasswordView.swift */; };
+		E7CF30912A1E2FCB00E3098D /* LoadingScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CF30902A1E2FCB00E3098D /* LoadingScreenView.swift */; };
+		E7EE75352A1D5DEB00776C0D /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7EE75342A1D5DEB00776C0D /* ProfileView.swift */; };
 		E7F43BC929830F7A0055CBE1 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F43BC829830F7A0055CBE1 /* HistoryView.swift */; };
 		E7F43BCB29830F980055CBE1 /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F43BCA29830F980055CBE1 /* HistoryViewModel.swift */; };
 		E7F43BCD298311710055CBE1 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F43BCC298311710055CBE1 /* StatsView.swift */; };
@@ -42,7 +48,6 @@
 
 /* Begin PBXFileReference section */
 		E70112E2298BF7F300F7DEB0 /* DefaultHistoryCompetitionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultHistoryCompetitionView.swift; sourceTree = "<group>"; };
-		E70112E4298C189300F7DEB0 /* OrganizerCompetitionButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizerCompetitionButtonView.swift; sourceTree = "<group>"; };
 		E70112E6298D054100F7DEB0 /* OrganizerActiveButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizerActiveButtonView.swift; sourceTree = "<group>"; };
 		E70112EA29910D0900F7DEB0 /* OrganizerDeactivedButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizerDeactivedButtonView.swift; sourceTree = "<group>"; };
 		E759AA242972E2C100540708 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
@@ -62,6 +67,13 @@
 		E798ED6C2957617E00263403 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E798ED6F2957617E00263403 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E798ED762958A48D00263403 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E7CF30822A1E11BB00E3098D /* BaseHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseHomeViewModel.swift; sourceTree = "<group>"; };
+		E7CF30842A1E147F00E3098D /* CompetitionButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionButtonView.swift; sourceTree = "<group>"; };
+		E7CF30862A1E21E900E3098D /* CreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateView.swift; sourceTree = "<group>"; };
+		E7CF308C2A1E24CE00E3098D /* MeasurementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementView.swift; sourceTree = "<group>"; };
+		E7CF308E2A1E2FA000E3098D /* ForgottenPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgottenPasswordView.swift; sourceTree = "<group>"; };
+		E7CF30902A1E2FCB00E3098D /* LoadingScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingScreenView.swift; sourceTree = "<group>"; };
+		E7EE75342A1D5DEB00776C0D /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		E7F43BC829830F7A0055CBE1 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		E7F43BCA29830F980055CBE1 /* HistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
 		E7F43BCC298311710055CBE1 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
@@ -100,9 +112,14 @@
 				E7F43BD6298315B00055CBE1 /* ActiveView.swift */,
 				E79677FB298BAC7700CB6EEA /* DefaultCompetitionButtonView.swift */,
 				E70112E2298BF7F300F7DEB0 /* DefaultHistoryCompetitionView.swift */,
-				E70112E4298C189300F7DEB0 /* OrganizerCompetitionButtonView.swift */,
 				E70112E6298D054100F7DEB0 /* OrganizerActiveButtonView.swift */,
 				E70112EA29910D0900F7DEB0 /* OrganizerDeactivedButtonView.swift */,
+				E7EE75342A1D5DEB00776C0D /* ProfileView.swift */,
+				E7CF30842A1E147F00E3098D /* CompetitionButtonView.swift */,
+				E7CF30862A1E21E900E3098D /* CreateView.swift */,
+				E7CF308C2A1E24CE00E3098D /* MeasurementView.swift */,
+				E7CF308E2A1E2FA000E3098D /* ForgottenPasswordView.swift */,
+				E7CF30902A1E2FCB00E3098D /* LoadingScreenView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -119,6 +136,7 @@
 				E7F43BCE298311A10055CBE1 /* StatsViewModel.swift */,
 				E7F43BD0298315720055CBE1 /* LibraryViewModel.swift */,
 				E7F43BD22983158E0055CBE1 /* ActiveViewModel.swift */,
+				E7CF30822A1E11BB00E3098D /* BaseHomeViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -262,14 +280,20 @@
 				E759AA342972E68600540708 /* RegisterView.swift in Sources */,
 				E7F43BC929830F7A0055CBE1 /* HistoryView.swift in Sources */,
 				E79677FC298BAC7700CB6EEA /* DefaultCompetitionButtonView.swift in Sources */,
+				E7CF308F2A1E2FA000E3098D /* ForgottenPasswordView.swift in Sources */,
+				E7CF308D2A1E24CE00E3098D /* MeasurementView.swift in Sources */,
+				E7CF30912A1E2FCB00E3098D /* LoadingScreenView.swift in Sources */,
 				E70112E7298D054100F7DEB0 /* OrganizerActiveButtonView.swift in Sources */,
 				E759AA2C2972E3C500540708 /* DefaultHomeViewModel.swift in Sources */,
 				E7F43BCD298311710055CBE1 /* StatsView.swift in Sources */,
 				E798ED692957617C00263403 /* LapItApp.swift in Sources */,
 				E70112E3298BF7F300F7DEB0 /* DefaultHistoryCompetitionView.swift in Sources */,
 				E7F43BD5298315A50055CBE1 /* LibraryView.swift in Sources */,
-				E70112E5298C189300F7DEB0 /* OrganizerCompetitionButtonView.swift in Sources */,
+				E7CF30852A1E147F00E3098D /* CompetitionButtonView.swift in Sources */,
 				E759AA322972E5B800540708 /* LogInView.swift in Sources */,
+				E7CF30872A1E21E900E3098D /* CreateView.swift in Sources */,
+				E7EE75352A1D5DEB00776C0D /* ProfileView.swift in Sources */,
+				E7CF30832A1E11BB00E3098D /* BaseHomeViewModel.swift in Sources */,
 				E759AA252972E2C100540708 /* Network.swift in Sources */,
 				E759AA432981396A00540708 /* OrganizerHomeViewModel.swift in Sources */,
 				E759AA412981393C00540708 /* OrganizerHomeView.swift in Sources */,
@@ -417,6 +441,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -446,6 +471,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

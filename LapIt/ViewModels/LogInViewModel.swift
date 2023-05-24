@@ -12,9 +12,9 @@ class LogInViewModel: ObservableObject {
     @Published public var forgottenPassword = false
     @Published public var errorForChange = ""
     @Published public var emailForChange = ""
-    @Published public var email: String = ""
-    @Published public var password: String = ""
-    @Published public var secured: Bool = true
+    @Published public var email = ""
+    @Published public var password = ""
+    @Published public var secured = true
     @Published public var error = ""
     @Published public var signInSuccess = false
     @Published public var sendEmailSuccess = false

@@ -9,14 +9,14 @@ import Foundation
 import SwiftUI
 
 class RegisterViewModel: ObservableObject {
-    @Published public var email: String = ""
-    @Published public var password: String = ""
-    @Published public var repeatPassword: String = ""
-    @Published public var secured1: Bool = true
-    @Published public var secured2: Bool = true
-    @Published public var firstName: String = ""
-    @Published public var secondName: String = ""
-    @Published public var isOrganizer: Bool = false
+    @Published public var email = ""
+    @Published public var password = ""
+    @Published public var repeatPassword = ""
+    @Published public var secured1 = true
+    @Published public var secured2 = true
+    @Published public var firstName = ""
+    @Published public var secondName = ""
+    @Published public var isOrganizer = false
     @Published public var error = ""
     @Published public var registerSuccess = false
     

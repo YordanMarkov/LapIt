@@ -47,6 +47,7 @@ struct RegisterView: View {
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                     
                     TextField("E-mail", text: $viewModel.email)
+                        .keyboardType(.emailAddress)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .autocapitalization(.none)
                     
@@ -93,8 +94,8 @@ struct RegisterView: View {
                     if viewModel.repeatPassword != viewModel.password {
                         Text("The passwords must match!")
                             .foregroundColor(.red)
-                    } else if viewModel.password.count < 8 && !viewModel.password.isEmpty {
-                        Text("The password must be at least 8 characters!")
+                    } else if viewModel.password.count < 6 && !viewModel.password.isEmpty {
+                        Text("The password must be at least 6 characters!")
                             .foregroundColor(.red)
                     }
                     
@@ -123,12 +124,14 @@ struct RegisterView: View {
                                 .multilineTextAlignment(.center)
                                 .foregroundColor(.white)
                                 .bold()
+                                .offset(x: -10)
                         })
                     .buttonStyle(.plain)
                     
                     Image("LapItLogo")
                         .resizable()
                         .frame(width: 109, height: 87)
+                        .offset(x: 20)
                     
                     if !viewModel.firstName.isEmpty && !viewModel.secondName.isEmpty && !viewModel.email.isEmpty && !viewModel.password.isEmpty && !viewModel.repeatPassword.isEmpty && viewModel.repeatPassword == viewModel.password && viewModel.password.count >= 8 {
                         Button(
@@ -150,6 +153,7 @@ struct RegisterView: View {
                                     .multilineTextAlignment(.center)
                                     .foregroundColor(.white)
                                     .bold()
+                                    .offset(x: 30)
                             })
                         .buttonStyle(.plain)
                         .alert(isPresented: $showAlert) {
@@ -159,14 +163,20 @@ struct RegisterView: View {
                             )
                         }
                     } else {
-                        Text("     ")
+                        Text("Disabled")
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(.white)
+                            .bold()
+                            .offset(x: 30)
                     }
                 }
             }
+            .offset(y: -28)
+            
         }
         .overlay {
             if showingLoadingScreen {
-                LoadingScreen()
+                LoadingScreenView()
             }
         }
         .background(Color.init(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor).ignoresSafeArea())

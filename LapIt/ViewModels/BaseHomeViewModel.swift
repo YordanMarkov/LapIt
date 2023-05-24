@@ -1,15 +1,15 @@
 //
-//  LibraryViewModel.swift
+//  BaseHomeViewModel.swift
 //  LapIt
 //
-//  Created by Yordan Markov on 26.01.23.
+//  Created by Yordan Markov on 24.05.23.
 //
 
 import Foundation
 import SwiftUI
 
-class LibraryViewModel: ObservableObject {
-    
+class BaseHomeViewModel: ObservableObject {
+
     struct Competition: Hashable, Identifiable {
         var id: String
         var name: String
@@ -17,35 +17,49 @@ class LibraryViewModel: ObservableObject {
         var distanceOrTime: Int
         var isActive: Bool
     }
-    
-    private let network: Network
+
+    internal let network: Network
     private unowned let coordinator: Coordinator
-    
-    @Published public var createView = false
-    @Published public var reuse = false
-    @Published public var error = ""
+
+    @Published public var profileView = false
+    @Published public var firstName = ""
+    @Published public var secondName = ""
     @Published public var email = ""
-    @Published public var name = ""
-    @Published public var description = ""
-    @Published public var distanceOrTime = 0
+    @Published public var error = ""
     @Published public var competitions: [String: Any] = [:]
-    
+
     init(network: Network, coordinator: Coordinator) {
         self.network = network
         self.coordinator = coordinator
     }
-    
+
     func route(to newTab: Coordinator.Tab) {
         coordinator.route(to: newTab)
     }
-    
+
+    func signOut() {
+        Task {
+            do {
+                try await network.signOut()
+            } catch {
+                DispatchQueue.main.async {
+                    self.error = error.localizedDescription
+                }
+            }
+        }
+    }
+
     func getDetails() {
         Task {
             do {
                 let email = try await network.getCurrentUserEmail()
-                let competitions = try await network.getCompetitionsByEmail(email: self.email)
+                let firstName = try await network.getUserFirstName(email: email)
+                let secondName = try await network.getUserSecondName(email: email)
+                let competitions = try await network.getActiveCompetitions()
                 DispatchQueue.main.async {
                     self.email = email
+                    self.firstName = firstName
+                    self.secondName = secondName
                     self.competitions = competitions
                 }
             } catch {
@@ -55,7 +69,7 @@ class LibraryViewModel: ObservableObject {
             }
         }
     }
-    
+
     func parseCompetitions() -> [Competition] {
         var competitionsList: [Competition] = []
         for (_, value) in self.competitions {
@@ -70,15 +84,23 @@ class LibraryViewModel: ObservableObject {
         }
         return competitionsList
     }
-    
-    func create() {
-        network.createCompetition(email: self.email, name: self.name, description: self.description, distanceOrTime: self.distanceOrTime, isActive: true)
-    }
-    
-    func delete(competition: Competition?) {
+
+    func deleteAccount() {
         Task {
             do {
-                try await network.deleteCompetition(competition_id: competition?.id ?? "")
+                try await network.deleteAccount(email: self.email)
+            } catch {
+                DispatchQueue.main.async {
+                    self.error = error.localizedDescription
+                }
+            }
+        }
+    }
+
+    func save(firstName: String, secondName: String) {
+        Task {
+            do {
+                try await network.updateNames(firstName: firstName, secondName: secondName, email: self.email)
             } catch {
                 DispatchQueue.main.async {
                     self.error = error.localizedDescription

@@ -28,8 +28,10 @@ struct OrganizerDeactivedButtonView: View {
                 .cornerRadius(10)
                 .foregroundColor(.white)
             
-            Text(currentCompetition.description)
-                .italic()
+            ScrollView {
+                Text(currentCompetition.description)
+                    .italic()
+            }
             
             if currentCompetition.distanceOrTime == 0 {
                 Text("The players are ranked by distance.")

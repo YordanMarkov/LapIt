@@ -7,75 +7,6 @@
 import Foundation
 import SwiftUI
 
-struct KmView: View {
-    let userKm: Float
-    let action: (Float) -> Void
-    @State var km: Float = 0
-    
-    init(userKm: Float, action: @escaping (Float) -> Void) {
-        self.userKm = userKm
-        self.action = action
-    }
-    
-    var body: some View {
-        HStack {
-            Text("Distance: \(userKm, specifier: "%.2f") km")
-            
-            TextField("Change", value: $km, format: .number)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-            
-            if(km != userKm && km >= 0) {
-                Button(
-                    action: {
-                        action(km)
-                    },
-                    label: {
-                        Text("Update")
-                            .frame(width: 60 , height: 15)
-                    })
-                .buttonStyle(.borderedProminent)
-                .foregroundColor(.white)
-                .tint(.yellow)
-            }
-        }
-    }
-}
-
-struct MinView: View {
-    let userMin: Float
-    let action: (Float) -> Void
-    @State var min: Float = 0
-    
-    init(userMin: Float, action: @escaping (Float) -> Void) {
-        self.userMin = userMin
-        self.action = action
-    }
-    
-    var body: some View {
-        HStack {
-            Text("Time: \(userMin, specifier: "%.2f") min")
-            
-            TextField("Change", value: $min, format: .number)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-            
-            if(min != userMin && min >= 0) {
-                Button(
-                    action: {
-                        action(min)
-                    },
-                    label: {
-                        Text("Update")
-                            .frame(width: 100 , height: 30)
-                    }
-                )
-                .buttonStyle(.borderedProminent)
-                .foregroundColor(.white)
-                .tint(.yellow)
-            }
-        }
-    }
-}
-
 struct OrganizerActiveButtonView: View {
     
     @ObservedObject private var viewModel: ActiveViewModel
@@ -100,8 +31,10 @@ struct OrganizerActiveButtonView: View {
                 .cornerRadius(10)
                 .foregroundColor(.white)
             
-            Text(currentCompetition.description)
-                .italic()
+            ScrollView {
+                Text(currentCompetition.description)
+                    .italic()
+            }
             
             if currentCompetition.distanceOrTime == 0 {
                 Text("The players are ranked by distance.")
@@ -184,14 +117,14 @@ struct OrganizerActiveButtonView: View {
                                 }
                             }
                             if currentCompetition.distanceOrTime == 0 {
-                                KmView(userKm: user.km, action: { newKm in
+                                MeasurementView(measure: user.km, title: "Distance", measure_type: "km", action: { newKm in
                                     viewModel.updateKm(currentCompetition: currentCompetition, km: newKm, user_email: user.user_email)
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                                         viewModel.getUsers(currentCompetition: currentCompetition)
                                     }
                                 })
                             } else {
-                                MinView(userMin: user.min, action: { newMin in
+                                MeasurementView(measure: user.min, title: "Time", measure_type: "min", action: { newMin in
                                     viewModel.updateMin(currentCompetition: currentCompetition, min: newMin, user_email: user.user_email)
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                                         viewModel.getUsers(currentCompetition: currentCompetition)

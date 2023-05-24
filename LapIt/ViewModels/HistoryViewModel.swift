@@ -32,8 +32,8 @@ class HistoryViewModel: ObservableObject {
     @Published public var secondName = ""
     @Published public var email = ""
     @Published public var error = ""
-    @Published public var competitions = [:]
-    @Published public var inactive_competitions = [:]
+    @Published public var competitions: [String: Any] = [:]
+    @Published public var inactive_competitions: [String: Any] = [:]
     @Published public var left = false
     @Published public var users: [User] = []
     

@@ -92,11 +92,11 @@ struct ActiveView: View {
                         .frame(width: 450, height: 21)
                     
                     HStack(spacing: 50) {
-                        Text("     ")
                         
                         Image("LapItLogo")
                             .resizable()
                             .frame(width: 109, height: 87, alignment: .center)
+                            .offset(x: 36)
                         
                         Button(
                             action: {
@@ -107,11 +107,13 @@ struct ActiveView: View {
                                     .frame(alignment: .center)
                                     .foregroundColor(.white)
                                     .bold()
+                                    .offset(x: 34)
                             })
                         .buttonStyle(.plain)
                     }
                 }
             }
+            .offset(y: -28)
         }
         .background(Color.init(cgColor: UIColor(red: 0.568, green: 0.817, blue: 0.814, alpha: 1).cgColor).ignoresSafeArea())
         .onAppear {
