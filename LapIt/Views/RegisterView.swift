@@ -133,7 +133,7 @@ struct RegisterView: View {
                         .frame(width: 109, height: 87)
                         .offset(x: 20)
                     
-                    if !viewModel.firstName.isEmpty && !viewModel.secondName.isEmpty && !viewModel.email.isEmpty && !viewModel.password.isEmpty && !viewModel.repeatPassword.isEmpty && viewModel.repeatPassword == viewModel.password && viewModel.password.count >= 8 {
+                    if !viewModel.firstName.isEmpty && !viewModel.secondName.isEmpty && !viewModel.email.isEmpty && !viewModel.password.isEmpty && !viewModel.repeatPassword.isEmpty && viewModel.repeatPassword == viewModel.password && viewModel.password.count >= 6 {
                         Button(
                             action: {
                                 viewModel.register()
