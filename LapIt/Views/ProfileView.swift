@@ -104,7 +104,7 @@ struct ProfileView: View {
                         .frame(width: 155 , height: 30, alignment: .center)
                 }).alert(isPresented: $showDeleteAlert) {
                     Alert (
-                        title: Text("You are about to delete your account. This will delete all of your stats and history. This action is irreversible. Continue?"),
+                        title: Text(viewModel is DefaultHomeViewModel ? "You are about to delete your account. This will delete all of your stats and history. This action is irreversible. Continue?" : "You are about to delete your account. This will delete all of your competitions and history (such as models, stats etc) for them. This action is irreversible. Continue?"),
                         primaryButton: .default(Text("Yes")) {
                             viewModel.profileView = false
                             viewModel.deleteAccount()

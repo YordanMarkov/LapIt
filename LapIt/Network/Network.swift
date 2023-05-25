@@ -44,7 +44,7 @@ class Network {
         let userData = querySnapshot.documents.first
         try await userData?.reference.updateData(["firstName": firstName, "secondName": secondName])
     }
-    
+        
     func deleteAccount(email: String) async throws {
         try await firebaseAuth.currentUser?.delete()
         
@@ -55,11 +55,19 @@ class Network {
         try await userData?.reference.delete()
         
         let competitionsCollection = firestore.collection("competitions")
-        let query2 = competitionsCollection.whereField("email", isEqualTo: email)
-        let querySnapshot2 = try await query2.getDocuments()
-        let competitionsData = querySnapshot2.documents
+        let competitionsQuery = competitionsCollection.whereField("email", isEqualTo: email)
+        let competitionsQuerySnapshot = try await competitionsQuery.getDocuments()
+        let competitionsData = competitionsQuerySnapshot.documents
+        
+        var competitionIDsToDelete: [String] = []
         competitionsData.forEach { document in
-            document.reference.delete()
+            if let competitionID = document["id"] as? String {
+                competitionIDsToDelete.append(competitionID)
+            }
+        }
+        
+        for competitionID in competitionIDsToDelete {
+            try await deleteCompetition(competition_id: competitionID)
         }
         
         let competitionsStatsCollection = firestore.collection("competitions_stats")
